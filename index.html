@@ -7,7 +7,7 @@
 <meta name="description" content="An interactive Korean food guide by T1 Group A — meals, etiquette, traditional dishes and modern food culture.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Figtree:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&family=Gowun+Batang:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Figtree:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&family=Gowun+Batang:wght@700&family=Gaegu:wght@700&display=swap" rel="stylesheet">
 <style>
 :root{
   --cream:#F8EFE8;
@@ -51,11 +51,26 @@ h2 .kr,h3 .kr{white-space:nowrap}
 
 section{position:relative;padding:110px 20px;}
 .wrap{max-width:1120px;margin:0 auto;position:relative;z-index:2}
+/* section label: a red name-seal (도장) stamp + plain label */
 .eyebrow{
-  display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:13px;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--red);background:var(--paper);border:2px solid var(--blush);padding:6px 14px;border-radius:999px;
+  display:inline-flex;align-items:center;gap:12px;font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--muted);
 }
-.eyebrow .dot{width:8px;height:8px;border-radius:50%;background:var(--red)}
+.seal{
+  --s:40px;flex:none;width:var(--s);height:var(--s);display:grid;place-items:center;
+  font-family:var(--kr);font-weight:700;font-size:13px;line-height:1.05;letter-spacing:0;text-transform:none;text-align:center;
+  color:var(--paper);background:var(--red);border-radius:5px;rotate:-5deg;
+  box-shadow:inset 0 0 0 2px var(--red),inset 0 0 0 3.5px var(--paper);
+  /* uneven ink, like a real stamp impression */
+  -webkit-mask:radial-gradient(circle at 20% 30%,#000c 0 1px,transparent 1.5px) 0 0/7px 9px,linear-gradient(#000,#000);
+  -webkit-mask-composite:xor;mask-composite:exclude;
+  mask:radial-gradient(circle at 20% 30%,#000c 0 1px,transparent 1.5px) 0 0/7px 9px,linear-gradient(#000,#000);
+}
+.seal.v{writing-mode:vertical-rl;font-size:12px;letter-spacing:.05em}
+.eyebrow .lbl{position:relative;padding-left:14px}
+.eyebrow .lbl::before{content:"";position:absolute;left:0;top:50%;width:6px;height:1.5px;background:var(--red)}
+.reveal.in .seal{animation:stamp-in .55s cubic-bezier(.2,1.5,.4,1) .15s backwards}
+@keyframes stamp-in{0%{transform:scale(1.9) rotate(-14deg);opacity:0}55%{transform:scale(.92);opacity:1}100%{transform:none}}
 h2{
   font-family:var(--serif);font-weight:400;font-size:clamp(38px,6vw,68px);line-height:1;margin:18px 0 14px;
   color:var(--navy);letter-spacing:-.01em;text-transform:uppercase;
@@ -301,8 +316,18 @@ ul.tri li::before{content:"";position:absolute;left:2px;top:.45em;border:7px sol
 .plate.on{background:var(--paper);transform:translateY(-10px);box-shadow:0 6px 0 #EAD6CB,0 24px 40px -20px rgba(120,50,40,.4)}
 .plate.on img{transform:rotate(14deg) scale(1.08)}
 .detail{margin-top:26px;padding:34px;min-height:420px;overflow:hidden}
+.pointer{position:relative;height:0;z-index:3}
+.pointer i{
+  position:absolute;top:12px;width:30px;height:16px;translate:-50% 0;left:var(--x,12.5%);
+  transition:left .5s cubic-bezier(.34,1.45,.64,1);
+}
+.pointer i::before,.pointer i::after{content:"";position:absolute;inset:0;clip-path:polygon(50% 0,100% 100%,0 100%)}
+.pointer i::before{background:#F0DED5}
+.pointer i::after{background:var(--paper);inset:2.5px 3px -1px}
+.plate .nm,.plate .kr{transition:color .25s}
+.plate.on .nm{color:var(--red)}
 .panel{display:none;grid-template-columns:1fr 1fr;gap:34px;align-items:start}
-.panel.on{display:grid;animation:pop .5s var(--spring)}
+.panel.on{display:grid}
 .panel h3{font-size:clamp(34px,4vw,48px);color:var(--red)}
 .panel h3 .kr{font-size:.75em}
 .facts li{font-weight:600;color:var(--navy)}
@@ -481,34 +506,118 @@ ul.tri li::before{content:"";position:absolute;left:2px;top:.45em;border:7px sol
 .basket .tot{font-weight:800;color:var(--navy);font-size:14px;white-space:nowrap}
 .honbap-msg{min-height:26px;margin-top:10px;font-weight:700;color:var(--red);text-align:center}
 
-.mixer{display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:start;margin-top:10px}
-.mixer .col h4{margin:0 0 8px;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-.mixer .col{display:flex;flex-direction:column;gap:8px}
-.mixer .plus{font-family:var(--serif);font-size:44px;color:var(--red);align-self:center}
-.mixer .chip{justify-content:center}
-.fusion-out{margin-top:20px;display:grid;grid-template-columns:150px 1fr;gap:16px;align-items:center;background:var(--cream);border-radius:20px;padding:16px;min-height:150px}
-.fusion-out .art{width:150px;height:130px;display:grid;place-items:center}
-.fusion-out .art img{height:130px;width:100%;object-fit:contain}
-.fusion-out .name{font-family:var(--serif);font-size:28px;color:var(--navy);text-transform:uppercase;line-height:1}
-.fusion-out .found{font-size:13px;font-weight:700;color:var(--muted);margin-top:8px}
-.fusion-out.pop .art{animation:pop .55s var(--spring)}
+/* fusion: the dish in the middle, the five real pairings around it */
+.fstage{position:relative;height:470px;margin:0 auto;max-width:560px}
+.fstage .links{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+.fstage .links line{stroke:var(--beige-dk);stroke-width:2;stroke-dasharray:4 6;vector-effect:non-scaling-stroke;transition:stroke .3s}
+.fstage .links line.on{stroke:var(--red);stroke-dasharray:none}
+.fcenter{position:absolute;left:50%;top:50%;translate:-50% -50%;width:200px;height:180px;display:grid;place-items:center}
+.fcenter::before{content:"";position:absolute;inset:6% 4%;border-radius:50%;background:radial-gradient(circle,var(--blush) 0 55%,transparent 72%)}
+.fcenter .art{position:relative;width:100%;height:100%;display:grid;place-items:center}
+.fcenter .art img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 12px 14px rgba(90,40,30,.25))}
+.fcenter .art svg{width:150px;height:150px;filter:drop-shadow(0 10px 12px rgba(90,40,30,.2))}
+.fcenter.swap .art{animation:dish-in .6s cubic-bezier(.34,1.5,.64,1)}
+@keyframes dish-in{0%{transform:scale(.6) rotate(-18deg);opacity:0}100%{transform:none;opacity:1}}
+.combo{
+  position:absolute;translate:-50% -50%;width:158px;padding:10px 12px;border-radius:16px;text-align:center;line-height:1.2;
+  background:var(--paper);border:2px solid var(--beige);box-shadow:0 4px 0 var(--beige);color:var(--navy);font-weight:700;font-size:14px;
+  transition:transform .35s var(--spring),background .25s,color .25s,border-color .25s,box-shadow .25s;
+}
+.combo i{display:block;font-style:normal;font-family:var(--serif);color:var(--red);font-size:18px;line-height:1;margin:2px 0}
+.combo:hover{transform:translateY(-3px) rotate(-2deg)}
+.combo:active{transform:translateY(2px);box-shadow:0 1px 0 var(--beige)}
+.combo.on{background:var(--navy);color:#fff;border-color:var(--navy);box-shadow:0 4px 0 var(--navy-dk)}
+.combo.on i{color:#F5C6C0}
+.fcaption{text-align:center;margin-top:40px;min-height:84px}
+.fcaption .name{font-family:var(--serif);font-size:30px;color:var(--navy);text-transform:uppercase;line-height:1}
+.fcaption p{margin:6px auto 0;color:var(--muted);max-width:40ch}
 .pot{width:110px;height:110px}
 
 /* ---------- global ---------- */
 #global{overflow:hidden}
-.hallyu{position:relative;margin-top:40px;padding:40px 0 20px}
-.hallyu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-.hw{padding:26px;cursor:pointer;transition:transform .45s var(--spring);position:relative;overflow:hidden}
-.hw:hover{transform:translateY(-8px) rotate(-1deg)}
-.hw:nth-child(2):hover{transform:translateY(-8px) rotate(1deg)}
-.hw .ico{width:72px;height:72px;border-radius:22px;display:grid;place-items:center;background:var(--blush);margin-bottom:16px;transition:transform .5s var(--spring)}
-.hw:hover .ico{transform:rotate(-10deg) scale(1.08)}
-.hw .ico svg{width:40px;height:40px}
-.hw h3{font-size:30px}
-.hw p{margin:0;color:var(--muted)}
-.hw .likes{display:flex;align-items:center;gap:6px;margin-top:16px;font-weight:800;color:var(--red);font-size:15px}
-.hw .likes svg{width:20px;height:20px;transition:transform .3s var(--spring)}
-.hw.liked .likes svg{transform:scale(1.3)}
+.hallyu{position:relative;margin-top:40px;padding:30px 0 20px}
+/* each channel of the Korean Wave drawn as its own medium */
+.hallyu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;align-items:end}
+.hw{display:flex;flex-direction:column;align-items:flex-start;gap:0;min-width:0}
+.hw .obj{
+  width:100%;height:340px;display:grid;place-items:center;margin-bottom:22px;cursor:pointer;border:0;background:none;padding:0;text-align:left;
+  -webkit-tap-highlight-color:transparent;perspective:900px;
+}
+.hw h3{font-size:30px;margin-bottom:6px}
+.hw p{margin:0;color:var(--muted);max-width:34ch}
+.like{
+  margin-top:16px;display:inline-flex;align-items:center;gap:8px;font-weight:800;font-size:15px;color:var(--red);
+  padding:7px 14px 7px 10px;border-radius:10px;border:2px solid var(--blush);background:transparent;
+  font-variant-numeric:tabular-nums;transition:background .2s,transform .12s;
+}
+.like:hover{background:var(--paper)}
+.like:active{transform:scale(.94)}
+.like svg{width:20px;height:20px;transition:transform .3s var(--spring)}
+.hw.liked .like svg{transform:scale(1.35)}
+.like small{font-weight:600;color:var(--muted);font-size:12px}
+
+/* photocard */
+.pc{
+  --rx:0deg;--ry:0deg;--mx:50%;--my:50%;
+  width:200px;aspect-ratio:55/85;border-radius:14px;position:relative;rotate:-4deg;
+  background:#fff;padding:9px;box-shadow:0 2px 0 #E8D2C7,0 22px 34px -16px rgba(90,40,40,.45);
+  transform:rotateX(var(--ry)) rotateY(var(--rx));transition:transform .25s ease, rotate .5s var(--spring);
+}
+.obj:hover .pc{rotate:0deg}
+.pc .art{
+  position:relative;height:100%;border-radius:8px;overflow:hidden;
+  background:linear-gradient(160deg,#FBE3E8 0%,#F6D9E8 35%,#E3E6FA 70%,#FCEBD3 100%);
+}
+.pc .art img{position:absolute;left:50%;top:44%;width:86%;translate:-50% -50%;filter:drop-shadow(0 8px 10px rgba(90,40,30,.25))}
+.pc .holo{
+  position:absolute;inset:0;border-radius:inherit;pointer-events:none;mix-blend-mode:color-dodge;opacity:.55;
+  background:radial-gradient(circle at var(--mx) var(--my),rgba(255,255,255,.9),transparent 38%),
+    linear-gradient(115deg,transparent 20%,rgba(255,170,200,.5) 35%,rgba(170,210,255,.5) 50%,rgba(200,255,220,.5) 62%,transparent 78%);
+  background-size:100% 100%,240% 240%;background-position:center,var(--mx) var(--my);
+}
+.pc .sign{position:absolute;left:14px;bottom:30px;font-family:"Gaegu",var(--kr);font-size:26px;line-height:1;color:var(--red);rotate:-8deg}
+.pc .no{position:absolute;right:12px;bottom:10px;font-size:10px;font-weight:800;letter-spacing:.12em;color:rgba(31,43,61,.55)}
+.pc .top{position:absolute;left:12px;top:10px;font-size:10px;font-weight:800;letter-spacing:.14em;color:rgba(31,43,61,.55)}
+
+/* drama screen */
+.tv{width:100%;max-width:330px;display:flex;flex-direction:column;align-items:center}
+.tv .screen{
+  width:100%;aspect-ratio:16/10;border-radius:12px;position:relative;overflow:hidden;
+  background:radial-gradient(ellipse at 55% 40%,#F3C9A0 0%,#B8714A 55%,#4A2A22 100%);
+  border:9px solid var(--navy);box-shadow:0 22px 34px -18px rgba(20,25,40,.6);
+}
+.tv .screen img{position:absolute;bottom:30%;width:30%;filter:drop-shadow(0 6px 8px rgba(0,0,0,.35));transition:transform .5s var(--spring)}
+.tv .screen .a{left:18%}
+.tv .screen .b{right:14%;width:34%;bottom:27%}
+.obj:hover .tv .screen .a{transform:translateY(-6px) rotate(-4deg)}
+.obj:hover .tv .screen .b{transform:translateY(-6px) rotate(4deg)}
+.tv .sub{
+  position:absolute;left:0;right:0;bottom:10px;text-align:center;line-height:1.25;color:#fff;font-weight:700;
+  text-shadow:0 0 3px #000,0 1px 2px #000,0 0 1px #000;
+}
+.tv .sub .kr{display:block;font-size:18px;color:#FFF3B0;margin-bottom:2px}
+.tv .sub span{font-size:11px}
+.tv .ep{position:absolute;left:10px;top:8px;font-size:10px;font-weight:800;letter-spacing:.12em;color:rgba(255,255,255,.85);background:rgba(0,0,0,.35);padding:2px 6px;border-radius:4px}
+.tv .stand{width:24%;height:22px;background:linear-gradient(var(--navy),var(--navy-dk));clip-path:polygon(30% 0,70% 0,100% 100%,0 100%)}
+.tv .base{width:40%;height:7px;border-radius:4px;background:var(--navy-dk)}
+
+/* phone */
+.phone{
+  width:158px;aspect-ratio:9/18.5;border-radius:30px;background:var(--navy);padding:8px;position:relative;rotate:4deg;
+  box-shadow:0 22px 34px -16px rgba(20,25,40,.55);transition:rotate .5s var(--spring);
+}
+.obj:hover .phone{rotate:0deg}
+.phone .scr{position:relative;height:100%;border-radius:23px;overflow:hidden;background:linear-gradient(#FBE2D6,#F2C6B6)}
+.phone .scr::before{content:"";position:absolute;left:50%;top:7px;translate:-50% 0;width:48px;height:12px;border-radius:8px;background:var(--navy);z-index:2}
+.phone .scr img{position:absolute;left:50%;top:44%;width:110%;translate:-50% -50%}
+.phone .rail{position:absolute;right:8px;bottom:70px;display:flex;flex-direction:column;gap:12px;align-items:center;z-index:2}
+.phone .rail i{width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.85);display:grid;place-items:center}
+.phone .rail i svg{width:14px;height:14px}
+.phone .cap{position:absolute;left:10px;right:44px;bottom:12px;font-size:10px;line-height:1.3;color:#fff;font-weight:600;text-shadow:0 1px 3px rgba(0,0,0,.6);z-index:2}
+.phone .cap b{display:block;font-size:11px}
+.phone .prog{position:absolute;left:10px;right:10px;bottom:5px;height:2px;border-radius:2px;background:rgba(255,255,255,.35);z-index:2;overflow:hidden}
+.phone .prog::after{content:"";position:absolute;inset:0;background:#fff;transform-origin:0 0;animation:prog 6s linear infinite}
+@keyframes prog{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 .hangeul-big{position:absolute;right:-30px;top:-60px;font-family:var(--kr);font-size:clamp(140px,22vw,280px);color:var(--blush);opacity:.7;z-index:0;line-height:1;pointer-events:none}
 
 /* ---------- mukbang ---------- */
@@ -593,16 +702,14 @@ footer{text-align:center;padding:0 20px 110px;color:var(--muted);font-size:14px}
   .slots{grid-template-columns:1fr 1fr}
   .navy-box{grid-template-columns:1fr}
   .hol{grid-template-columns:1fr;justify-items:center;text-align:center}
-  .fusion-out{grid-template-columns:1fr;justify-items:center;text-align:center}
-  .mixer{grid-template-columns:1fr}
-  .mixer .plus{justify-self:center}
   .mitem .tag{font-size:10px;padding:2px 5px}
   .hero{padding-bottom:200px}
   .nav a{padding:8px 10px;font-size:12px}
   section{padding:64px 16px}
   h2{font-size:clamp(32px,9vw,44px)}
   .lede{font-size:16px}
-  .eyebrow{font-size:11px;padding:5px 12px}
+  .eyebrow{font-size:11px;gap:10px}
+  .seal{--s:34px;font-size:11px}
   .meal-grid,.eti-grid,.trad-grid,.jeong,.muk{gap:22px;margin-top:24px}
   .table{border-width:6px;rotate:0deg;border-radius:20px}
   .hot{width:36px;height:36px;margin:-18px 0 0 -18px}
@@ -631,6 +738,7 @@ footer{text-align:center;padding:0 20px 110px;color:var(--muted);font-size:14px}
   .plate .kr{font-size:12px}
   .plate.on{transform:translateY(-4px)}
   .detail{padding:18px;margin-top:16px;min-height:0}
+  .pointer i{top:2px}
   .panel{gap:22px}
   .photo-stack{height:240px}
   .photo-stack img{border-width:5px}
@@ -670,16 +778,18 @@ footer{text-align:center;padding:0 20px 110px;color:var(--muted);font-size:14px}
   .sitem .pic{height:60px}
   .sitem .pic img{height:60px}
   .sitem .pic svg{width:54px;height:48px}
-  .mixer{grid-template-columns:1fr 1fr;gap:10px}
-  .mixer .plus{display:none}
-  .mixer .chip{padding:9px 8px;font-size:13px}
-  .fusion-out .art{width:120px;height:110px}
-  .fusion-out .art img{height:110px}
-  .fusion-out .name{font-size:22px}
+  .fstage{height:auto;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .fstage .links{display:none}
+  .fcenter{position:relative;left:auto;top:auto;translate:none;grid-column:1/-1;justify-self:center;width:180px;height:160px}
+  .combo{position:static;translate:none;width:auto;font-size:13px}
+  .combo:last-child{grid-column:1/-1;justify-self:center;min-width:50%}
+  .fcaption .name{font-size:24px}
+  .fcaption{margin-top:16px}
   .hallyu{margin-top:20px;padding-top:10px}
-  .hallyu-grid{gap:14px}
-  .hw{padding:20px}
-  .hw:hover,.hw:nth-child(2):hover{transform:none}
+  .hallyu-grid{gap:46px}
+  .hw .obj{height:290px}
+  .pc{width:176px}
+  .phone{width:140px}
   .global-note{font-size:13px;border-radius:16px}
   .tile{padding:10px 12px}
   .tile .kr{font-size:24px}
@@ -745,7 +855,7 @@ footer{text-align:center;padding:0 20px 110px;color:var(--muted);font-size:14px}
 <section id="meal">
   <div class="wrap">
     <div class="reveal">
-      <span class="eyebrow"><span class="dot"></span>Characteristics of Korean food culture</span>
+      <span class="eyebrow"><span class="seal" aria-hidden="true">밥상</span><span class="lbl">Characteristics of Korean food culture</span></span>
       <h2>Basic structure of a <em>Korean meal</em></h2>
       <p class="lede">Every everyday table follows the same pattern. Tap the dots on the table to set your meal.</p>
     </div>
@@ -773,7 +883,7 @@ footer{text-align:center;padding:0 20px 110px;color:var(--muted);font-size:14px}
 <section id="cutlery" style="padding-top:40px">
   <div class="wrap">
     <div class="reveal">
-      <span class="eyebrow"><span class="dot"></span>Spoon + chopsticks = 수저</span>
+      <span class="eyebrow"><span class="seal" aria-hidden="true">수저</span><span class="lbl">Spoon + chopsticks</span></span>
       <h2>Why <em>stainless</em> cutlery?</h2>
       <p class="lede">Tap a card to flip it.</p>
     </div>
@@ -840,7 +950,7 @@ footer{text-align:center;padding:0 20px 110px;color:var(--muted);font-size:14px}
   <img class="blossom r" src="assets/blossom.webp" alt="" style="right:-20px;top:0;scale:-1 1;width:min(320px,40vw)">
   <div class="wrap">
     <div class="reveal">
-      <span class="eyebrow"><span class="dot"></span>Korean dining etiquette</span>
+      <span class="eyebrow"><span class="seal" aria-hidden="true">예절</span><span class="lbl">Korean dining etiquette</span></span>
       <h2>Mind your <em>manners</em></h2>
       <p class="lede">Four moments at the table. Tap a step to open it, and press play to hear the phrase.</p>
     </div>
@@ -880,7 +990,7 @@ footer{text-align:center;padding:0 20px 110px;color:var(--muted);font-size:14px}
 
       <div class="card quiz reveal" id="quiz">
         <div style="display:flex;justify-content:space-between;align-items:center">
-          <span class="eyebrow" style="font-size:11px">Quick quiz</span>
+          <span class="eyebrow" style="font-size:11px"><span class="seal" aria-hidden="true" style="--s:32px;font-size:11px">퀴즈</span><span class="lbl">Quick quiz</span></span>
           <div class="dots" id="qDots"></div>
         </div>
         <div class="q" id="qText"></div>
@@ -896,7 +1006,7 @@ footer{text-align:center;padding:0 20px 110px;color:var(--muted);font-size:14px}
 <section id="foods">
   <div class="wrap">
     <div class="reveal" style="text-align:center">
-      <span class="eyebrow"><span class="dot"></span>Traditional &amp; popular</span>
+      <span class="eyebrow"><span class="seal" aria-hidden="true">음식</span><span class="lbl">Traditional &amp; popular</span></span>
       <h2>Korean <em>classics</em></h2>
       <p class="lede" style="margin:0 auto">Pick a plate. Each one has something to play with.</p>
     </div>
@@ -907,6 +1017,7 @@ footer{text-align:center;padding:0 20px 110px;color:var(--muted);font-size:14px}
       <button class="plate" data-food="yakgwa" role="tab" aria-selected="false"><img src="assets/yakgwa.webp" alt=""><div class="nm">Yakgwa</div><div class="kr">약과</div></button>
     </div>
 
+    <div class="pointer" aria-hidden="true"><i></i></div>
     <div class="card detail reveal">
       <!-- kimchi -->
       <div class="panel on" data-panel="kimchi">
@@ -1021,7 +1132,7 @@ footer{text-align:center;padding:0 20px 110px;color:var(--muted);font-size:14px}
 <section id="traditions">
   <div class="wrap">
     <div class="reveal">
-      <span class="eyebrow"><span class="dot"></span>Korean food traditions</span>
+      <span class="eyebrow"><span class="seal" aria-hidden="true">풍습</span><span class="lbl">Korean food traditions</span></span>
       <h2>Made <em>together</em></h2>
     </div>
     <div class="trad-grid">
@@ -1115,7 +1226,7 @@ footer{text-align:center;padding:0 20px 110px;color:var(--muted);font-size:14px}
   <div class="wrap">
     <div class="modern-hero">
       <div class="reveal">
-        <span class="eyebrow"><span class="dot"></span>Part two</span>
+        <span class="eyebrow"><span class="seal" aria-hidden="true">현대</span><span class="lbl">Part two · today</span></span>
         <h2 style="font-size:clamp(48px,8vw,96px)"><em>Modern</em><br>Korean food<br>culture</h2>
       </div>
       <img class="gim sticker wobble reveal" src="assets/gimbap.webp" alt="A plate of gimbap">
@@ -1217,15 +1328,11 @@ footer{text-align:center;padding:0 20px 110px;color:var(--muted);font-size:14px}
     <!-- fusion -->
     <div class="card feature flipx reveal">
       <div class="art-first">
-        <div class="mixer">
-          <div class="col" id="colT"><h4>Traditional</h4></div>
-          <div class="plus">+</div>
-          <div class="col" id="colI"><h4>International</h4></div>
+        <div class="fstage" id="fstage">
+          <svg class="links" id="flinks" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"></svg>
+          <div class="fcenter" id="fcenter"><div class="art" id="fArt"></div></div>
         </div>
-        <div class="fusion-out" id="fusionOut">
-          <div class="art" id="fArt"></div>
-          <div><div class="name" id="fName">Pick one of each</div><div id="fDesc" style="color:var(--muted);margin-top:6px">Combine a Korean classic with an international twist.</div><div class="found" id="fFound">Discovered 0 / 5</div></div>
-        </div>
+        <div class="fcaption" aria-live="polite"><div class="name" id="fName"></div><p id="fDesc"></p></div>
       </div>
       <div>
         <h3>Fusion of traditional<br>&amp; modern <span style="color:var(--red)">K-cuisine</span></h3>
@@ -1245,26 +1352,59 @@ footer{text-align:center;padding:0 20px 110px;color:var(--muted);font-size:14px}
   <div class="hangeul-big" aria-hidden="true">한류</div>
   <div class="wrap">
     <div class="reveal">
-      <span class="eyebrow"><span class="dot"></span>The Korean Wave · 한류</span>
+      <span class="eyebrow"><span class="seal" aria-hidden="true">한류</span><span class="lbl">The Korean Wave</span></span>
       <h2>The global popularity<br>of <em>Korean food</em></h2>
-      <p class="lede">Korean food's rise around the world is strongly influenced by the Korean Wave. Give each one some love.</p>
+      <p class="lede">Korean food's rise around the world is strongly influenced by the Korean Wave. Tap one to give it some love. Likes from everyone who visits add up.</p>
     </div>
     <div class="hallyu">
       <div class="hallyu-grid">
-        <div class="card hw reveal" tabindex="0" role="button">
-          <div class="ico"><svg viewBox="0 0 40 40"><path d="M15 30V10l16-4v20" stroke="#B4454A" stroke-width="3.5" fill="none" stroke-linejoin="round"/><circle cx="11" cy="30" r="5" fill="#B4454A"/><circle cx="27" cy="26" r="5" fill="#B4454A"/></svg></div>
+        <div class="hw reveal" data-like="kpop">
+          <button class="obj" aria-label="Like K-pop">
+            <div class="pc">
+              <div class="art">
+                <img src="assets/tteokbokki-bowl.webp" alt="">
+                <span class="top">K-POP</span>
+                <span class="sign">맛있어요♡</span>
+                <span class="no">PC 01/03</span>
+              </div>
+              <div class="holo"></div>
+            </div>
+          </button>
           <h3>K-pop</h3><p>Music videos, idols and celebrity food recommendations introduce Korean dishes to international audiences.</p>
-          <div class="likes"><svg viewBox="0 0 24 24" fill="#B4454A"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z"/></svg><span>0</span></div>
+          <button class="like" aria-label="Like K-pop"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z"/></svg><span class="n">–</span><small>likes</small></button>
         </div>
-        <div class="card hw reveal" tabindex="0" role="button">
-          <div class="ico"><svg viewBox="0 0 40 40"><rect x="4" y="8" width="32" height="22" rx="4" stroke="#B4454A" stroke-width="3.5" fill="none"/><path d="M14 34h12M17 15v8l7-4z" stroke="#B4454A" stroke-width="3" fill="#B4454A" stroke-linejoin="round" stroke-linecap="round"/></svg></div>
+        <div class="hw reveal" data-like="kdrama">
+          <button class="obj" aria-label="Like K-dramas">
+            <div class="tv">
+              <div class="screen">
+                <span class="ep">EP. 07</span>
+                <img class="a" src="assets/ramyeon.webp" alt="">
+                <img class="b" src="assets/chicken.webp" alt="">
+                <div class="sub"><span class="kr">라면 먹고 갈래?</span><span>Want some ramyeon before you go?</span></div>
+              </div>
+              <div class="stand"></div><div class="base"></div>
+            </div>
+          </button>
           <h3>K-dramas</h3><p>Scenes featuring ramyeon, Korean BBQ and fried chicken encourage viewers to try Korean food.</p>
-          <div class="likes"><svg viewBox="0 0 24 24" fill="#B4454A"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z"/></svg><span>0</span></div>
+          <button class="like" aria-label="Like K-dramas"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z"/></svg><span class="n">–</span><small>likes</small></button>
         </div>
-        <div class="card hw reveal" tabindex="0" role="button">
-          <div class="ico"><svg viewBox="0 0 40 40"><rect x="11" y="4" width="18" height="32" rx="4" stroke="#B4454A" stroke-width="3.5" fill="none"/><circle cx="20" cy="31" r="1.8" fill="#B4454A"/><path d="M16 14l8 4-8 4z" fill="#B4454A"/></svg></div>
+        <div class="hw reveal" data-like="social">
+          <button class="obj" aria-label="Like social media">
+            <div class="phone">
+              <div class="scr">
+                <img src="assets/fusion-rice.webp" alt="">
+                <div class="rail">
+                  <i><svg viewBox="0 0 24 24" fill="#B4454A"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z"/></svg></i>
+                  <i><svg viewBox="0 0 24 24" fill="none" stroke="#1F2B3D" stroke-width="2.4"><path d="M4 5h16v11H9l-5 4z" stroke-linejoin="round"/></svg></i>
+                  <i><svg viewBox="0 0 24 24" fill="none" stroke="#1F2B3D" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 5l6 6-6 6M20 11H9a5 5 0 0 0-5 5v2"/></svg></i>
+                </div>
+                <div class="cap"><b>@seoul.eats</b>kimchi cheese fried rice 🔥 #mukbang #koreanfood</div>
+                <div class="prog"></div>
+              </div>
+            </div>
+          </button>
           <h3>Social media</h3><p>TikTok, YouTube and Instagram spread food trends through mukbang, food reviews and cooking videos.</p>
-          <div class="likes"><svg viewBox="0 0 24 24" fill="#B4454A"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z"/></svg><span>0</span></div>
+          <button class="like" aria-label="Like social media"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z"/></svg><span class="n">–</span><small>likes</small></button>
         </div>
       </div>
       <p class="reveal" style="text-align:center;margin-top:30px"><span class="pill-red global-note">International visitors are increasingly interested in experiencing Korean food firsthand.</span></p>
@@ -1309,7 +1449,7 @@ footer{text-align:center;padding:0 20px 110px;color:var(--muted);font-size:14px}
 <section id="conclusion">
   <div class="wrap">
     <div class="reveal" style="text-align:center">
-      <span class="eyebrow"><span class="dot"></span>To wrap up</span>
+      <span class="eyebrow"><span class="seal" aria-hidden="true">정리</span><span class="lbl">To wrap up</span></span>
       <h2><em>Conclusion</em></h2>
     </div>
     <div class="concl-grid">
@@ -1455,7 +1595,7 @@ let t0 = 0;
 })();
 function burst(x, y, n = 14) { if (reduce) return; for (let i = 0; i < n; i++) petals.push(mkPetal(x * DPR, y * DPR, true)); }
 document.addEventListener('click', e => {
-  if (e.target.closest('.btn,.plate,.hot,.dish,.friend,.hw,.tile')) burst(e.clientX, e.clientY, 8);
+  if (e.target.closest('.btn,.plate,.hot,.dish,.friend,.tile')) burst(e.clientX, e.clientY, 8);
 });
 
 function confetti(n = 40) {
@@ -1614,10 +1754,43 @@ $('#qNext').onclick = () => {
 renderQ();
 
 /* ---------------- foods tabs ---------------- */
-$$('.plate').forEach(p => p.onclick = () => {
+const detail = $('.detail'), ptr = $('.pointer i'), platesEl = $('.plates');
+const aimPointer = () => {
+  const p = $('.plate.on'); if (!p) return;
+  ptr.style.setProperty('--x', (p.offsetLeft + p.offsetWidth / 2 - platesEl.offsetLeft) + 'px');
+};
+aimPointer(); addEventListener('resize', aimPointer); addEventListener('load', aimPointer);
+let foodTok = 0;
+function showFood(p) {
+  const next = $(`.panel[data-panel="${p.dataset.food}"]`), cur = $('.panel.on');
+  if (next === cur) return;
+  const tok = ++foodTok;
   $$('.plate').forEach(x => { x.classList.toggle('on', x === p); x.setAttribute('aria-selected', x === p); });
-  $$('.panel').forEach(x => x.classList.toggle('on', x.dataset.panel === p.dataset.food));
-});
+  aimPointer();
+  const img = $('img', p);
+  img.animate([{ transform: 'rotate(-40deg) scale(.9)' }, { transform: 'rotate(14deg) scale(1.08)' }], { duration: 650, easing: 'cubic-bezier(.34,1.56,.64,1)' });
+  detail.getAnimations().forEach(a => a.cancel());
+  const swap = () => {
+    if (tok !== foodTok) return;
+    const h0 = detail.offsetHeight;
+    $$('.panel').forEach(x => x.classList.toggle('on', x === next));
+    if (reduce) return;
+    const h1 = detail.offsetHeight;
+    detail.animate([{ height: h0 + 'px' }, { height: h1 + 'px' }], { duration: 420, easing: 'cubic-bezier(.22,1,.36,1)' });
+    const [txt, media] = next.children;
+    const bits = [...txt.children].flatMap(el => el.matches('ul') ? [...el.children] : [el]);
+    bits.forEach((el, i) => el.animate(
+      [{ opacity: 0, transform: 'translateY(14px)' }, { opacity: 1, transform: 'none' }],
+      { duration: 460, delay: 40 + i * 40, easing: 'cubic-bezier(.22,1,.36,1)', fill: 'backwards' }));
+    media.animate(
+      [{ opacity: 0, transform: 'translateY(22px) scale(.94) rotate(-2.5deg)' }, { opacity: 1, transform: 'none' }],
+      { duration: 650, delay: 90, easing: 'cubic-bezier(.34,1.4,.64,1)', fill: 'backwards' });
+  };
+  if (reduce || !cur) return swap();
+  cur.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateY(-10px)' }],
+    { duration: 150, easing: 'ease-in' }).onfinish = swap;
+}
+$$('.plate').forEach(p => p.onclick = () => showFood(p));
 /* photo stack: click to bring to front */
 $$('.photo-stack img').forEach(img => img.onclick = () => {
   $$('.photo-stack img').forEach(x => x.classList.remove('front')); img.classList.add('front');
@@ -1782,50 +1955,71 @@ SH.forEach(it => {
 });
 
 /* ---------------- fusion ---------------- */
-const TR = ['Kimchi', 'Tteokbokki', 'Bulgogi', 'Rice-flour batter'];
-const IN = ['Cheese & fried rice', 'Cream sauce', 'Tortilla', 'Burger bun', 'Hot dog'];
 const potSvg = c => `<svg class="pot" viewBox="0 0 110 110"><ellipse cx="55" cy="96" rx="40" ry="6" fill="#000" opacity=".08"/><path d="M14 46 Q16 92 55 94 Q94 92 96 46 Z" fill="#fff" stroke="#1F2B3D" stroke-width="3"/><ellipse cx="55" cy="46" rx="41" ry="12" fill="${c}" stroke="#1F2B3D" stroke-width="3"/><circle cx="44" cy="44" r="5" fill="#fff" opacity=".6"/><circle cx="64" cy="48" r="4" fill="#fff" opacity=".5"/></svg>`;
 const corndog = '<svg class="pot" viewBox="0 0 110 110"><rect x="52" y="64" width="6" height="42" rx="3" fill="#D8B27A" stroke="#1F2B3D" stroke-width="2"/><rect x="34" y="8" width="42" height="64" rx="21" fill="#E3A33B" stroke="#1F2B3D" stroke-width="3"/><g fill="#F6D77B" stroke="#B9822A" stroke-width="1">' + Array.from({ length: 16 }, (_, i) => `<rect x="${39 + (i % 4) * 8}" y="${15 + Math.floor(i / 4) * 12}" width="6" height="6" rx="1.5"/>`).join('') + '</g><path d="M44 20 q11 -8 22 0" stroke="#B4454A" stroke-width="3" fill="none" stroke-linecap="round"/></svg>';
 const taco = '<svg class="pot" viewBox="0 0 110 110"><path d="M10 80 Q55 0 100 80 Z" fill="#F2D18B" stroke="#1F2B3D" stroke-width="3" stroke-linejoin="round"/><path d="M22 66 Q55 22 88 66" stroke="#8E3237" stroke-width="12" fill="none" stroke-linecap="round"/><path d="M26 60 Q55 30 84 60" stroke="#6F9A4E" stroke-width="5" fill="none" stroke-dasharray="6 5" stroke-linecap="round"/><path d="M10 80 Q55 92 100 80" stroke="#1F2B3D" stroke-width="3" fill="#E9BE6C"/></svg>';
 const burger = '<svg class="pot" viewBox="0 0 110 110"><path d="M16 50 Q16 14 55 14 Q94 14 94 50 Z" fill="#E3A33B" stroke="#1F2B3D" stroke-width="3"/><g fill="#fff"><ellipse cx="40" cy="30" rx="3" ry="1.6"/><ellipse cx="58" cy="24" rx="3" ry="1.6"/><ellipse cx="70" cy="34" rx="3" ry="1.6"/></g><path d="M12 56 q10 -8 20 0 q10 -8 22 0 q10 -8 22 0 q10 -8 22 0" stroke="#6F9A4E" stroke-width="6" fill="none" stroke-linecap="round"/><rect x="14" y="60" width="82" height="16" rx="8" fill="#7A3B22" stroke="#1F2B3D" stroke-width="3"/><path d="M16 82 h78 q0 16 -18 16 h-42 q-18 0 -18 -16z" fill="#E3A33B" stroke="#1F2B3D" stroke-width="3"/></svg>';
-const FUS = {
-  'Kimchi|Cheese & fried rice': { n: 'Kimchi cheese fried rice', d: 'Tangy kimchi fried rice under a blanket of melted cheese.', a: '<img src="assets/fusion-rice.webp" alt="">' },
-  'Tteokbokki|Cream sauce': { n: 'Creamy rose tteokbokki', d: 'Spicy gochujang meets cream for a pink "rose" sauce.', a: potSvg('#F08E86') },
-  'Bulgogi|Tortilla': { n: 'Korean tacos', d: 'Sweet-savoury bulgogi folded into a tortilla.', a: taco },
-  'Bulgogi|Burger bun': { n: 'Bulgogi burger', d: 'Marinated bulgogi patty in a soft bun.', a: burger },
-  'Rice-flour batter|Hot dog': { n: 'Korean-style corn dog', d: 'A sausage in chewy batter, rolled in crunchy coatings and sugar.', a: corndog }
-};
-let selT = null, selI = null; const found = new Set();
-const mkChips = (col, arr, set) => arr.forEach(t => {
-  const b = document.createElement('button'); b.className = 'chip'; b.textContent = t; b.setAttribute('aria-pressed', 'false');
-  b.onclick = () => { $$('.chip', col).forEach(x => x.setAttribute('aria-pressed', x === b)); set(t); tryFuse(); };
-  col.appendChild(b);
+const roseBowl = '<img src="assets/tteokbokki-bowl.webp" alt="" style="filter:saturate(.75) sepia(.15) brightness(1.08) hue-rotate(-8deg)">';
+const FUS = [
+  { a: 'Kimchi', b: 'Fried rice & cheese', n: 'Kimchi cheese fried rice', d: 'Tangy kimchi fried rice under a blanket of melted cheese.', art: '<img src="assets/fusion-rice.webp" alt="">', x: 50, y: 6 },
+  { a: 'Tteokbokki', b: 'Cream sauce', n: 'Creamy rose tteokbokki', d: 'Spicy gochujang meets cream for a pink "rose" sauce.', art: roseBowl, x: 85, y: 30 },
+  { a: 'Rice-flour batter', b: 'Hot dog', n: 'Korean corn dog', d: 'A sausage in chewy batter, rolled in crunchy coatings and sugar.', art: corndog, x: 82, y: 76 },
+  { a: 'Bulgogi', b: 'Burger bun', n: 'Bulgogi burger', d: 'A sweet-savoury marinated beef patty in a soft bun.', art: burger, x: 40, y: 93 },
+  { a: 'Dak galbi', b: 'Tortilla', n: 'Korean tacos', d: 'Spicy gochujang stir-fried chicken (dak galbi) folded into a tortilla.', art: taco, x: 14, y: 46 }
+];
+const fstage = $('#fstage'), flinks = $('#flinks'), fcenter = $('#fcenter');
+flinks.innerHTML = FUS.map(f => `<line x1="50" y1="50" x2="${f.x}" y2="${f.y}"/>`).join('');
+const combos = FUS.map((f, i) => {
+  const b = document.createElement('button');
+  b.className = 'combo'; b.style.left = f.x + '%'; b.style.top = f.y + '%';
+  b.innerHTML = `${f.a}<i>+</i>${f.b}`; b.setAttribute('aria-label', `${f.a} plus ${f.b}`);
+  b.onclick = () => showFusion(i, true);
+  fstage.appendChild(b); return b;
 });
-mkChips($('#colT'), TR, v => selT = v);
-mkChips($('#colI'), IN, v => selI = v);
-function tryFuse() {
-  if (!selT || !selI) return;
-  const out = $('#fusionOut'), f = FUS[selT + '|' + selI];
-  out.classList.remove('pop'); void out.offsetWidth; out.classList.add('pop');
-  if (f) {
-    $('#fArt').innerHTML = f.a; $('#fName').textContent = f.n; $('#fDesc').textContent = f.d;
-    const isNew = !found.has(f.n); found.add(f.n);
-    $('#fFound').textContent = `Discovered ${found.size} / 5` + (found.size === 5 ? ' · Fusion master! 🏆' : '');
-    if (isNew) chord(); if (found.size === 5 && isNew) confetti(50);
-  } else {
-    $('#fArt').innerHTML = potSvg('#DDD0BD'); $('#fName').textContent = 'Hmm… not a classic (yet)';
-    $('#fDesc').textContent = `${selT} + ${selI}? Try a different pairing.`; blip(220, .1, 'square', .03);
-  }
+function showFusion(i, user) {
+  const f = FUS[i];
+  combos.forEach((b, j) => { b.classList.toggle('on', j === i); b.setAttribute('aria-pressed', j === i); });
+  $$('line', flinks).forEach((l, j) => l.classList.toggle('on', j === i));
+  $('#fArt').innerHTML = f.art; $('#fName').textContent = f.n; $('#fDesc').textContent = f.d;
+  if (user) { fcenter.classList.remove('swap'); void fcenter.offsetWidth; fcenter.classList.add('swap'); chord(); }
 }
+showFusion(0, false);
 
-/* ---------------- hallyu likes ---------------- */
+/* ---------------- hallyu likes (shared, stored on the server) ---------------- */
+const LIKE_API = location.hostname.endsWith('vercel.app') ? '/api/likes' : 'https://korean-food-guide.vercel.app/api/likes';
+const likeCounts = {}, pending = {};
+const fmt = n => n.toLocaleString('en-US');
+const paintLikes = () => $$('.hw').forEach(c => { const v = likeCounts[c.dataset.like]; if (v != null) $('.like .n', c).textContent = fmt(v); });
+fetch(LIKE_API).then(r => r.ok ? r.json() : Promise.reject()).then(d => { Object.assign(likeCounts, d); paintLikes(); })
+  .catch(() => $$('.like .n').forEach(n => n.textContent = '0'));
+let flushT;
+const flush = () => {
+  const batch = { ...pending }; Object.keys(pending).forEach(k => delete pending[k]);
+  Object.entries(batch).forEach(([id, n]) => fetch(LIKE_API, {
+    method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id, n }), keepalive: true
+  }).then(r => r.ok ? r.json() : null).then(d => { if (d && d.count != null && !pending[id]) { likeCounts[id] = d.count; paintLikes(); } }).catch(() => {}));
+};
+addEventListener('pagehide', flush);
 $$('.hw').forEach(c => {
-  let n = Math.floor(Math.random() * 40) + 12; const sp = $('.likes span', c); sp.textContent = n + 'k';
-  const like = () => {
-    n++; sp.textContent = n + 'k'; c.classList.add('liked'); setTimeout(() => c.classList.remove('liked'), 250);
-    const r = c.getBoundingClientRect(); burst(r.left + 40, r.bottom - 30, 6);
+  const id = c.dataset.like;
+  const like = e => {
+    likeCounts[id] = (likeCounts[id] || 0) + 1; pending[id] = (pending[id] || 0) + 1; paintLikes();
+    clearTimeout(flushT); flushT = setTimeout(flush, 700);
+    c.classList.add('liked'); setTimeout(() => c.classList.remove('liked'), 250);
+    blip(700 + Math.random() * 200, .06, 'triangle');
+    const r = (e && e.currentTarget || c).getBoundingClientRect(); burst(r.left + r.width / 2, r.top + r.height / 2, 6);
   };
-  c.onclick = like; c.onkeydown = e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); like(); } };
+  $$('.obj, .like', c).forEach(b => b.addEventListener('click', like));
+  const pc = $('.pc', c);
+  if (pc && !reduce) {
+    const o = $('.obj', c);
+    o.addEventListener('pointermove', e => {
+      const r = pc.getBoundingClientRect(), x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+      pc.style.setProperty('--rx', (x - .5) * 22 + 'deg'); pc.style.setProperty('--ry', (.5 - y) * 22 + 'deg');
+      pc.style.setProperty('--mx', x * 100 + '%'); pc.style.setProperty('--my', y * 100 + '%');
+    });
+    o.addEventListener('pointerleave', () => { ['--rx', '--ry'].forEach(k => pc.style.setProperty(k, '0deg')); });
+  }
 });
 
 /* ---------------- mukbang ---------------- */
