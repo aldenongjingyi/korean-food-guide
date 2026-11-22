@@ -37,9 +37,10 @@ body{
   font-size:17px;line-height:1.55;overflow-x:clip;
   background-image:radial-gradient(ellipse at 50% 0%, #fff7f2 0%, transparent 60%);
 }
-img{max-width:100%;display:block;user-select:none;-webkit-user-drag:none}
+img{max-width:100%;height:auto;display:block;user-select:none;-webkit-user-drag:none}
 button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
 .kr{font-family:var(--kr);font-weight:700}
+h2 .kr,h3 .kr{white-space:nowrap}
 
 /* ---------- shared bits ---------- */
 .waves{
@@ -188,7 +189,7 @@ ul.tri li::before{content:"";position:absolute;left:2px;top:.45em;border:7px sol
 /* ---------- meal ---------- */
 .meal-grid{display:grid;grid-template-columns:1.35fr 1fr;gap:34px;align-items:center;margin-top:40px}
 .table{position:relative;border-radius:28px;overflow:hidden;border:10px solid var(--paper);box-shadow:0 6px 0 #E8D2C7,0 30px 50px -24px rgba(90,40,30,.45);rotate:-1deg}
-.table img{width:100%}
+.table img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover}
 .hot{
   position:absolute;width:44px;height:44px;margin:-22px 0 0 -22px;border-radius:50%;
   display:grid;place-items:center;transition:transform .3s var(--spring);
@@ -202,10 +203,11 @@ ul.tri li::before{content:"";position:absolute;left:2px;top:.45em;border:7px sol
 @keyframes ping{0%{transform:scale(.6);opacity:1}100%{transform:scale(1.6);opacity:0}}
 .bubble{
   position:absolute;z-index:5;background:var(--paper);border-radius:16px;padding:10px 14px;box-shadow:0 10px 24px -8px rgba(0,0,0,.35);
-  font-size:14px;max-width:210px;pointer-events:none;translate:-50% calc(-100% - 30px);animation:pop .4s var(--spring);
+  font-size:14px;width:max-content;max-width:210px;pointer-events:none;--tx:-50%;--ax:50%;translate:var(--tx) calc(-100% - 30px);animation:pop .4s var(--spring);
 }
 .bubble b{display:block;color:var(--red);font-size:15px}
-.bubble::after{content:"";position:absolute;left:50%;bottom:-8px;translate:-50% 0;border:9px solid transparent;border-top-color:var(--paper);border-bottom:0}
+.bubble::after{content:"";position:absolute;left:var(--ax);bottom:-8px;translate:-50% 0;border:9px solid transparent;border-top-color:var(--paper);border-bottom:0}
+.bubble.below::after{bottom:auto;top:-8px;border-top:0;border-bottom:9px solid var(--paper)}
 .tray{padding:26px}
 .tray h3{margin-bottom:4px}
 .slots{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px 0}
@@ -451,7 +453,7 @@ ul.tri li::before{content:"";position:absolute;left:2px;top:.45em;border:7px sol
 .cart .sign{text-align:center;font-family:var(--kr);font-size:30px;color:var(--red);margin-top:6px}
 .menu{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;align-items:end;padding:10px 0 0}
 .mitem{display:flex;flex-direction:column;align-items:center;gap:6px;padding:8px 4px;border-radius:14px;transition:background .2s}
-.mitem img{height:96px;width:auto;object-fit:contain;transition:transform .45s var(--spring)}
+.mitem img{height:96px;width:100%;max-width:110px;object-fit:contain;transition:transform .45s var(--spring)}
 .mitem:hover img,.mitem.on img{transform:translateY(-10px) rotate(-6deg) scale(1.08)}
 .mitem .tag{font-size:12px;font-weight:800;color:#fff;background:var(--navy);border-radius:6px;padding:3px 8px;transform-origin:50% -6px;transition:transform .3s}
 .mitem:hover .tag{animation:swing .8s ease-in-out}
@@ -469,13 +471,13 @@ ul.tri li::before{content:"";position:absolute;left:2px;top:.45em;border:7px sol
 .sitem:hover{transform:translateY(-6px)}
 .sitem.taken{opacity:.3;transform:scale(.9)}
 .sitem .pic{height:78px;display:grid;place-items:center}
-.sitem .pic img{max-height:78px;width:auto}
+.sitem .pic img{height:78px;width:100%;object-fit:contain}
 .sitem small{font-size:11px;font-weight:800;color:var(--navy);text-align:center;line-height:1.1}
 .sitem .pic svg{width:70px;height:62px}
 .basket{display:flex;align-items:center;gap:12px;background:#fff;border-radius:16px;padding:10px 14px;min-height:64px}
 .basket .items{display:flex;gap:6px;flex:1;flex-wrap:wrap}
 .basket .items span{width:40px;height:40px;border-radius:10px;background:var(--cream);display:grid;place-items:center;animation:pop .4s var(--spring);overflow:hidden}
-.basket .items span img,.basket .items span svg{max-width:34px;max-height:34px}
+.basket .items span img,.basket .items span svg{width:34px;height:34px;object-fit:contain}
 .basket .tot{font-weight:800;color:var(--navy);font-size:14px;white-space:nowrap}
 .honbap-msg{min-height:26px;margin-top:10px;font-weight:700;color:var(--red);text-align:center}
 
@@ -486,7 +488,7 @@ ul.tri li::before{content:"";position:absolute;left:2px;top:.45em;border:7px sol
 .mixer .chip{justify-content:center}
 .fusion-out{margin-top:20px;display:grid;grid-template-columns:150px 1fr;gap:16px;align-items:center;background:var(--cream);border-radius:20px;padding:16px;min-height:150px}
 .fusion-out .art{width:150px;height:130px;display:grid;place-items:center}
-.fusion-out .art img{max-height:130px;width:auto}
+.fusion-out .art img{height:130px;width:100%;object-fit:contain}
 .fusion-out .name{font-family:var(--serif);font-size:28px;color:var(--navy);text-transform:uppercase;line-height:1}
 .fusion-out .found{font-size:13px;font-weight:700;color:var(--muted);margin-top:8px}
 .fusion-out.pop .art{animation:pop .55s var(--spring)}
@@ -597,6 +599,99 @@ footer{text-align:center;padding:0 20px 110px;color:var(--muted);font-size:14px}
   .mitem .tag{font-size:10px;padding:2px 5px}
   .hero{padding-bottom:200px}
   .nav a{padding:8px 10px;font-size:12px}
+  section{padding:64px 16px}
+  h2{font-size:clamp(32px,9vw,44px)}
+  .lede{font-size:16px}
+  .eyebrow{font-size:11px;padding:5px 12px}
+  .meal-grid,.eti-grid,.trad-grid,.jeong,.muk{gap:22px;margin-top:24px}
+  .table{border-width:6px;rotate:0deg;border-radius:20px}
+  .hot{width:36px;height:36px;margin:-18px 0 0 -18px}
+  .hot::before{inset:6px}
+  .bubble{font-size:13px;max-width:170px;padding:8px 11px}
+  .tray{padding:18px}
+  .slot{padding:10px;min-height:80px}
+  .slot .kr{font-size:18px}
+  .why-grid{gap:12px;margin-top:24px}
+  .flip{height:170px}
+  .face{padding:18px}
+  .face .ico{width:48px;height:48px}
+  .face.back{font-size:16px}
+  .chopsticks{padding:20px;margin-top:32px;gap:16px}
+  .cs-stage{height:170px}
+  .cs-stage svg{height:150px}
+  .step{grid-template-columns:44px 1fr;gap:12px;padding:14px}
+  .step .num{width:44px;height:44px;font-size:22px}
+  .step:hover{transform:none}
+  .say .kr{font-size:17px}
+  .quiz{padding:18px}
+  .quiz .q{font-size:17px;min-height:0}
+  .plates{margin-top:24px}
+  .plate{padding:8px 2px 12px;border-radius:18px}
+  .plate .nm{font-size:13px}
+  .plate .kr{font-size:12px}
+  .plate.on{transform:translateY(-4px)}
+  .detail{padding:18px;margin-top:16px;min-height:0}
+  .panel{gap:22px}
+  .photo-stack{height:240px}
+  .photo-stack img{border-width:5px}
+  .tteok-grid{gap:10px}
+  .tcard .back{font-size:13px;padding:10px}
+  .tcard .back b{font-size:18px}
+  .bowl-wrap img.bowl{width:min(280px,100%)}
+  .yak img{width:min(260px,100%)}
+  .kimjang,.holiday{padding:20px}
+  .stamp{width:84px;height:84px;font-size:10px;right:12px;top:12px}
+  .stamp big{font-size:24px}
+  .kimjang ul.tri{max-width:100%!important;margin-top:8px}
+  .kimjang .tag-red{max-width:calc(100% - 90px)}
+  .hand{width:40px;height:40px;font-size:13px}
+  .big-title{font-size:clamp(40px,12vw,56px)}
+  .share-table{max-width:340px}
+  .friend{width:70px}
+  .friend .face-c{width:52px;height:52px}
+  .friend svg{width:36px;height:36px}
+  .friend .kr{font-size:13px}
+  .marquee{margin-top:36px}
+  .marquee .track{font-size:20px;gap:24px}
+  .feature{margin-top:40px;padding:18px;gap:20px}
+  .road{height:220px}
+  .road .shop{width:80px;bottom:52px}
+  .road .house{width:74px;right:10px;bottom:50px}
+  .road .scooter{width:104px}
+  .road .bag{width:48px;right:22px;bottom:100px}
+  @keyframes ride{0%{left:10px}80%{left:calc(100% - 190px)}100%{left:calc(100% - 184px)}}
+  .chicken-box{width:min(220px,70%)}
+  .cart{padding:14px 10px 0}
+  .awning{margin:-14px -10px 12px;height:36px}
+  .cart .counter{margin:0 -10px}
+  .menu{gap:2px}
+  .mitem{padding:6px 0}
+  .mitem img{height:52px}
+  .sitem .pic{height:60px}
+  .sitem .pic img{height:60px}
+  .sitem .pic svg{width:54px;height:48px}
+  .mixer{grid-template-columns:1fr 1fr;gap:10px}
+  .mixer .plus{display:none}
+  .mixer .chip{padding:9px 8px;font-size:13px}
+  .fusion-out .art{width:120px;height:110px}
+  .fusion-out .art img{height:110px}
+  .fusion-out .name{font-size:22px}
+  .hallyu{margin-top:20px;padding-top:10px}
+  .hallyu-grid{gap:14px}
+  .hw{padding:20px}
+  .hw:hover,.hw:nth-child(2):hover{transform:none}
+  .global-note{font-size:13px;border-radius:16px}
+  .tile{padding:10px 12px}
+  .tile .kr{font-size:24px}
+  .combine{gap:8px}
+  .combine .op{font-size:26px}
+  .stream{padding:10px;border-radius:20px}
+  .chat{width:56%}
+  .stream .ctrls .btn{flex:1;padding:12px 14px}
+  .concl-grid{gap:12px;margin-top:24px}
+  .note{min-height:0;rotate:0deg!important}
+  .thanks{padding:90px 16px 170px}
+  .thanks .side{width:38vw;bottom:30px}
 }
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
@@ -1172,7 +1267,7 @@ footer{text-align:center;padding:0 20px 110px;color:var(--muted);font-size:14px}
           <div class="likes"><svg viewBox="0 0 24 24" fill="#B4454A"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z"/></svg><span>0</span></div>
         </div>
       </div>
-      <p class="reveal" style="text-align:center;margin-top:30px"><span class="pill-red">International visitors are increasingly interested in experiencing Korean food firsthand.</span></p>
+      <p class="reveal" style="text-align:center;margin-top:30px"><span class="pill-red global-note">International visitors are increasingly interested in experiencing Korean food firsthand.</span></p>
     </div>
   </div>
 </section>
@@ -1402,7 +1497,9 @@ hots.forEach((h, i) => {
     bub && bub.remove();
     bub = document.createElement('div'); bub.className = 'bubble';
     bub.style.left = h.x + '%'; bub.style.top = h.y + '%';
-    if (h.y < 30) { bub.style.translate = '-50% 34px'; }
+    if (h.x < 25) bub.style.setProperty("--tx", "-14%"), bub.style.setProperty("--ax", "14%");
+    if (h.x > 75) bub.style.setProperty("--tx", "-86%"), bub.style.setProperty("--ax", "86%");
+    if (h.y < 30) { bub.style.translate = "var(--tx) 34px"; bub.classList.add("below"); }
     bub.innerHTML = `<b>${h.n}</b>${h.d}`; table.appendChild(bub);
     clearTimeout(bub._t); const me = bub; me._t = setTimeout(() => me.remove(), 3200);
     if (b.classList.contains('got')) { blip(500); return; }
