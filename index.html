@@ -460,14 +460,9 @@ ul.tri li::before{content:"";position:absolute;left:2px;top:.45em;border:7px sol
 .road::after{content:"";position:absolute;left:0;right:0;bottom:44px;height:4px;background:repeating-linear-gradient(90deg,var(--beige-dk) 0 26px,transparent 26px 46px)}
 .road .house{position:absolute;right:18px;bottom:52px;width:110px}
 .road .shop{position:absolute;left:14px;bottom:56px;width:120px}
-.road .scooter{position:absolute;left:-200px;bottom:20px;width:150px;z-index:2}
-.road .scooter.go{animation:ride 2.4s cubic-bezier(.5,0,.4,1) forwards}
-@keyframes ride{0%{left:20px;transform:rotate(0)}10%{transform:rotate(-4deg)}80%{left:calc(100% - 270px);transform:rotate(-2deg)}100%{left:calc(100% - 260px);transform:rotate(0)}}
-.road .bag{position:absolute;right:40px;bottom:120px;width:70px;opacity:0}
-.road .bag.drop{animation:bagdrop .7s var(--spring) forwards}
-@keyframes bagdrop{0%{opacity:0;transform:translateY(-40px) scale(.5)}100%{opacity:1;transform:none}}
-.road .done{position:absolute;top:18px;left:50%;translate:-50% 0;background:var(--paper);border-radius:999px;padding:8px 16px;font-weight:800;color:var(--green);opacity:0;white-space:nowrap}
-.road .done.show{animation:pop .5s var(--spring) forwards}
+.road .scooter{position:absolute;left:0;bottom:20px;width:150px;z-index:2;transform-origin:30% 90%;will-change:transform}
+.road .bag{position:absolute;left:0;bottom:42px;width:58px;opacity:0;z-index:1;transform-origin:50% 100%}
+.road .done{position:absolute;top:18px;left:50%;translate:-50% 0;background:var(--paper);border-radius:999px;padding:8px 16px;font-weight:800;color:var(--green);opacity:0;white-space:nowrap;z-index:3}
 .chicken-box{position:relative;width:min(300px,80%);margin:0 auto}
 .chicken-box img{transition:filter .5s}
 .flavours{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}
@@ -769,8 +764,7 @@ footer{text-align:center;padding:0 20px 110px;color:var(--muted);font-size:14px}
   .road .shop{width:80px;bottom:52px}
   .road .house{width:74px;right:10px;bottom:50px}
   .road .scooter{width:104px}
-  .road .bag{width:48px;right:22px;bottom:100px}
-  @keyframes ride{0%{left:10px}80%{left:calc(100% - 190px)}100%{left:calc(100% - 184px)}}
+  .road .bag{width:44px}
   .chicken-box{width:min(220px,70%)}
   .cart{padding:14px 10px 0}
   .awning{margin:-14px -10px 12px;height:36px}
@@ -806,9 +800,12 @@ footer{text-align:center;padding:0 20px 110px;color:var(--muted);font-size:14px}
   .thanks{padding:90px 16px 170px}
   .thanks .side{width:38vw;bottom:30px}
 }
+/* reduced motion: stop the ambient, looping motion only; anything the visitor clicks still animates */
 @media (prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
-  .reveal{opacity:1;transform:none}
+  .blossom,.hero .plate-l img,.hero .plate-r img,.marquee .track,.hot::after,.moon,.bonus,
+  .scroll-cue .chop::before,.scroll-cue .chop::after,.phone .prog::after{animation:none!important}
+  .reveal{transform:none;transition:none}
+  html{scroll-behavior:auto}
 }
 </style>
 </head>
@@ -1429,7 +1426,7 @@ footer{text-align:center;padding:0 20px 110px;color:var(--muted);font-size:14px}
         <span class="op">=</span>
         <div class="tile result"><span class="kr">먹방</span><small>MUKBANG</small></div>
       </div>
-      <button class="btn small cream" id="combineBtn">Smoosh the words together</button>
+      <button class="btn small cream" id="combineBtn" data-silent>Smoosh the words together</button>
     </div>
     <div class="reveal">
       <div class="stream">
@@ -1503,7 +1500,7 @@ function blip(f = 520, d = .09, type = 'sine', vol = .08) {
 }
 const chord = () => [523, 659, 784, 1046].forEach((f, i) => setTimeout(() => blip(f, .12, 'triangle', .06), i * 80));
 document.addEventListener('pointerdown', e => {
-  if (e.target.closest('.btn,.chip,.opt,.say,.plate,.mitem,.sitem')) blip(420 + Math.random() * 120, .06, 'sine', .06);
+  if (e.target.closest('.btn,.chip,.opt,.say,.plate,.mitem,.sitem') && !e.target.closest('[data-silent]')) blip(420 + Math.random() * 120, .06, 'sine', .06);
 });
 
 /* ---------------- speech ---------------- */
@@ -1594,15 +1591,14 @@ let t0 = 0;
       if (p.burst || petals.length > 22) petals.splice(i, 1); else Object.assign(p, mkPetal());
     }
   }
-  if (!reduce && !document.hidden) requestAnimationFrame(loop); else setTimeout(() => requestAnimationFrame(loop), 500);
+  if (!document.hidden) requestAnimationFrame(loop); else setTimeout(() => requestAnimationFrame(loop), 500);
 })();
-function burst(x, y, n = 14) { if (reduce) return; for (let i = 0; i < n; i++) petals.push(mkPetal(x * DPR, y * DPR, true)); }
+function burst(x, y, n = 14) { for (let i = 0; i < n; i++) petals.push(mkPetal(x * DPR, y * DPR, true)); }
 document.addEventListener('click', e => {
   if (e.target.closest('.btn,.plate,.hot,.dish,.friend,.tile')) burst(e.clientX, e.clientY, 8);
 });
 
 function confetti(n = 40) {
-  if (reduce) return;
   const cols = ['#B4454A', '#1F2B3D', '#F2B1BE', '#E3A33B', '#6F9A4E'];
   for (let i = 0; i < n; i++) {
     const c = document.createElement('i'); c.className = 'confetti';
@@ -1694,7 +1690,7 @@ function drawCS(k) {
     g.innerHTML = stick(88, -3) + stick(112, 3) +
       `<text x="220" y="185" text-anchor="middle" font-family="Figtree" font-weight="700" font-size="13" fill="#6C6266">${c.flat ? 'flat · metal' : k === 'jp' ? 'round · wood · pointed' : 'long · bamboo/wood · blunt'}</text>`;
     g.style.opacity = 1; g.style.transform = 'none';
-  }, reduce ? 0 : 180);
+  }, 180);
   $('#csInfo').textContent = c.info;
 }
 $$('[data-cs]').forEach(b => b.onclick = () => {
@@ -1777,7 +1773,6 @@ function showFood(p) {
     if (tok !== foodTok) return;
     const h0 = detail.offsetHeight;
     $$('.panel').forEach(x => x.classList.toggle('on', x === next));
-    if (reduce) return;
     const h1 = detail.offsetHeight;
     detail.animate([{ height: h0 + 'px' }, { height: h1 + 'px' }], { duration: 420, easing: 'cubic-bezier(.22,1,.36,1)' });
     const [txt, media] = next.children;
@@ -1789,7 +1784,7 @@ function showFood(p) {
       [{ opacity: 0, transform: 'translateY(22px) scale(.94) rotate(-2.5deg)' }, { opacity: 1, transform: 'none' }],
       { duration: 650, delay: 90, easing: 'cubic-bezier(.34,1.4,.64,1)', fill: 'backwards' });
   };
-  if (reduce || !cur) return swap();
+  if (!cur) return swap();
   cur.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateY(-10px)' }],
     { duration: 150, easing: 'ease-in' }).onfinish = swap;
 }
@@ -1878,7 +1873,7 @@ function share(i) {
   m.style.left = x0 + 'px'; m.style.top = y0 + 'px';
   const anim = m.animate([{ transform: 'translate(0,0) scale(1)' },
     { transform: `translate(${(x1 - x0) / 2}px,${(y1 - y0) / 2 - 60}px) scale(1.3)` },
-    { transform: `translate(${x1 - x0}px,${y1 - y0}px) scale(.6)` }], { duration: reduce ? 1 : 520, easing: 'ease-in-out' });
+    { transform: `translate(${x1 - x0}px,${y1 - y0}px) scale(.6)` }], { duration: 520, easing: 'ease-in-out' });
   blip(500, .08);
   anim.onfinish = () => {
     m.remove();
@@ -1909,14 +1904,55 @@ $$('#flavours .chip').forEach(c => c.onclick = () => {
   const img = $('#chickenImg'); img.style.filter = flav[c.dataset.f] + ' drop-shadow(0 10px 14px rgba(90,40,30,.22))';
   img.animate([{ transform: 'scale(1) rotate(0)' }, { transform: 'scale(1.08) rotate(-5deg)' }, { transform: 'scale(1)' }], { duration: 500, easing: 'cubic-bezier(.34,1.56,.64,1)' });
 });
-$('#orderBtn').onclick = () => {
-  const s = $('#scooter'), bag = $('#bag'), done = $('#doneTag');
-  $('#orderWrap').style.display = 'none';
-  s.classList.remove('go'); bag.classList.remove('drop'); done.classList.remove('show'); void s.offsetWidth;
-  s.classList.add('go');
+/* delivery: measured in pixels so it plays the same in every browser */
+const road = $('#road'), scooter = $('#scooter'), bag = $('#bag'), doneTag = $('#doneTag'), orderWrap = $('#orderWrap');
+const roadSpots = () => {
+  const R = road.getBoundingClientRect(), box = el => { const r = el.getBoundingClientRect(); return { x: r.left - R.left, w: r.width }; };
+  const shop = box($('.shop', road)), house = box($('.house', road)), w = scooter.offsetWidth;
+  return {
+    start: shop.x + shop.w * .1,
+    end: house.x - w * .78,
+    bagX: house.x + house.w * .16 - bag.offsetWidth * .5
+  };
+};
+const parkScooter = () => { if (!scooter.getAnimations().some(a => a.playState === 'running')) scooter.style.transform = `translateX(${roadSpots().start}px)`; };
+scooter.complete ? parkScooter() : scooter.addEventListener('load', parkScooter);
+addEventListener('load', parkScooter); addEventListener('resize', parkScooter);
+let delivering = false;
+$('#orderBtn').onclick = async () => {
+  if (delivering) return;
+  delivering = true;
+  orderWrap.style.display = 'none';
+  const spot = roadSpots();
+  [scooter, bag, doneTag].forEach(el => el.getAnimations().forEach(a => a.cancel()));
+  // coming back for another order: fade out at the house, reappear at the shop
+  if (bag.style.opacity === '1') {
+    await Promise.all([bag, doneTag].map(el => el.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 250, fill: 'forwards' }).finished));
+    bag.style.opacity = doneTag.style.opacity = '0';
+    [bag, doneTag].forEach(el => el.getAnimations().forEach(a => a.cancel()));
+  }
+  scooter.style.transform = `translateX(${spot.start}px)`;
   let n = 0; const iv = setInterval(() => { blip(180 + (n++ % 2) * 30, .05, 'sawtooth', .025); if (n > 18) clearInterval(iv); }, 120);
-  setTimeout(() => { bag.classList.add('drop'); done.classList.add('show'); chord(); }, reduce ? 0 : 2400);
-  setTimeout(() => { $('#orderWrap').style.display = ''; $('#orderBtn').textContent = 'Order again 🛵'; }, reduce ? 0 : 3600);
+  const x0 = spot.start, x1 = spot.end;
+  const ride = scooter.animate([
+    { transform: `translateX(${x0}px) rotate(0deg)` },
+    { transform: `translateX(${x0 + 4}px) rotate(-6deg)`, offset: .1 },
+    { transform: `translateX(${x0 + (x1 - x0) * .5}px) rotate(-1deg) translateY(-2px)`, offset: .5 },
+    { transform: `translateX(${x1 + 10}px) rotate(1.5deg)`, offset: .9 },
+    { transform: `translateX(${x1}px) rotate(0deg)` }
+  ], { duration: 2600, easing: 'ease-in-out', fill: 'forwards' });
+  await ride.finished;
+  scooter.style.transform = `translateX(${x1}px)`;
+  ride.cancel(); clearInterval(iv);
+  bag.style.left = spot.bagX + 'px';
+  bag.animate([{ opacity: 0, transform: 'translateY(-46px) scale(.5) rotate(-15deg)' }, { opacity: 1, transform: 'translateY(4px) scale(1.05,.92)', offset: .7 }, { opacity: 1, transform: 'none' }],
+    { duration: 650, easing: 'cubic-bezier(.34,1.4,.64,1)', fill: 'forwards' });
+  bag.style.opacity = '1';
+  doneTag.animate([{ opacity: 0, transform: 'scale(.5)' }, { opacity: 1, transform: 'scale(1.1)', offset: .7 }, { opacity: 1, transform: 'none' }],
+    { duration: 500, easing: 'cubic-bezier(.34,1.56,.64,1)', fill: 'forwards' });
+  doneTag.style.opacity = '1';
+  chord();
+  setTimeout(() => { $('#orderBtn').textContent = 'Order again 🛵'; orderWrap.style.display = ''; delivering = false; }, 1100);
 };
 
 /* ---------------- bunsik ---------------- */
@@ -2033,7 +2069,7 @@ $$('.hw').forEach(c => {
   };
   $$('.obj, .like', c).forEach(b => b.addEventListener('click', like));
   const pc = $('.pc', c);
-  if (pc && !reduce) {
+  if (pc) {
     const o = $('.obj', c);
     o.addEventListener('pointermove', e => {
       const r = pc.getBoundingClientRect(), x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
@@ -2047,7 +2083,7 @@ $$('.hw').forEach(c => {
 /* ---------------- mukbang ---------------- */
 $('#combineBtn').onclick = () => {
   const c = $('#combine'); c.classList.remove('merged'); void c.offsetWidth; c.classList.add('merged');
-  setTimeout(() => c.classList.remove('merged'), 900); speak('먹방');
+  setTimeout(() => c.classList.remove('merged'), 900);
 };
 const chatMsgs = [['k_fan', '먹방 최고!! 🔥'], ['ana.eats', 'is that ramyeon?? 😍'], ['jiwon', 'the chicken looks so crispy'], ['user482', 'Hello from Malaysia 🇲🇾'], ['tteokluv', 'eat the rice too!'], ['minji', '맛있겠다 ㅠㅠ'], ['foodie_99', 'ASMR pls'], ['sujin', 'I\'m ordering delivery now lol'], ['mr.bbq', 'what sauce is that'], ['lingling', '♥♥♥']];
 let liveOn = false, viewers = 0, liveIv, ci = 0;
