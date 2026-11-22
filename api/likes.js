@@ -4,6 +4,13 @@ const MAX_PER_REQUEST = 50;
 
 const URL_ = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL;
 const TOKEN = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN;
+const ADMIN_KEY = process.env.LIKES_ADMIN_KEY;
+const crypto = require('crypto');
+const isAdmin = key => {
+  if (!ADMIN_KEY || typeof key !== 'string') return false;
+  const a = Buffer.from(key), b = Buffer.from(ADMIN_KEY);
+  return a.length === b.length && crypto.timingSafeEqual(a, b);
+};
 
 async function redis(...cmd) {
   const r = await fetch(URL_, {
@@ -18,7 +25,7 @@ async function redis(...cmd) {
 module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, X-Admin-Key');
   res.setHeader('Cache-Control', 'no-store');
   if (req.method === 'OPTIONS') return res.status(204).end();
   if (!URL_ || !TOKEN) return res.status(500).json({ error: 'Storage is not configured' });
@@ -33,6 +40,11 @@ module.exports = async (req, res) => {
       const { id } = body;
       const n = Math.min(MAX_PER_REQUEST, Math.max(1, Math.floor(Number(body.n) || 1)));
       if (!IDS.includes(id)) return res.status(400).json({ error: 'Unknown card' });
+      if (body.reset) {
+        if (!isAdmin(req.headers['x-admin-key'])) return res.status(403).json({ error: 'Not allowed' });
+        await redis('SET', `likes:${id}`, 0);
+        return res.status(200).json({ id, count: 0 });
+      }
       const count = await redis('INCRBY', `likes:${id}`, n);
       return res.status(200).json({ id, count });
     }
