@@ -1,0 +1,1775 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Korean Food Guide</title>
+<meta name="description" content="An interactive Korean food guide by T1 Group A — meals, etiquette, traditional dishes and modern food culture.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Figtree:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&family=Gowun+Batang:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#F8EFE8;
+  --blush:#F3DCD4;
+  --paper:#FFF9F4;
+  --red:#B4454A;
+  --red-dk:#8E3237;
+  --navy:#1F2B3D;
+  --navy-dk:#121A26;
+  --beige:#DDD0BD;
+  --beige-dk:#B9A88F;
+  --wave:#EBC0B8;
+  --ink:#2A2A30;
+  --muted:#6C6266;
+  --gold:#E3A33B;
+  --green:#6F9A4E;
+  --radius:22px;
+  --serif:"DM Serif Display","Gowun Batang",Georgia,serif;
+  --kr:"Gowun Batang","DM Serif Display",serif;
+  --sans:"Figtree",system-ui,sans-serif;
+  --spring:cubic-bezier(.34,1.56,.64,1);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{
+  margin:0;background:var(--cream);color:var(--ink);font-family:var(--sans);
+  font-size:17px;line-height:1.55;overflow-x:clip;
+  background-image:radial-gradient(ellipse at 50% 0%, #fff7f2 0%, transparent 60%);
+}
+img{max-width:100%;display:block;user-select:none;-webkit-user-drag:none}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+.kr{font-family:var(--kr);font-weight:700}
+
+/* ---------- shared bits ---------- */
+.waves{
+  --w:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='30'%3E%3Cg fill='%23F8EFE8' stroke='%23EBC0B8' stroke-width='1.6'%3E%3Cg id='a'%3E%3Ccircle cx='30' cy='-15' r='29'/%3E%3C/g%3E%3Ccircle cx='0' cy='0' r='29'/%3E%3Ccircle cx='0' cy='0' r='21'/%3E%3Ccircle cx='0' cy='0' r='13'/%3E%3Ccircle cx='0' cy='0' r='5'/%3E%3Ccircle cx='60' cy='0' r='29'/%3E%3Ccircle cx='60' cy='0' r='21'/%3E%3Ccircle cx='60' cy='0' r='13'/%3E%3Ccircle cx='60' cy='0' r='5'/%3E%3Ccircle cx='30' cy='15' r='29'/%3E%3Ccircle cx='30' cy='15' r='21'/%3E%3Ccircle cx='30' cy='15' r='13'/%3E%3Ccircle cx='30' cy='15' r='5'/%3E%3Ccircle cx='0' cy='30' r='29'/%3E%3Ccircle cx='0' cy='30' r='21'/%3E%3Ccircle cx='0' cy='30' r='13'/%3E%3Ccircle cx='0' cy='30' r='5'/%3E%3Ccircle cx='60' cy='30' r='29'/%3E%3Ccircle cx='60' cy='30' r='21'/%3E%3Ccircle cx='60' cy='30' r='13'/%3E%3Ccircle cx='60' cy='30' r='5'/%3E%3C/g%3E%3C/svg%3E");
+  background-image:var(--w);background-size:60px 30px;
+}
+.wave-band{height:90px;-webkit-mask:linear-gradient(transparent,#000 70%);mask:linear-gradient(transparent,#000 70%);opacity:.9}
+
+section{position:relative;padding:110px 20px;}
+.wrap{max-width:1120px;margin:0 auto;position:relative;z-index:2}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:13px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--red);background:var(--paper);border:2px solid var(--blush);padding:6px 14px;border-radius:999px;
+}
+.eyebrow .dot{width:8px;height:8px;border-radius:50%;background:var(--red)}
+h2{
+  font-family:var(--serif);font-weight:400;font-size:clamp(38px,6vw,68px);line-height:1;margin:18px 0 14px;
+  color:var(--navy);letter-spacing:-.01em;text-transform:uppercase;
+}
+h2 em{font-style:normal;color:var(--red)}
+h2 .kr{font-size:.82em}
+h3{font-family:var(--serif);font-weight:400;font-size:clamp(26px,3.4vw,36px);line-height:1.05;margin:0 0 10px;color:var(--navy);text-transform:uppercase}
+.lede{font-size:clamp(17px,1.6vw,20px);color:var(--muted);max-width:640px;margin:0}
+.pill-red{
+  display:inline-block;background:var(--red);color:#fff;border-radius:999px;padding:8px 18px;font-weight:600;font-style:italic;
+  box-shadow:0 4px 0 var(--red-dk);
+}
+
+/* tactile button */
+.btn{
+  --bg:var(--red);--sh:var(--red-dk);
+  position:relative;display:inline-flex;align-items:center;gap:10px;justify-content:center;
+  background:var(--bg);color:#fff;font-weight:700;padding:14px 24px;border-radius:999px;white-space:nowrap;
+  box-shadow:0 6px 0 var(--sh),0 12px 20px -8px rgba(80,20,20,.35);
+  transform:translateY(0);transition:transform .12s ease, box-shadow .12s ease;
+  -webkit-tap-highlight-color:transparent;
+}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 0 var(--sh),0 16px 24px -8px rgba(80,20,20,.35)}
+.btn:active,.btn.pressed{transform:translateY(5px);box-shadow:0 1px 0 var(--sh),0 4px 8px -4px rgba(80,20,20,.3)}
+.btn.navy{--bg:var(--navy);--sh:var(--navy-dk)}
+.btn.cream{--bg:var(--paper);--sh:var(--beige-dk);color:var(--navy)}
+.btn.small{padding:9px 16px;font-size:14px;box-shadow:0 4px 0 var(--sh)}
+.btn.small:active{transform:translateY(3px);box-shadow:0 1px 0 var(--sh)}
+.btn:focus-visible,.chip:focus-visible,.plate:focus-visible{outline:3px dashed var(--red);outline-offset:4px}
+
+.chip{
+  display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;font-weight:600;
+  background:var(--paper);border:2px solid var(--beige);box-shadow:0 4px 0 var(--beige);
+  transition:transform .12s, box-shadow .12s, background .2s, color .2s, border-color .2s;
+}
+.chip:hover{transform:translateY(-2px)}
+.chip:active{transform:translateY(3px);box-shadow:0 1px 0 var(--beige)}
+.chip[aria-pressed="true"],.chip.on{background:var(--navy);color:#fff;border-color:var(--navy);box-shadow:0 4px 0 var(--navy-dk)}
+
+.card{
+  background:var(--paper);border-radius:var(--radius);border:2px solid #F0DED5;
+  box-shadow:0 2px 0 #EAD6CB, 0 18px 40px -22px rgba(120,50,40,.35);
+}
+.ticket{ /* beige notched card like the deck */
+  background:var(--beige);border-radius:14px;position:relative;
+  --n:18px;
+  -webkit-mask:radial-gradient(circle var(--n) at 0 0,#0000 98%,#000) top left/51% 51% no-repeat,
+       radial-gradient(circle var(--n) at 100% 0,#0000 98%,#000) top right/51% 51% no-repeat,
+       radial-gradient(circle var(--n) at 0 100%,#0000 98%,#000) bottom left/51% 51% no-repeat,
+       radial-gradient(circle var(--n) at 100% 100%,#0000 98%,#000) bottom right/51% 51% no-repeat;
+  mask:radial-gradient(circle var(--n) at 0 0,#0000 98%,#000) top left/51% 51% no-repeat,
+       radial-gradient(circle var(--n) at 100% 0,#0000 98%,#000) top right/51% 51% no-repeat,
+       radial-gradient(circle var(--n) at 0 100%,#0000 98%,#000) bottom left/51% 51% no-repeat,
+       radial-gradient(circle var(--n) at 100% 100%,#0000 98%,#000) bottom right/51% 51% no-repeat;
+}
+ul.tri{list-style:none;padding:0;margin:0}
+ul.tri li{position:relative;padding-left:26px;margin:8px 0}
+ul.tri li::before{content:"";position:absolute;left:2px;top:.45em;border:7px solid transparent;border-left:11px solid var(--red);border-right:0}
+
+.blossom{position:absolute;pointer-events:none;z-index:1;width:min(420px,48vw);transform-origin:0 0;animation:sway 7s ease-in-out infinite}
+.blossom.r{transform-origin:50% 0;animation-delay:-3s}
+@keyframes sway{0%,100%{rotate:0deg}50%{rotate:2.2deg}}
+
+.reveal{transform:translateY(24px);transition:transform .8s var(--spring)}
+.reveal.in{opacity:1;transform:none}
+
+.sticker{filter:drop-shadow(0 10px 14px rgba(90,40,30,.22));transition:transform .5s var(--spring)}
+.wobble:hover{animation:wob .6s var(--spring)}
+@keyframes wob{0%{transform:rotate(0) scale(1)}30%{transform:rotate(-6deg) scale(1.06)}60%{transform:rotate(4deg) scale(1.03)}100%{transform:rotate(0) scale(1)}}
+@keyframes floaty{0%,100%{translate:0 0}50%{translate:0 -10px}}
+@keyframes pop{0%{transform:scale(.4);opacity:0}70%{transform:scale(1.12);opacity:1}100%{transform:scale(1)}}
+
+/* ---------- petals canvas ---------- */
+#petals{position:fixed;inset:0;pointer-events:none;z-index:40}
+
+/* ---------- nav ---------- */
+.nav{
+  position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom, 0px));translate:-50% 0;z-index:50;display:flex;gap:4px;align-items:center;
+  background:rgba(255,249,244,.88);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border:2px solid #EED8CF;border-radius:999px;padding:6px;box-shadow:0 6px 0 #E6CFC4,0 18px 30px -12px rgba(80,30,30,.35);
+  transition:translate .5s var(--spring);max-width:calc(100vw - 24px);overflow-x:auto;scrollbar-width:none;
+}
+.nav::-webkit-scrollbar{display:none}
+.nav.hide{translate:-50% 140%}
+.nav a{
+  text-decoration:none;color:var(--navy);font-weight:700;font-size:13px;padding:9px 13px;border-radius:999px;white-space:nowrap;
+  transition:background .2s,color .2s;
+}
+.nav a:hover{background:var(--blush)}
+.nav a.active{background:var(--red);color:#fff}
+.nav .snd{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:var(--blush);flex:none}
+.nav .snd svg{width:18px;height:18px}
+
+/* ---------- hero ---------- */
+.hero{position:relative;min-height:100svh;display:grid;place-items:center;padding:90px 20px 140px;overflow:hidden;text-align:center}
+.hero .blossom.l{left:-30px;top:-10px}
+.hero .blossom.r{right:-30px;top:-10px;scale:-1 1}
+.hero h1{
+  font-family:var(--serif);font-weight:400;margin:0;line-height:.86;text-transform:uppercase;
+  font-size:clamp(50px,13vw,170px);color:var(--navy);letter-spacing:-.01em;
+}
+.hero h1 .k{display:block;color:var(--red)}
+.hero h1 span.l{display:inline-block;transition:transform .35s var(--spring)}
+.hero h1 span.l:hover{transform:translateY(-12px) rotate(-6deg)}
+.hero .tag{margin:26px auto 0;display:inline-block}
+.hero .sub{font-size:clamp(17px,2vw,21px);color:var(--muted);margin:22px auto 30px;max-width:520px}
+.hero .plate-l,.hero .plate-r{position:absolute;z-index:3;cursor:grab}
+.hero .plate-l{width:min(380px,38vw);left:-70px;bottom:40px;rotate:-12deg}
+.hero .plate-r{width:min(330px,34vw);right:-50px;bottom:60px;rotate:10deg}
+.hero .plate-l img,.hero .plate-r img{animation:floaty 6s ease-in-out infinite}
+.hero .plate-r img{animation-delay:-2.5s}
+.hero .plate-l:active,.hero .plate-r:active{cursor:grabbing}
+.hero .wave-band{position:absolute;left:0;right:0;bottom:0;height:140px}
+.members{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:8px}
+.member{
+  background:var(--paper);border:2px solid #EED8CF;border-radius:16px;padding:10px 16px 10px 12px;display:flex;align-items:center;gap:10px;
+  box-shadow:0 4px 0 #EAD3C8;transition:transform .3s var(--spring);text-align:left;
+}
+.member:hover{transform:translateY(-4px) rotate(-2deg)}
+.member:nth-child(even):hover{transform:translateY(-4px) rotate(2deg)}
+.member .kr{font-size:22px;color:var(--red);min-width:56px;text-align:center}
+.member small{display:block;color:var(--muted);font-size:12px;letter-spacing:.04em}
+.member b{font-size:14px}
+.scroll-cue{margin-top:34px;display:inline-flex;flex-direction:column;align-items:center;gap:6px;color:var(--muted);font-size:13px;font-weight:600;text-decoration:none}
+.scroll-cue .chop{width:14px;height:40px;position:relative}
+.scroll-cue .chop::before,.scroll-cue .chop::after{content:"";position:absolute;top:0;width:4px;height:40px;border-radius:3px;background:linear-gradient(#cfd4da,#8f98a3);animation:chop 1.4s ease-in-out infinite}
+.scroll-cue .chop::before{left:2px;transform-origin:50% 0;rotate:-6deg}
+.scroll-cue .chop::after{right:2px;transform-origin:50% 0;rotate:6deg;animation-delay:-.1s}
+@keyframes chop{0%,100%{translate:0 0}50%{translate:0 8px}}
+
+/* ---------- meal ---------- */
+.meal-grid{display:grid;grid-template-columns:1.35fr 1fr;gap:34px;align-items:center;margin-top:40px}
+.table{position:relative;border-radius:28px;overflow:hidden;border:10px solid var(--paper);box-shadow:0 6px 0 #E8D2C7,0 30px 50px -24px rgba(90,40,30,.45);rotate:-1deg}
+.table img{width:100%}
+.hot{
+  position:absolute;width:44px;height:44px;margin:-22px 0 0 -22px;border-radius:50%;
+  display:grid;place-items:center;transition:transform .3s var(--spring);
+}
+.hot::before{content:"";position:absolute;inset:8px;border-radius:50%;background:var(--red);box-shadow:0 0 0 4px rgba(255,255,255,.9);transition:background .2s}
+.hot::after{content:"";position:absolute;inset:0;border-radius:50%;border:3px solid rgba(180,69,74,.7);animation:ping 1.8s ease-out infinite}
+.hot.got::before{background:var(--green)}
+.hot.got::after{display:none}
+.hot span{position:relative;color:#fff;font-weight:800;font-size:14px;line-height:1}
+.hot:hover{transform:scale(1.2)}
+@keyframes ping{0%{transform:scale(.6);opacity:1}100%{transform:scale(1.6);opacity:0}}
+.bubble{
+  position:absolute;z-index:5;background:var(--paper);border-radius:16px;padding:10px 14px;box-shadow:0 10px 24px -8px rgba(0,0,0,.35);
+  font-size:14px;max-width:210px;pointer-events:none;translate:-50% calc(-100% - 30px);animation:pop .4s var(--spring);
+}
+.bubble b{display:block;color:var(--red);font-size:15px}
+.bubble::after{content:"";position:absolute;left:50%;bottom:-8px;translate:-50% 0;border:9px solid transparent;border-top-color:var(--paper);border-bottom:0}
+.tray{padding:26px}
+.tray h3{margin-bottom:4px}
+.slots{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px 0}
+.slot{
+  border:2px dashed var(--beige-dk);border-radius:18px;padding:14px;min-height:96px;position:relative;transition:background .3s,border-color .3s;
+}
+.slot .kr{font-size:22px;color:var(--navy)}
+.slot small{display:block;color:var(--muted);font-weight:600;font-size:13px}
+.slot .count{position:absolute;right:12px;top:12px;font-weight:800;font-size:13px;color:var(--muted)}
+.slot.done{background:#EEF4E6;border-color:var(--green);border-style:solid}
+.slot.done .count{color:var(--green)}
+.slot.bump{animation:wob .5s var(--spring)}
+.meal-msg{min-height:28px;font-weight:700;color:var(--red)}
+
+/* ---------- cutlery ---------- */
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:36px}
+.flip{perspective:1000px;height:240px;cursor:pointer}
+.flip-in{position:relative;width:100%;height:100%;transition:transform .7s var(--spring);transform-style:preserve-3d}
+.flip.on .flip-in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:var(--radius);padding:24px;display:flex;flex-direction:column;justify-content:space-between}
+.face.front{background:var(--paper);border:2px solid #F0DED5;box-shadow:0 6px 0 #EAD6CB}
+.face.back{background:var(--navy);color:#fff;transform:rotateY(180deg);box-shadow:0 6px 0 var(--navy-dk);justify-content:center;font-size:18px}
+.face .ico{width:64px;height:64px}
+.face .hint{font-size:13px;color:var(--muted);font-weight:600;display:flex;align-items:center;gap:6px}
+.face.front h3{margin:0}
+.chopsticks{margin-top:56px;padding:30px;display:grid;grid-template-columns:1fr 1.2fr;gap:30px;align-items:center}
+.funfact{display:inline-block;font-family:var(--serif);font-size:30px;color:var(--red);text-transform:uppercase;rotate:-3deg;margin-bottom:6px}
+.cs-stage{height:230px;position:relative;display:grid;place-items:center;background:var(--cream);border-radius:20px;overflow:hidden}
+.cs-stage svg{width:100%;max-width:440px;height:200px}
+.cs-pair{transition:opacity .4s, transform .6s var(--spring);transform-origin:center}
+.cs-info{min-height:52px;margin-top:12px;font-weight:600;color:var(--navy)}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+
+/* ---------- etiquette ---------- */
+.eti-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:40px;align-items:start}
+.steps{display:flex;flex-direction:column;gap:14px}
+.step{
+  display:grid;grid-template-columns:56px 1fr;gap:16px;align-items:start;padding:18px;cursor:pointer;
+  transition:transform .35s var(--spring), background .25s;
+}
+.step:hover{transform:translateX(6px)}
+.step .num{
+  width:56px;height:56px;border-radius:50%;background:var(--blush);color:var(--red);display:grid;place-items:center;
+  font-family:var(--serif);font-size:28px;transition:background .3s,color .3s, transform .4s var(--spring);
+}
+.step.on{background:#FFF3EC}
+.step.on .num{background:var(--red);color:#fff;transform:rotate(-8deg) scale(1.05)}
+.step h4{margin:4px 0 2px;font-size:19px;color:var(--navy)}
+.step p{margin:0;color:var(--muted)}
+.step .body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s var(--spring)}
+.step.on .body{grid-template-rows:1fr}
+.step .body>div{overflow:hidden}
+.say{
+  text-align:left;margin-top:10px;display:inline-flex;align-items:center;gap:10px;background:var(--paper);border:2px solid var(--blush);border-radius:14px;padding:8px 12px 8px 8px;
+  box-shadow:0 3px 0 var(--blush);transition:transform .12s, box-shadow .12s;
+}
+.say:active{transform:translateY(2px);box-shadow:0 1px 0 var(--blush)}
+.say .play{width:34px;height:34px;border-radius:50%;background:var(--red);display:grid;place-items:center;flex:none}
+.say .play svg{width:14px;height:14px;fill:#fff}
+.say .kr{font-size:19px;color:var(--navy)}
+.say small{display:block;color:var(--muted);font-size:12px;font-weight:600}
+.say.speaking .play{animation:wob .6s infinite}
+.quiz{padding:26px;position:sticky;top:30px}
+.quiz .q{font-weight:700;font-size:19px;color:var(--navy);min-height:58px;margin:12px 0 16px}
+.quiz .opts{display:grid;gap:10px}
+.opt{
+  text-align:left;padding:14px 16px;border-radius:16px;background:var(--cream);border:2px solid var(--beige);font-weight:600;
+  box-shadow:0 4px 0 var(--beige);transition:transform .12s, box-shadow .12s, background .2s, border-color .2s;
+}
+.opt:hover{transform:translateY(-2px)}
+.opt:active{transform:translateY(3px);box-shadow:0 1px 0 var(--beige)}
+.opt.right{background:#EEF4E6;border-color:var(--green);box-shadow:0 4px 0 var(--green)}
+.opt.wrong{background:#FBE7E5;border-color:var(--red);box-shadow:0 4px 0 var(--red);animation:shake .4s}
+@keyframes shake{25%{translate:-6px 0}50%{translate:6px 0}75%{translate:-3px 0}}
+.quiz .fb{min-height:48px;margin-top:14px;color:var(--muted);font-size:15px}
+.dots{display:flex;gap:6px}
+.dots i{width:10px;height:10px;border-radius:50%;background:var(--beige);transition:background .3s, transform .3s var(--spring)}
+.dots i.on{background:var(--red);transform:scale(1.3)}
+.dots i.ok{background:var(--green)}
+
+/* ---------- foods ---------- */
+#foods{background:linear-gradient(var(--cream),var(--blush) 50%,var(--cream))}
+.plates{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:40px}
+.plate{
+  text-align:center;padding:12px 8px 18px;border-radius:26px;transition:transform .45s var(--spring), background .3s;
+}
+.plate img{width:86%;margin:0 auto;aspect-ratio:1;object-fit:contain;transition:transform .6s var(--spring)}
+.plate:hover img{transform:rotate(-8deg) scale(1.05)}
+.plate .nm{font-family:var(--serif);font-size:24px;color:var(--navy);text-transform:uppercase;margin-top:8px;line-height:1}
+.plate .kr{color:var(--red);font-size:18px}
+.plate.on{background:var(--paper);transform:translateY(-10px);box-shadow:0 6px 0 #EAD6CB,0 24px 40px -20px rgba(120,50,40,.4)}
+.plate.on img{transform:rotate(14deg) scale(1.08)}
+.detail{margin-top:26px;padding:34px;min-height:420px;overflow:hidden}
+.panel{display:none;grid-template-columns:1fr 1fr;gap:34px;align-items:start}
+.panel.on{display:grid;animation:pop .5s var(--spring)}
+.panel h3{font-size:clamp(34px,4vw,48px);color:var(--red)}
+.panel h3 .kr{font-size:.75em}
+.facts li{font-weight:600;color:var(--navy)}
+.mini-title{font-weight:800;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--red);margin:22px 0 8px}
+.navy-box{background:var(--navy);color:#fff;border-radius:18px;padding:18px 20px;display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}
+.navy-box b{display:block;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:#F5C6C0;margin-bottom:4px}
+.navy-box p{margin:0 0 6px;font-size:15px}
+.photo-stack{position:relative;height:360px}
+.photo-stack img{
+  position:absolute;width:62%;border-radius:16px;border:7px solid #fff;box-shadow:0 14px 30px -12px rgba(0,0,0,.4);
+  transition:transform .55s var(--spring), z-index 0s .2s;cursor:pointer;aspect-ratio:4/3;object-fit:cover;
+}
+.photo-stack img:nth-child(1){left:0;top:0;rotate:-6deg}
+.photo-stack img:nth-child(2){right:0;top:70px;rotate:5deg}
+.photo-stack img:nth-child(3){left:14%;bottom:0;rotate:-2deg}
+.photo-stack img:hover{transform:scale(1.06)}
+.photo-stack img.front{z-index:3}
+.ferment{margin-top:16px;background:var(--cream);border-radius:16px;padding:16px}
+.ferment input{width:100%;accent-color:var(--red)}
+.ferment .row{display:flex;justify-content:space-between;font-size:13px;font-weight:700;color:var(--muted)}
+.jar{display:flex;align-items:center;gap:14px;margin-bottom:8px}
+.jar svg{width:56px;height:64px;flex:none}
+.jar .state{font-weight:700;color:var(--navy)}
+.tteok-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.tcard{perspective:800px;aspect-ratio:1/1.05;cursor:pointer}
+.tcard .flip-in{border-radius:18px}
+.tcard .face{padding:0;overflow:hidden;border-radius:18px}
+.tcard .front img{width:100%;height:78%;object-fit:cover}
+.tcard .front span{display:block;text-align:center;font-weight:700;padding:8px;color:var(--navy)}
+.tcard .back{font-size:15px;padding:16px;text-align:center}
+.tcard .back b{font-family:var(--serif);font-weight:400;font-size:22px;display:block;margin-bottom:6px;color:#F5C6C0}
+.tcard.on .flip-in{transform:rotateY(180deg)}
+.bowl-wrap{position:relative;display:grid;place-items:center}
+.bowl-wrap img.bowl{width:min(380px,100%);transition:transform .2s}
+.bowl-wrap.mixing img.bowl{animation:mix 1.1s cubic-bezier(.45,.05,.55,.95)}
+@keyframes mix{0%{transform:rotate(0)}20%{transform:rotate(-14deg) scale(1.03)}40%{transform:rotate(16deg)}60%{transform:rotate(-12deg) scale(1.04)}80%{transform:rotate(8deg)}100%{transform:rotate(0)}}
+.mixed .bowl{filter:saturate(1.25) hue-rotate(-8deg)}
+.gochu{position:absolute;width:26px;height:26px;border-radius:50%;background:#C8322B;opacity:0;pointer-events:none;box-shadow:inset -4px -4px 0 rgba(0,0,0,.15)}
+.bowl-wrap.mixing .gochu{animation:drop 1s ease-in forwards}
+@keyframes drop{0%{opacity:1;transform:translateY(-140px) scale(.6)}60%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(10px) scale(1.6)}}
+.mix-count{font-weight:700;color:var(--muted);margin-top:10px;text-align:center;min-height:26px}
+.yak{position:relative;display:grid;place-items:center}
+.yak img{width:min(360px,100%);border-radius:50%;transition:filter .6s}
+.yak.glossy img{filter:saturate(1.3) brightness(1.1) contrast(1.05)}
+.drip{position:absolute;top:-20px;width:16px;height:30px;border-radius:50% 50% 50% 50% / 30% 30% 70% 70%;background:linear-gradient(#F3C35A,#D98A1C);opacity:0;pointer-events:none}
+.yak.dripping .drip{animation:drip 1.2s ease-in forwards}
+@keyframes drip{0%{opacity:1;transform:translateY(0) scaleY(.6)}70%{opacity:1;transform:translateY(200px) scaleY(1.2)}100%{opacity:0;transform:translateY(240px) scale(1.8,.3)}}
+.recipe{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.recipe span{background:var(--cream);border:2px solid var(--beige);border-radius:999px;padding:6px 12px;font-weight:700;font-size:14px;transition:transform .3s var(--spring)}
+.recipe span:hover{transform:translateY(-3px) rotate(-3deg)}
+
+/* ---------- traditions ---------- */
+.trad-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:40px}
+.kimjang{padding:30px;position:relative;overflow:hidden}
+.stamp{
+  position:absolute;right:22px;top:22px;width:118px;height:118px;border-radius:50%;border:4px double var(--red);color:var(--red);
+  display:grid;place-items:center;text-align:center;font-weight:800;font-size:13px;line-height:1.1;letter-spacing:.05em;rotate:-14deg;
+  opacity:0;transform:scale(2.2);background:rgba(255,249,244,.6);
+}
+.stamp big{display:block;font-family:var(--serif);font-weight:400;font-size:34px;letter-spacing:0}
+.kimjang.in .stamp{animation:stamp .5s .4s cubic-bezier(.2,1.4,.4,1) forwards}
+@keyframes stamp{to{opacity:.92;transform:scale(1)}}
+.hands{display:flex;gap:6px;margin-top:20px;flex-wrap:wrap}
+.hand{
+  width:50px;height:50px;border-radius:50%;background:var(--blush);display:grid;place-items:center;font-weight:800;color:var(--red);
+  transition:transform .35s var(--spring), background .3s;font-family:var(--kr);
+}
+.hand.on{background:var(--red);color:#fff;transform:translateY(-6px)}
+.kim-meter{height:16px;background:var(--cream);border-radius:999px;margin-top:14px;overflow:hidden;border:2px solid var(--beige)}
+.kim-meter i{display:block;height:100%;width:0;background:linear-gradient(90deg,#E6534A,#B4454A);border-radius:999px;transition:width .5s var(--spring)}
+.holiday{padding:30px}
+.season-toggle{display:flex;background:var(--cream);border-radius:999px;padding:5px;gap:4px;margin:12px 0 22px;border:2px solid var(--beige)}
+.season-toggle button{flex:1;padding:10px;border-radius:999px;font-weight:700;transition:background .3s,color .3s}
+.season-toggle button.on{background:var(--navy);color:#fff}
+.hol{display:none;grid-template-columns:150px 1fr;gap:20px;align-items:center}
+.hol.on{display:grid;animation:pop .5s var(--spring)}
+.hol .art{width:150px;height:150px;position:relative}
+.hol .art img{width:100%;height:100%;object-fit:contain}
+.hol h4{font-family:var(--serif);font-weight:400;font-size:30px;margin:0;color:var(--red);text-transform:uppercase;line-height:1}
+.hol .meaning{font-weight:600;color:var(--navy)}
+.moon{position:absolute;right:-10px;top:-10px;width:46px;height:46px;border-radius:50%;background:#F6D77B;box-shadow:0 0 0 6px rgba(246,215,123,.3),0 0 30px #F6D77B;animation:floaty 4s infinite}
+
+/* ---------- jeong ---------- */
+.jeong{display:grid;grid-template-columns:1fr 1.1fr;gap:40px;align-items:center;margin-top:30px}
+.share-table{position:relative;aspect-ratio:1;max-width:480px;margin:0 auto;width:100%}
+.share-table .tbl{position:absolute;inset:16%;border-radius:50%;background:radial-gradient(circle,#F3E2D3 0 58%,#E4CDB8 59% 62%,#F3E2D3 63%);box-shadow:0 10px 0 #D9BFA8,0 30px 40px -20px rgba(80,40,30,.5)}
+.share-table .dish{position:absolute;left:50%;top:50%;width:40%;translate:-50% -50%;cursor:pointer;transition:transform .4s var(--spring)}
+.share-table .dish:hover{transform:scale(1.06) rotate(8deg)}
+.share-table .dish:active{transform:scale(.94)}
+.friend{
+  position:absolute;width:90px;translate:-50% -50%;display:flex;flex-direction:column;align-items:center;gap:4px;transition:transform .35s var(--spring)
+}
+.friend .face-c{
+  width:66px;height:66px;border-radius:50%;background:var(--paper);border:3px solid var(--blush);display:grid;place-items:center;position:relative;
+  box-shadow:0 4px 0 #EAD3C8;
+}
+.friend svg{width:46px;height:46px}
+.friend .kr{font-size:15px;color:var(--navy);background:var(--paper);border-radius:999px;padding:1px 10px}
+.friend.fed{transform:translate(0,-6px) scale(1.06)}
+.friend.fed .face-c{border-color:var(--red)}
+.morsel{position:absolute;width:22px;height:22px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#F08A3E,#B3401E);z-index:4;pointer-events:none;translate:-50% -50%}
+.heart{position:absolute;z-index:5;pointer-events:none;width:26px;height:26px;translate:-50% -50%;animation:heartUp 1.1s ease-out forwards}
+@keyframes heartUp{0%{transform:scale(.3);opacity:0}25%{transform:scale(1.2);opacity:1}100%{transform:translateY(-70px) scale(.9);opacity:0}}
+.jeong-meter{display:flex;align-items:center;gap:12px;margin-top:34px;font-weight:700;color:var(--navy)}
+.jeong-meter .bar{flex:1;height:14px;border-radius:999px;background:var(--paper);border:2px solid var(--beige);overflow:hidden}
+.jeong-meter .bar i{display:block;height:100%;width:0;background:var(--red);transition:width .5s var(--spring)}
+.big-title{font-family:var(--serif);font-size:clamp(46px,7vw,84px);line-height:.92;text-transform:uppercase;color:var(--navy);margin:0 0 18px}
+.big-title span{color:var(--red)}
+.tag-red{display:inline-block;background:var(--red);color:#fff;border-radius:999px;padding:6px 16px;font-family:var(--serif);font-size:17px;text-transform:uppercase;margin:16px 0 6px;box-shadow:0 4px 0 var(--red-dk)}
+
+/* ---------- modern ---------- */
+.modern-hero{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center}
+.modern-hero .gim{width:100%;max-width:520px;margin-left:auto;cursor:pointer}
+.marquee{overflow:hidden;margin:50px -20px 0;padding:16px 0;background:var(--navy);rotate:-1.5deg;box-shadow:0 6px 0 var(--navy-dk)}
+.marquee .track{display:flex;gap:40px;width:max-content;animation:marq 30s linear infinite;color:#fff;font-family:var(--serif);font-size:28px;text-transform:uppercase;align-items:center}
+.marquee .track i{width:10px;height:10px;border-radius:50%;background:#F5C6C0;display:inline-block}
+@keyframes marq{to{transform:translateX(-50%)}}
+.changing{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:36px}
+.change{padding:20px;text-align:center}
+.change .from{color:var(--muted);font-weight:600;font-size:14px;text-decoration:line-through;text-decoration-color:var(--red)}
+.change .arrow{font-size:22px;color:var(--red);margin:4px 0;display:block;transition:transform .4s var(--spring)}
+.change:hover .arrow{transform:translateY(6px)}
+.change .to{font-weight:800;color:var(--navy)}
+
+.feature{margin-top:70px;padding:34px;display:grid;grid-template-columns:1.05fr 1fr;gap:34px;align-items:center;overflow:hidden}
+.feature.flipx{grid-template-columns:1fr 1.05fr}
+.feature h3{font-size:clamp(30px,3.6vw,44px)}
+.feature h3 .kr{font-size:.8em;color:var(--red)}
+.road{position:relative;height:300px;background:var(--cream);border-radius:22px;overflow:hidden}
+.road::after{content:"";position:absolute;left:0;right:0;bottom:44px;height:4px;background:repeating-linear-gradient(90deg,var(--beige-dk) 0 26px,transparent 26px 46px)}
+.road .house{position:absolute;right:18px;bottom:52px;width:110px}
+.road .shop{position:absolute;left:14px;bottom:56px;width:120px}
+.road .scooter{position:absolute;left:-200px;bottom:20px;width:150px;z-index:2}
+.road .scooter.go{animation:ride 2.4s cubic-bezier(.5,0,.4,1) forwards}
+@keyframes ride{0%{left:20px;transform:rotate(0)}10%{transform:rotate(-4deg)}80%{left:calc(100% - 270px);transform:rotate(-2deg)}100%{left:calc(100% - 260px);transform:rotate(0)}}
+.road .bag{position:absolute;right:40px;bottom:120px;width:70px;opacity:0}
+.road .bag.drop{animation:bagdrop .7s var(--spring) forwards}
+@keyframes bagdrop{0%{opacity:0;transform:translateY(-40px) scale(.5)}100%{opacity:1;transform:none}}
+.road .done{position:absolute;top:18px;left:50%;translate:-50% 0;background:var(--paper);border-radius:999px;padding:8px 16px;font-weight:800;color:var(--green);opacity:0;white-space:nowrap}
+.road .done.show{animation:pop .5s var(--spring) forwards}
+.chicken-box{position:relative;width:min(300px,80%);margin:0 auto}
+.chicken-box img{transition:filter .5s}
+.flavours{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}
+
+.cart{position:relative;padding:20px 20px 0;background:#FFF3EA;border-radius:22px;border:3px solid var(--red)}
+.awning{height:46px;margin:-20px -20px 16px;border-radius:18px 18px 0 0;background:repeating-linear-gradient(90deg,var(--red) 0 40px,#fff 40px 80px);position:relative}
+.awning::after{content:"";position:absolute;left:0;right:0;bottom:-14px;height:14px;background:radial-gradient(circle at 20px 0,var(--red) 19px,transparent 20px) 0 0/80px 14px,radial-gradient(circle at 60px 0,#fff 19px,transparent 20px) 0 0/80px 14px}
+.cart .sign{text-align:center;font-family:var(--kr);font-size:30px;color:var(--red);margin-top:6px}
+.menu{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;align-items:end;padding:10px 0 0}
+.mitem{display:flex;flex-direction:column;align-items:center;gap:6px;padding:8px 4px;border-radius:14px;transition:background .2s}
+.mitem img{height:96px;width:auto;object-fit:contain;transition:transform .45s var(--spring)}
+.mitem:hover img,.mitem.on img{transform:translateY(-10px) rotate(-6deg) scale(1.08)}
+.mitem .tag{font-size:12px;font-weight:800;color:#fff;background:var(--navy);border-radius:6px;padding:3px 8px;transform-origin:50% -6px;transition:transform .3s}
+.mitem:hover .tag{animation:swing .8s ease-in-out}
+@keyframes swing{0%,100%{rotate:0}25%{rotate:10deg}75%{rotate:-8deg}}
+.mitem.on{background:#fff}
+.cart .counter{height:18px;background:var(--beige-dk);margin:0 -20px;border-radius:0 0 18px 18px}
+.minfo{min-height:64px;margin-top:14px;padding:14px 16px;border-radius:16px;background:var(--cream);font-weight:600;color:var(--navy)}
+.minfo b{color:var(--red)}
+
+.store{background:#E9F0F3;border-radius:22px;padding:18px;position:relative;border:3px solid #C9D7DE}
+.store .sign{display:flex;justify-content:space-between;align-items:center;font-weight:800;color:var(--navy);font-size:14px;letter-spacing:.06em;margin-bottom:10px}
+.store .sign .open{background:var(--green);color:#fff;border-radius:6px;padding:2px 8px;font-size:12px}
+.shelf{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:10px 6px 6px;border-bottom:10px solid #B7C7CF;border-radius:4px;margin-bottom:12px}
+.sitem{display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px 2px;border-radius:12px;transition:transform .35s var(--spring)}
+.sitem:hover{transform:translateY(-6px)}
+.sitem.taken{opacity:.3;transform:scale(.9)}
+.sitem .pic{height:78px;display:grid;place-items:center}
+.sitem .pic img{max-height:78px;width:auto}
+.sitem small{font-size:11px;font-weight:800;color:var(--navy);text-align:center;line-height:1.1}
+.sitem .pic svg{width:70px;height:62px}
+.basket{display:flex;align-items:center;gap:12px;background:#fff;border-radius:16px;padding:10px 14px;min-height:64px}
+.basket .items{display:flex;gap:6px;flex:1;flex-wrap:wrap}
+.basket .items span{width:40px;height:40px;border-radius:10px;background:var(--cream);display:grid;place-items:center;animation:pop .4s var(--spring);overflow:hidden}
+.basket .items span img,.basket .items span svg{max-width:34px;max-height:34px}
+.basket .tot{font-weight:800;color:var(--navy);font-size:14px;white-space:nowrap}
+.honbap-msg{min-height:26px;margin-top:10px;font-weight:700;color:var(--red);text-align:center}
+
+.mixer{display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:start;margin-top:10px}
+.mixer .col h4{margin:0 0 8px;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.mixer .col{display:flex;flex-direction:column;gap:8px}
+.mixer .plus{font-family:var(--serif);font-size:44px;color:var(--red);align-self:center}
+.mixer .chip{justify-content:center}
+.fusion-out{margin-top:20px;display:grid;grid-template-columns:150px 1fr;gap:16px;align-items:center;background:var(--cream);border-radius:20px;padding:16px;min-height:150px}
+.fusion-out .art{width:150px;height:130px;display:grid;place-items:center}
+.fusion-out .art img{max-height:130px;width:auto}
+.fusion-out .name{font-family:var(--serif);font-size:28px;color:var(--navy);text-transform:uppercase;line-height:1}
+.fusion-out .found{font-size:13px;font-weight:700;color:var(--muted);margin-top:8px}
+.fusion-out.pop .art{animation:pop .55s var(--spring)}
+.pot{width:110px;height:110px}
+
+/* ---------- global ---------- */
+#global{overflow:hidden}
+.hallyu{position:relative;margin-top:40px;padding:40px 0 20px}
+.hallyu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.hw{padding:26px;cursor:pointer;transition:transform .45s var(--spring);position:relative;overflow:hidden}
+.hw:hover{transform:translateY(-8px) rotate(-1deg)}
+.hw:nth-child(2):hover{transform:translateY(-8px) rotate(1deg)}
+.hw .ico{width:72px;height:72px;border-radius:22px;display:grid;place-items:center;background:var(--blush);margin-bottom:16px;transition:transform .5s var(--spring)}
+.hw:hover .ico{transform:rotate(-10deg) scale(1.08)}
+.hw .ico svg{width:40px;height:40px}
+.hw h3{font-size:30px}
+.hw p{margin:0;color:var(--muted)}
+.hw .likes{display:flex;align-items:center;gap:6px;margin-top:16px;font-weight:800;color:var(--red);font-size:15px}
+.hw .likes svg{width:20px;height:20px;transition:transform .3s var(--spring)}
+.hw.liked .likes svg{transform:scale(1.3)}
+.hangeul-big{position:absolute;right:-30px;top:-60px;font-family:var(--kr);font-size:clamp(140px,22vw,280px);color:var(--blush);opacity:.7;z-index:0;line-height:1;pointer-events:none}
+
+/* ---------- mukbang ---------- */
+.muk{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;margin-top:30px}
+.bonus{display:inline-block;background:var(--red);color:#fff;font-weight:800;border-radius:999px;padding:6px 16px;letter-spacing:.08em;box-shadow:0 4px 0 var(--red-dk);rotate:6deg;animation:floaty 3s infinite}
+.combine{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:22px 0}
+.tile{background:var(--paper);border:2px solid #EED8CF;box-shadow:0 5px 0 #EAD3C8;border-radius:18px;padding:12px 16px;text-align:center;transition:transform .6s var(--spring)}
+.tile .kr{font-size:30px;color:var(--navy);display:block;line-height:1.2}
+.tile .kr .hl{color:var(--red)}
+.tile small{font-weight:700;color:var(--muted);font-size:12px;letter-spacing:.08em}
+.combine .op{font-family:var(--serif);font-size:34px;color:var(--red)}
+.tile.result{background:var(--red);border-color:var(--red);box-shadow:0 5px 0 var(--red-dk)}
+.tile.result .kr,.tile.result small{color:#fff}
+.combine.merged .t1{transform:translateX(30px) rotate(-4deg)}
+.combine.merged .t2{transform:translateX(-30px) rotate(4deg)}
+.combine.merged .result{animation:wob .6s var(--spring)}
+.stream{position:relative;background:var(--navy);border-radius:26px;padding:16px;box-shadow:0 8px 0 var(--navy-dk);overflow:hidden}
+.stream .screen{position:relative;background:linear-gradient(#FBE9DF,#F3D3C6);border-radius:18px;aspect-ratio:1.15;overflow:hidden}
+.stream .screen img{position:absolute;left:50%;bottom:0;width:78%;translate:-50% 0;transition:transform .2s}
+.stream .screen img.chomp{animation:chomp .5s}
+@keyframes chomp{30%{transform:translateY(6px) scale(1.02,.98)}60%{transform:translateY(-4px)}}
+.live{position:absolute;left:12px;top:12px;display:flex;gap:8px;z-index:3}
+.live span{font-size:12px;font-weight:800;border-radius:6px;padding:3px 8px;background:rgba(0,0,0,.5);color:#fff}
+.live .red{background:#E0352B}
+.live.off .red{background:#888}
+.chat{position:absolute;right:10px;bottom:10px;top:50px;width:46%;display:flex;flex-direction:column;justify-content:flex-end;gap:6px;z-index:3;pointer-events:none;overflow:hidden}
+.chat div{background:rgba(255,255,255,.88);border-radius:12px;padding:5px 9px;font-size:12px;font-weight:600;animation:chatIn .4s var(--spring)}
+.chat div b{color:var(--red)}
+@keyframes chatIn{from{transform:translateX(40px);opacity:0}}
+.react{position:absolute;bottom:20px;left:20px;z-index:3;pointer-events:none}
+.stream .ctrls{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+
+/* ---------- conclusion ---------- */
+.concl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:40px}
+.note{padding:22px;min-height:220px;display:flex;flex-direction:column;gap:12px;transition:transform .45s var(--spring)}
+.note:nth-child(odd){rotate:-1.5deg}
+.note:nth-child(even){rotate:1.5deg}
+.note:hover{transform:translateY(-8px) rotate(0) scale(1.03)}
+.note .n{font-family:var(--serif);font-size:44px;color:var(--red);line-height:1}
+.note p{margin:0;font-weight:600;color:var(--navy)}
+.thanks{text-align:center;padding:140px 20px 200px;overflow:hidden}
+.thanks h2{font-size:clamp(70px,14vw,180px);line-height:.85;margin:0}
+.thanks h2 .t{color:var(--red);display:block}
+.thanks .kr-thanks{font-family:var(--kr);font-size:clamp(26px,4vw,40px);color:var(--red);margin:24px 0}
+.thanks .blossom.l{left:-30px;top:0}
+.thanks .blossom.r{right:-30px;top:0;scale:-1 1}
+.thanks .side{position:absolute;bottom:40px;width:min(300px,30vw);z-index:2}
+.thanks .side.l{left:-40px;rotate:-10deg}
+.thanks .side.r{right:-40px;rotate:12deg}
+.thanks .wave-band{position:absolute;left:0;right:0;bottom:0;height:150px}
+footer{text-align:center;padding:0 20px 110px;color:var(--muted);font-size:14px}
+
+/* ---------- confetti ---------- */
+.confetti{position:fixed;z-index:60;pointer-events:none;width:12px;height:12px;border-radius:50% 0 50% 0}
+
+/* ---------- responsive ---------- */
+@media (max-width:900px){
+  section{padding:80px 16px}
+  .meal-grid,.eti-grid,.panel,.trad-grid,.jeong,.modern-hero,.feature,.feature.flipx,.muk,.chopsticks{grid-template-columns:1fr}
+  .why-grid,.hallyu-grid{grid-template-columns:1fr}
+  .concl-grid,.changing{grid-template-columns:1fr 1fr}
+  .plates{grid-template-columns:repeat(4,1fr);gap:6px}
+  .plate .nm{font-size:16px}
+  .plate .kr{font-size:14px}
+  .quiz{position:relative;top:0}
+  .detail{padding:22px}
+  .feature{padding:22px}
+  .feature .art-first{order:-1}
+  .menu{grid-template-columns:repeat(5,1fr)}
+  .mitem img{height:64px}
+  .hero .plate-l{width:44vw;left:-60px;bottom:30px}
+  .hero .plate-r{width:40vw;right:-40px;bottom:40px}
+  .flip{height:200px}
+  .photo-stack{height:300px}
+}
+@media (max-width:560px){
+  .members{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .member{padding:8px 10px 8px 8px;gap:6px}
+  .member .kr{font-size:17px;min-width:0}
+  .member b{font-size:12px}
+  .concl-grid,.changing{grid-template-columns:1fr}
+  .slots{grid-template-columns:1fr 1fr}
+  .navy-box{grid-template-columns:1fr}
+  .hol{grid-template-columns:1fr;justify-items:center;text-align:center}
+  .fusion-out{grid-template-columns:1fr;justify-items:center;text-align:center}
+  .mixer{grid-template-columns:1fr}
+  .mixer .plus{justify-self:center}
+  .mitem .tag{font-size:10px;padding:2px 5px}
+  .hero{padding-bottom:200px}
+  .nav a{padding:8px 10px;font-size:12px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+<canvas id="petals" aria-hidden="true"></canvas>
+
+<nav class="nav" id="nav" aria-label="Sections">
+  <a href="#meal">Meal</a>
+  <a href="#cutlery">Cutlery</a>
+  <a href="#etiquette">Etiquette</a>
+  <a href="#foods">Foods</a>
+  <a href="#traditions">Traditions</a>
+  <a href="#modern">Modern</a>
+  <a href="#global">Global</a>
+  <a href="#mukbang">Mukbang</a>
+  <button class="snd" id="snd" aria-label="Toggle sound" aria-pressed="true">
+    <svg viewBox="0 0 24 24" fill="none" stroke="#B4454A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="#B4454A"/><path class="w" d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg>
+  </button>
+</nav>
+
+<!-- ================= HERO ================= -->
+<header class="hero" id="top">
+  <img class="blossom l" src="assets/blossom.webp" alt="">
+  <img class="blossom r" src="assets/blossom.webp" alt="">
+  <div class="plate-l drag" aria-hidden="true"><img class="sticker" src="assets/gimbap-plate.webp" alt=""></div>
+  <div class="plate-r drag" aria-hidden="true"><img class="sticker" src="assets/chicken-plate.webp" alt=""></div>
+
+  <div class="wrap">
+    <h1 aria-label="Korean Food Guide">
+      <span class="k" aria-hidden="true"></span>
+      <span class="f" aria-hidden="true"></span>
+    </h1>
+    <p class="sub">A bite-sized, poke-able tour of how Korea eats: the table, the manners, the classics and what's cooking now.</p>
+    <div class="pill-red tag">T1 Group A</div>
+    <div class="members" style="margin-top:18px">
+      <div class="member"><span class="kr">수진</span><div><b>Fayola Tanaka</b><small>22010458</small></div></div>
+      <div class="member"><span class="kr">슈엣링</span><div><b>Tan Shuet Ling</b><small>23100316</small></div></div>
+      <div class="member"><span class="kr">안나</span><div><b>Anna Nozaki</b><small>24142168</small></div></div>
+      <div class="member"><span class="kr">지원</span><div><b>Lee Jiwon</b><small>25016858</small></div></div>
+    </div>
+    <a class="scroll-cue" href="#meal"><span class="chop"></span>Let's eat · 먹자!</a>
+  </div>
+  <div class="wave-band waves"></div>
+</header>
+
+<!-- ================= MEAL ================= -->
+<section id="meal">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="eyebrow"><span class="dot"></span>Characteristics of Korean food culture</span>
+      <h2>Basic structure of a <em>Korean meal</em></h2>
+      <p class="lede">Every everyday table follows the same pattern. Tap the dots on the table to set your meal.</p>
+    </div>
+    <div class="meal-grid">
+      <div class="table reveal" id="table">
+        <img src="assets/meal.webp" alt="A Korean meal: rice, stew, six small side dishes and a stainless spoon and chopsticks" width="640" height="480">
+      </div>
+      <div class="card tray reveal">
+        <h3>Your tray</h3>
+        <p style="margin:0;color:var(--muted)">Find all four parts of the meal.</p>
+        <div class="slots">
+          <div class="slot" data-slot="rice"><span class="count">0/1</span><span class="kr">밥</span><small>Rice · bap</small></div>
+          <div class="slot" data-slot="soup"><span class="count">0/1</span><span class="kr">국 · 찌개</span><small>Soup / stew</small></div>
+          <div class="slot" data-slot="side"><span class="count">0/6</span><span class="kr">반찬</span><small>Side dishes · banchan</small></div>
+          <div class="slot" data-slot="cutlery"><span class="count">0/1</span><span class="kr">수저</span><small>Stainless cutlery</small></div>
+        </div>
+        <div class="meal-msg" id="mealMsg" aria-live="polite"></div>
+        <button class="btn small cream" id="mealReset" style="margin-top:8px">Clear the table</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CUTLERY ================= -->
+<section id="cutlery" style="padding-top:40px">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="eyebrow"><span class="dot"></span>Spoon + chopsticks = 수저</span>
+      <h2>Why <em>stainless</em> cutlery?</h2>
+      <p class="lede">Tap a card to flip it.</p>
+    </div>
+    <div class="why-grid">
+      <div class="flip reveal" tabindex="0" role="button" aria-label="Royal Tradition, flip card">
+        <div class="flip-in">
+          <div class="face front">
+            <svg class="ico" viewBox="0 0 64 64"><path d="M10 46 L14 20 L24 32 L32 14 L40 32 L50 20 L54 46 Z" fill="#E3A33B" stroke="#1F2B3D" stroke-width="3" stroke-linejoin="round"/><rect x="10" y="46" width="44" height="8" rx="3" fill="#B4454A" stroke="#1F2B3D" stroke-width="3"/><circle cx="32" cy="14" r="4" fill="#fff" stroke="#1F2B3D" stroke-width="2.5"/></svg>
+            <h3>Royal Tradition</h3>
+            <span class="hint">↻ tap to flip</span>
+          </div>
+          <div class="face back"><p style="margin:0">Korean royalty once used <b>silver</b> utensils, believing they could <b>detect poison</b>.</p></div>
+        </div>
+      </div>
+      <div class="flip reveal" tabindex="0" role="button" aria-label="Hygiene, flip card">
+        <div class="flip-in">
+          <div class="face front">
+            <svg class="ico" viewBox="0 0 64 64"><circle cx="24" cy="26" r="12" fill="#CFE6F2" stroke="#1F2B3D" stroke-width="3"/><circle cx="42" cy="38" r="9" fill="#CFE6F2" stroke="#1F2B3D" stroke-width="3"/><circle cx="20" cy="46" r="6" fill="#CFE6F2" stroke="#1F2B3D" stroke-width="3"/><path d="M19 22a6 6 0 0 1 6-3" stroke="#fff" stroke-width="3" stroke-linecap="round" fill="none"/></svg>
+            <h3>Hygiene</h3>
+            <span class="hint">↻ tap to flip</span>
+          </div>
+          <div class="face back"><p style="margin:0">Metal is <b>easy to clean</b> and doesn't easily absorb food odours.</p></div>
+        </div>
+      </div>
+      <div class="flip reveal" tabindex="0" role="button" aria-label="Durability, flip card">
+        <div class="flip-in">
+          <div class="face front">
+            <svg class="ico" viewBox="0 0 64 64"><path d="M32 6 L54 14 V32 C54 46 44 54 32 58 C20 54 10 46 10 32 V14 Z" fill="#DDE3E8" stroke="#1F2B3D" stroke-width="3" stroke-linejoin="round"/><path d="M22 32 L29 39 L43 24" stroke="#B4454A" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <h3>Durability</h3>
+            <span class="hint">↻ tap to flip</span>
+          </div>
+          <div class="face back"><p style="margin:0">Stainless steel chopsticks are <b>strong, reusable</b> and long-lasting.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card chopsticks reveal">
+      <div>
+        <span class="funfact">Fun fact!</span>
+        <p style="margin:0 0 4px;font-size:18px;font-weight:600;color:var(--navy)">Korean chopsticks are typically <span style="color:var(--red)">flat and made of metal</span>. Their neighbours' aren't.</p>
+        <div class="tabs" role="tablist">
+          <button class="chip on" data-cs="kr" role="tab" aria-selected="true">🇰🇷 Korea</button>
+          <button class="chip" data-cs="jp" role="tab" aria-selected="false">🇯🇵 Japan</button>
+          <button class="chip" data-cs="cn" role="tab" aria-selected="false">🇨🇳 China</button>
+        </div>
+        <div class="cs-info" id="csInfo" aria-live="polite"></div>
+      </div>
+      <div class="cs-stage">
+        <svg viewBox="0 0 440 200" id="csSvg" aria-hidden="true">
+          <defs>
+            <linearGradient id="steel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F1F3F5"/><stop offset=".5" stop-color="#B8C0C8"/><stop offset="1" stop-color="#8A949E"/></linearGradient>
+            <linearGradient id="wood" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#C98A55"/><stop offset="1" stop-color="#8B5A2B"/></linearGradient>
+            <linearGradient id="bamboo" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F2DFA6"/><stop offset="1" stop-color="#C9AE62"/></linearGradient>
+          </defs>
+          <g id="csPair" class="cs-pair"></g>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ETIQUETTE ================= -->
+<section id="etiquette">
+  <img class="blossom r" src="assets/blossom.webp" alt="" style="right:-20px;top:0;scale:-1 1;width:min(320px,40vw)">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="eyebrow"><span class="dot"></span>Korean dining etiquette</span>
+      <h2>Mind your <em>manners</em></h2>
+      <p class="lede">Four moments at the table. Tap a step to open it, and press play to hear the phrase.</p>
+    </div>
+    <div class="eti-grid">
+      <div class="steps">
+        <div class="card step on reveal" data-step="0">
+          <div class="num">1</div>
+          <div><h4>Before eating</h4>
+            <div class="body"><div>
+              <p>Wait for the elders to start eating, then say:</p>
+              <button class="say" data-say="잘 먹겠습니다"><span class="play"><svg viewBox="0 0 10 10"><path d="M2 1l7 4-7 4z"/></svg></span><span><span class="kr">잘 먹겠습니다</span><small>jal meokgesseumnida · "Thank you for the meal"</small></span></button>
+            </div></div>
+          </div>
+        </div>
+        <div class="card step reveal" data-step="1">
+          <div class="num">2</div>
+          <div><h4>During the meal</h4>
+            <div class="body"><div><p>Keep your rice and soup bowls <b>on the table</b>. Don't lift them.</p></div></div>
+          </div>
+        </div>
+        <div class="card step reveal" data-step="2">
+          <div class="num">3</div>
+          <div><h4>Drinking etiquette</h4>
+            <div class="body"><div><p>Pour drinks for elders using <b>both hands</b>. Turn your head slightly away when drinking in front of elders.</p></div></div>
+          </div>
+        </div>
+        <div class="card step reveal" data-step="3">
+          <div class="num">4</div>
+          <div><h4>After the meal</h4>
+            <div class="body"><div>
+              <p>Show your thanks:</p>
+              <button class="say" data-say="잘 먹었습니다"><span class="play"><svg viewBox="0 0 10 10"><path d="M2 1l7 4-7 4z"/></svg></span><span><span class="kr">잘 먹었습니다</span><small>jal meogeosseumnida · "Thank you, I enjoyed the meal"</small></span></button>
+            </div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card quiz reveal" id="quiz">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span class="eyebrow" style="font-size:11px">Quick quiz</span>
+          <div class="dots" id="qDots"></div>
+        </div>
+        <div class="q" id="qText"></div>
+        <div class="opts" id="qOpts"></div>
+        <div class="fb" id="qFb" aria-live="polite"></div>
+        <button class="btn small navy" id="qNext" style="display:none">Next →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOODS ================= -->
+<section id="foods">
+  <div class="wrap">
+    <div class="reveal" style="text-align:center">
+      <span class="eyebrow"><span class="dot"></span>Traditional &amp; popular</span>
+      <h2>Korean <em>classics</em></h2>
+      <p class="lede" style="margin:0 auto">Pick a plate. Each one has something to play with.</p>
+    </div>
+    <div class="plates reveal" role="tablist">
+      <button class="plate on" data-food="kimchi" role="tab" aria-selected="true"><img src="assets/kimchi.webp" alt=""><div class="nm">Kimchi</div><div class="kr">김치</div></button>
+      <button class="plate" data-food="tteok" role="tab" aria-selected="false"><img src="assets/tteok.webp" alt=""><div class="nm">Tteok</div><div class="kr">떡</div></button>
+      <button class="plate" data-food="bibimbap" role="tab" aria-selected="false"><img src="assets/bibimbap.webp" alt=""><div class="nm">Bibimbap</div><div class="kr">비빔밥</div></button>
+      <button class="plate" data-food="yakgwa" role="tab" aria-selected="false"><img src="assets/yakgwa.webp" alt=""><div class="nm">Yakgwa</div><div class="kr">약과</div></button>
+    </div>
+
+    <div class="card detail reveal">
+      <!-- kimchi -->
+      <div class="panel on" data-panel="kimchi">
+        <div>
+          <h3>Kimchi <span class="kr">(김치)</span></h3>
+          <ul class="tri facts">
+            <li>One of Korea's most famous traditional foods.</li>
+            <li>Made through fermentation, mainly using vegetables such as cabbage and radish.</li>
+          </ul>
+          <div class="navy-box">
+            <div><b>Common types</b><p>Baechu kimchi (배추김치): napa cabbage kimchi</p><p>Kkakdugi (깍두기): cubed radish kimchi</p></div>
+            <div><b>Other fermented foods</b><p>Doenjang: fermented soybean paste</p><p>Gochujang: fermented red chilli paste</p></div>
+          </div>
+          <div class="ferment">
+            <div class="jar">
+              <svg viewBox="0 0 56 64" aria-hidden="true"><rect x="12" y="2" width="32" height="8" rx="3" fill="#3A2E2A"/><path d="M8 14 Q4 34 10 54 Q14 62 28 62 Q42 62 46 54 Q52 34 48 14 Z" fill="#4A3A34"/><path id="kimFill" d="M10 40 Q12 56 28 58 Q44 56 46 40 Z" fill="#D9452F"/><g id="bubbles" fill="#FFD5C8"></g><path d="M16 20 Q14 30 16 40" stroke="#7A6560" stroke-width="3" fill="none" stroke-linecap="round"/></svg>
+              <div><span class="mini-title" style="margin:0">Fermentation jar</span><div class="state" id="kimState">Day 1: fresh &amp; crunchy</div></div>
+            </div>
+            <input type="range" min="1" max="30" value="1" id="kimDays" aria-label="Days of fermentation">
+            <div class="row"><span>Fresh</span><span>Ripe</span><span>Sour</span></div>
+          </div>
+        </div>
+        <div class="photo-stack">
+          <img src="assets/napa.webp" alt="Napa cabbage kimchi">
+          <img src="assets/kkakdugi.webp" alt="Kkakdugi, cubed radish kimchi">
+          <img src="assets/jars.webp" alt="Onggi jars with doenjang and gochujang">
+        </div>
+      </div>
+
+      <!-- tteok -->
+      <div class="panel" data-panel="tteok">
+        <div>
+          <h3>Tteok <span class="kr">(떡)</span></h3>
+          <ul class="tri facts">
+            <li>Traditional Korean rice cakes.</li>
+            <li>Usually made from rice flour or glutinous rice.</li>
+            <li>Available in different shapes, colours, textures and flavours.</li>
+            <li>Can be sweet or savoury.</li>
+          </ul>
+          <div class="ticket" style="padding:20px 22px;margin-top:20px">
+            <div class="mini-title" style="margin-top:0">Common ways of eating</div>
+            <ul class="tri" style="margin:0">
+              <li>Plain or with soybean powder</li><li>In soups</li><li>In desserts</li><li>In spicy dishes such as tteokbokki</li>
+            </ul>
+          </div>
+        </div>
+        <div>
+          <div class="tteok-grid">
+            <div class="tcard" tabindex="0" role="button"><div class="flip-in"><div class="face front card"><img src="assets/garaetteok.webp" alt=""><span>Garaetteok</span></div><div class="face back"><p style="margin:0"><b>Garaetteok</b>Long, cylinder-shaped rice cake. Plain, chewy and very versatile.</p></div></div></div>
+            <div class="tcard" tabindex="0" role="button"><div class="flip-in"><div class="face front card"><img src="assets/injeolmi.webp" alt=""><span>Injeolmi</span></div><div class="face back"><p style="margin:0"><b>Injeolmi</b>Glutinous rice cake coated in roasted soybean powder.</p></div></div></div>
+            <div class="tcard" tabindex="0" role="button"><div class="flip-in"><div class="face front card"><img src="assets/songpyeon-photo.webp" alt=""><span>Songpyeon</span></div><div class="face back"><p style="margin:0"><b>Songpyeon</b>Half-moon rice cakes made for Chuseok.</p></div></div></div>
+            <div class="tcard" tabindex="0" role="button"><div class="flip-in"><div class="face front card"><img src="assets/tteokbokki-photo.webp" alt=""><span>Tteokbokki</span></div><div class="face back"><p style="margin:0"><b>Tteokbokki</b>Rice cakes in a sweet and spicy gochujang sauce.</p></div></div></div>
+          </div>
+          <p style="text-align:center;color:var(--muted);font-size:13px;font-weight:600;margin:10px 0 0">Tap a rice cake to flip it</p>
+        </div>
+      </div>
+
+      <!-- bibimbap -->
+      <div class="panel" data-panel="bibimbap">
+        <div>
+          <h3>Bibimbap <span class="kr">(비빔밥)</span></h3>
+          <ul class="tri facts">
+            <li>A popular Korean rice dish.</li>
+            <li>Made with rice, vegetables, meat and an egg.</li>
+            <li>Usually served with gochujang (Korean chilli paste).</li>
+            <li>Mixed together before eating.</li>
+            <li>Offers a combination of colours, textures and flavours.</li>
+          </ul>
+          <img src="assets/bibim-ingredients.webp" alt="Bibimbap ingredients in small bowls" style="border-radius:16px;margin-top:18px;border:6px solid #fff;box-shadow:0 10px 20px -10px rgba(0,0,0,.3);rotate:-1.5deg">
+        </div>
+        <div>
+          <div class="bowl-wrap" id="bowl">
+            <img class="bowl sticker" src="assets/bibim-bowl.webp" alt="A bowl of bibimbap">
+            <span class="gochu" style="left:46%;top:40%"></span>
+            <span class="gochu" style="left:54%;top:46%;animation-delay:.12s"></span>
+          </div>
+          <div style="text-align:center;margin-top:14px">
+            <button class="btn" id="mixBtn">Add gochujang &amp; mix! · 비벼!</button>
+          </div>
+          <div class="mix-count" id="mixCount" aria-live="polite">Bibim = "mixed", bap = "rice"</div>
+        </div>
+      </div>
+
+      <!-- yakgwa -->
+      <div class="panel" data-panel="yakgwa">
+        <div>
+          <h3>Yakgwa <span class="kr">(약과)</span></h3>
+          <div style="display:inline-block;background:var(--navy);color:#fff;border-radius:999px;padding:10px 20px;font-family:var(--serif);font-size:20px;text-transform:uppercase;margin-bottom:14px">Traditional Korean honey cookie</div>
+          <ul class="tri facts">
+            <li>A traditional Korean sweet.</li>
+            <li>Shaped into flowers or other decorative forms.</li>
+            <li>Deep-fried and soaked in honey syrup.</li>
+            <li>Has a sweet flavour and slightly chewy texture.</li>
+          </ul>
+          <div class="mini-title">Made mainly with</div>
+          <div class="recipe"><span>🌾 Wheat flour</span><span>🍯 Honey</span><span>🫗 Sesame oil</span></div>
+        </div>
+        <div>
+          <div class="yak" id="yak">
+            <img class="sticker" src="assets/yakgwa.webp" alt="A plate of flower-shaped yakgwa glazed in honey">
+            <span class="drip" style="left:40%"></span><span class="drip" style="left:52%;animation-delay:.2s"></span><span class="drip" style="left:62%;animation-delay:.4s"></span>
+          </div>
+          <div style="text-align:center;margin-top:16px"><button class="btn" id="honeyBtn">🍯 Soak in honey syrup</button></div>
+          <div class="mix-count" id="honeyMsg" aria-live="polite"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TRADITIONS ================= -->
+<section id="traditions">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="eyebrow"><span class="dot"></span>Korean food traditions</span>
+      <h2>Made <em>together</em></h2>
+    </div>
+    <div class="trad-grid">
+      <div class="card kimjang reveal" id="kimjang">
+        <div class="stamp"><div>UNESCO<big>2013</big>HERITAGE</div></div>
+        <span class="tag-red">Kimjang (= making kimchi)</span>
+        <ul class="tri" style="max-width:78%">
+          <li>A traditional culture of making and sharing kimchi before winter.</li>
+          <li>Families and communities prepare kimchi together.</li>
+          <li>Represents cooperation and sharing.</li>
+          <li>Recognised by UNESCO in 2013.</li>
+        </ul>
+        <div class="mini-title">Call the neighbours to help</div>
+        <div class="hands" id="hands"></div>
+        <div class="kim-meter"><i id="kimBar"></i></div>
+        <div style="font-weight:700;color:var(--navy);margin-top:8px;font-size:15px" id="kimTxt" aria-live="polite">0 heads of cabbage seasoned</div>
+      </div>
+
+      <div class="card holiday reveal">
+        <span class="tag-red">Traditional holiday foods</span>
+        <div class="season-toggle" role="tablist">
+          <button class="on" data-hol="seollal" role="tab" aria-selected="true">설날 Seollal</button>
+          <button data-hol="chuseok" role="tab" aria-selected="false">추석 Chuseok</button>
+        </div>
+        <div class="hol on" data-holp="seollal">
+          <div class="art">
+            <svg viewBox="0 0 150 150" aria-label="A bowl of tteokguk">
+              <ellipse cx="75" cy="128" rx="52" ry="8" fill="#000" opacity=".1"/>
+              <path d="M18 70 Q20 124 75 126 Q130 124 132 70 Z" fill="#fff" stroke="#1F2B3D" stroke-width="3"/>
+              <path d="M18 70 Q20 124 75 126 Q130 124 132 70" fill="none" stroke="#B4454A" stroke-width="6" stroke-dasharray="2 10" opacity=".5"/>
+              <ellipse cx="75" cy="70" rx="57" ry="15" fill="#F4EDE0" stroke="#1F2B3D" stroke-width="3"/>
+              <g fill="#fff" stroke="#D8CFC0" stroke-width="1.5">
+                <ellipse cx="55" cy="68" rx="11" ry="6" transform="rotate(-20 55 68)"/><ellipse cx="78" cy="64" rx="11" ry="6" transform="rotate(15 78 64)"/><ellipse cx="96" cy="71" rx="11" ry="6" transform="rotate(-10 96 71)"/><ellipse cx="68" cy="75" rx="11" ry="6" transform="rotate(25 68 75)"/>
+              </g>
+              <path d="M60 62 h10 M86 72 h12" stroke="#F2C230" stroke-width="3" stroke-linecap="round"/>
+              <path d="M74 74 h10" stroke="#6F9A4E" stroke-width="3" stroke-linecap="round"/>
+              <path d="M60 40 q-6 -10 0 -18 M75 36 q-6 -10 0 -18 M90 40 q-6 -10 0 -18" stroke="#C9B9A8" stroke-width="3" fill="none" stroke-linecap="round" class="steam"/>
+            </svg>
+          </div>
+          <div>
+            <h4>Tteokguk</h4>
+            <p style="margin:6px 0 0;color:var(--muted)">Rice-cake soup eaten at the Lunar New Year.</p>
+            <p class="meaning">Symbol of a new year beginning, and of growing a year older.</p>
+            <button class="btn small" id="ageBtn" style="margin-top:6px">Eat a bowl 🥣</button>
+            <div id="ageTxt" style="font-weight:700;color:var(--red);margin-top:10px;min-height:24px" aria-live="polite"></div>
+          </div>
+        </div>
+        <div class="hol" data-holp="chuseok">
+          <div class="art"><img src="assets/songpyeon.webp" alt="Songpyeon rice cakes"><span class="moon"></span></div>
+          <div>
+            <h4>Songpyeon</h4>
+            <p style="margin:6px 0 0;color:var(--muted)">Half-moon rice cakes shared at the autumn harvest festival.</p>
+            <p class="meaning">Gratitude for the harvest and wishes for good fortune.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= JEONG ================= -->
+<section id="jeong" style="padding-top:40px">
+  <div class="wrap jeong">
+    <div class="reveal">
+      <h2 class="big-title">Food,<br><span>Affection,</span><br>Community</h2>
+      <span class="tag-red">Jeong 정 (= emotional connection)</span>
+      <ul class="tri">
+        <li>Expressing care and affection through preparing and sharing food.</li>
+        <li>Offering food to family, friends and guests as a gesture of kindness.</li>
+      </ul>
+      <span class="tag-red">Sharing &amp; relations</span>
+      <ul class="tri">
+        <li>Eating together strengthens relationships between family, friends and colleagues.</li>
+        <li>Sharing food creates a sense of belonging and togetherness.</li>
+        <li>Food plays an important role in bringing people closer.</li>
+      </ul>
+    </div>
+    <div class="reveal">
+      <div class="share-table" id="shareTable">
+        <div class="tbl"></div>
+        <img class="dish sticker" src="assets/jeyuk.webp" alt="Shared dish. Click to offer food to a friend" role="button" tabindex="0">
+      </div>
+      <div class="jeong-meter"><span>정</span><div class="bar"><i id="jeongBar"></i></div><span id="jeongNum">0</span></div>
+      <p style="text-align:center;color:var(--muted);font-size:14px;font-weight:600;margin:8px 0 0">Tap the dish (or a friend) to share a bite</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MODERN ================= -->
+<section id="modern">
+  <div class="wrap">
+    <div class="modern-hero">
+      <div class="reveal">
+        <span class="eyebrow"><span class="dot"></span>Part two</span>
+        <h2 style="font-size:clamp(48px,8vw,96px)"><em>Modern</em><br>Korean food<br>culture</h2>
+      </div>
+      <img class="gim sticker wobble reveal" src="assets/gimbap.webp" alt="A plate of gimbap">
+    </div>
+
+    <div class="reveal" style="margin-top:50px">
+      <h3 style="font-size:clamp(28px,3.6vw,44px)">How is Korean food culture <span style="color:var(--red)">changing?</span></h3>
+      <p class="lede" style="max-width:820px">Traditional food culture emphasises shared meals, family gatherings and banchan. Modern lifestyles have shifted towards individual dining, takeaway and convenience. Globalisation and technology have changed how food is prepared and experienced, while traditional dishes keep evolving through modern interpretations and fusion cuisine.</p>
+    </div>
+    <div class="changing">
+      <div class="card change reveal"><div class="from">Shared meals</div><span class="arrow">↓</span><div class="to">Individual dining</div></div>
+      <div class="card change reveal"><div class="from">Home cooking</div><span class="arrow">↓</span><div class="to">Takeaway &amp; delivery</div></div>
+      <div class="card change reveal"><div class="from">Family gatherings</div><span class="arrow">↓</span><div class="to">Convenience</div></div>
+      <div class="card change reveal"><div class="from">Fixed recipes</div><span class="arrow">↓</span><div class="to">Fusion cuisine</div></div>
+    </div>
+  </div>
+
+  <div class="marquee" aria-hidden="true"><div class="track" id="marq"></div></div>
+
+  <div class="wrap">
+    <!-- chicken & delivery -->
+    <div class="card feature reveal">
+      <div>
+        <h3>K-Fried chicken <span class="kr">(치킨)</span><br>&amp; delivery <span class="kr">(배달)</span></h3>
+        <ul class="tri">
+          <li>Korean fried chicken has become a popular modern comfort food.</li>
+          <li>Its crispy texture and different flavours attract different consumers.</li>
+          <li>Delivery apps make fried chicken and other Korean meals easily accessible at home.</li>
+          <li>Delivery culture encourages convenience and lets restaurants reach more customers.</li>
+        </ul>
+        <div class="mini-title">Pick a flavour</div>
+        <div class="flavours" id="flavours">
+          <button class="chip on" data-f="soy">Soy garlic</button>
+          <button class="chip" data-f="yang">Spicy yangnyeom</button>
+          <button class="chip" data-f="honey">Honey butter</button>
+        </div>
+      </div>
+      <div class="art-first">
+        <div class="chicken-box"><img class="sticker" id="chickenImg" src="assets/chicken.webp" alt="Korean fried chicken"></div>
+        <div class="road" id="road" style="margin-top:14px">
+          <svg class="shop" viewBox="0 0 120 100" aria-hidden="true"><rect x="10" y="30" width="100" height="70" rx="6" fill="#FFF9F4" stroke="#1F2B3D" stroke-width="3"/><path d="M4 30 h112 l-8 -22 h-96 z" fill="#B4454A" stroke="#1F2B3D" stroke-width="3" stroke-linejoin="round"/><rect x="24" y="52" width="30" height="48" fill="#DDD0BD" stroke="#1F2B3D" stroke-width="3"/><rect x="66" y="50" width="32" height="24" fill="#CFE6F2" stroke="#1F2B3D" stroke-width="3"/><text x="60" y="25" text-anchor="middle" font-family="Gowun Batang" font-weight="700" font-size="15" fill="#fff">치킨</text></svg>
+          <svg class="house" viewBox="0 0 110 100" aria-hidden="true"><path d="M8 48 L55 10 L102 48" fill="#1F2B3D" stroke="#1F2B3D" stroke-width="3" stroke-linejoin="round"/><rect x="18" y="44" width="74" height="54" fill="#FFF9F4" stroke="#1F2B3D" stroke-width="3"/><rect x="46" y="64" width="20" height="34" fill="#B4454A" stroke="#1F2B3D" stroke-width="3"/><rect x="26" y="56" width="14" height="14" fill="#F6D77B" stroke="#1F2B3D" stroke-width="2.5"/><rect x="72" y="56" width="14" height="14" fill="#F6D77B" stroke="#1F2B3D" stroke-width="2.5"/></svg>
+          <img class="scooter" id="scooter" src="assets/scooter.webp" alt="">
+          <img class="bag" id="bag" src="assets/bag.webp" alt="">
+          <div class="done" id="doneTag">배달 완료! Delivered 🎉</div>
+          <div style="position:absolute;left:50%;top:50%;translate:-50% -90%;z-index:3" id="orderWrap"><button class="btn" id="orderBtn">Order chicken 🛵</button></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- bunsik -->
+    <div class="card feature flipx reveal">
+      <div class="art-first">
+        <div class="cart">
+          <div class="awning"></div>
+          <div class="sign">분식</div>
+          <div class="menu" id="menu">
+            <button class="mitem" data-m="0"><img src="assets/b-tteokbokki.webp" alt="Tteokbokki"><span class="tag">떡볶이</span></button>
+            <button class="mitem" data-m="1"><img src="assets/b-gimbap.webp" alt="Gimbap"><span class="tag">김밥</span></button>
+            <button class="mitem" data-m="2"><img src="assets/b-eomuk.webp" alt="Eomuk"><span class="tag">어묵</span></button>
+            <button class="mitem" data-m="3"><img src="assets/b-sundae.webp" alt="Sundae"><span class="tag">순대</span></button>
+            <button class="mitem" data-m="4"><img src="assets/b-hotteok.webp" alt="Hotteok"><span class="tag">호떡</span></button>
+          </div>
+          <div class="counter"></div>
+        </div>
+        <div class="minfo" id="minfo" aria-live="polite">Tap something on the cart 👆</div>
+      </div>
+      <div>
+        <h3>Korean street food<br>Bunsik <span class="kr">(분식)</span></h3>
+        <div class="pill-red" style="margin:4px 0 14px">Casual, affordable snack foods &amp; light meals</div>
+        <ul class="tri">
+          <li>Street food provides affordable and convenient meals.</li>
+          <li>Bunsik is popular among students, workers, younger consumers and international tourists.</li>
+          <li>Traditional snacks are being reinvented with cheese, unusual toppings and new flavours.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- convenience store -->
+    <div class="card feature reveal">
+      <div>
+        <h3>Convenience store<br><span class="kr">혼밥</span> (eating alone)</h3>
+        <ul class="tri">
+          <li>Convenience stores offer ready-to-eat meals, instant noodles, lunch boxes, gimbap and desserts.</li>
+          <li>Busy schedules and smaller households drive demand for individual meals. Honbap reflects greater acceptance of independent dining.</li>
+          <li>Affordable, accessible meals without a restaurant visit. Some stores even have seating and equipment for preparing meals.</li>
+        </ul>
+      </div>
+      <div class="art-first">
+        <div class="store">
+          <div class="sign"><span>🏪 24/7 STORE</span><span class="open">OPEN</span></div>
+          <div class="shelf" id="shelf"></div>
+          <div class="basket"><span style="font-size:22px">🧺</span><div class="items" id="basket"></div><span class="tot" id="tot">₩0</span></div>
+        </div>
+        <div class="honbap-msg" id="honbapMsg" aria-live="polite">Build your 혼밥 dinner for one</div>
+      </div>
+    </div>
+
+    <!-- fusion -->
+    <div class="card feature flipx reveal">
+      <div class="art-first">
+        <div class="mixer">
+          <div class="col" id="colT"><h4>Traditional</h4></div>
+          <div class="plus">+</div>
+          <div class="col" id="colI"><h4>International</h4></div>
+        </div>
+        <div class="fusion-out" id="fusionOut">
+          <div class="art" id="fArt"></div>
+          <div><div class="name" id="fName">Pick one of each</div><div id="fDesc" style="color:var(--muted);margin-top:6px">Combine a Korean classic with an international twist.</div><div class="found" id="fFound">Discovered 0 / 5</div></div>
+        </div>
+      </div>
+      <div>
+        <h3>Fusion of traditional<br>&amp; modern <span style="color:var(--red)">K-cuisine</span></h3>
+        <div class="pill-red" style="margin:4px 0 14px">Traditional ingredients + international influences</div>
+        <ul class="tri">
+          <li>Traditional ingredients are adapted to suit changing tastes.</li>
+          <li>International ingredients and cooking techniques create new dishes.</li>
+          <li>Fusion cuisine attracts younger consumers and international audiences.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= GLOBAL ================= -->
+<section id="global">
+  <div class="hangeul-big" aria-hidden="true">한류</div>
+  <div class="wrap">
+    <div class="reveal">
+      <span class="eyebrow"><span class="dot"></span>The Korean Wave · 한류</span>
+      <h2>The global popularity<br>of <em>Korean food</em></h2>
+      <p class="lede">Korean food's rise around the world is strongly influenced by the Korean Wave. Give each one some love.</p>
+    </div>
+    <div class="hallyu">
+      <div class="hallyu-grid">
+        <div class="card hw reveal" tabindex="0" role="button">
+          <div class="ico"><svg viewBox="0 0 40 40"><path d="M15 30V10l16-4v20" stroke="#B4454A" stroke-width="3.5" fill="none" stroke-linejoin="round"/><circle cx="11" cy="30" r="5" fill="#B4454A"/><circle cx="27" cy="26" r="5" fill="#B4454A"/></svg></div>
+          <h3>K-pop</h3><p>Music videos, idols and celebrity food recommendations introduce Korean dishes to international audiences.</p>
+          <div class="likes"><svg viewBox="0 0 24 24" fill="#B4454A"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z"/></svg><span>0</span></div>
+        </div>
+        <div class="card hw reveal" tabindex="0" role="button">
+          <div class="ico"><svg viewBox="0 0 40 40"><rect x="4" y="8" width="32" height="22" rx="4" stroke="#B4454A" stroke-width="3.5" fill="none"/><path d="M14 34h12M17 15v8l7-4z" stroke="#B4454A" stroke-width="3" fill="#B4454A" stroke-linejoin="round" stroke-linecap="round"/></svg></div>
+          <h3>K-dramas</h3><p>Scenes featuring ramyeon, Korean BBQ and fried chicken encourage viewers to try Korean food.</p>
+          <div class="likes"><svg viewBox="0 0 24 24" fill="#B4454A"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z"/></svg><span>0</span></div>
+        </div>
+        <div class="card hw reveal" tabindex="0" role="button">
+          <div class="ico"><svg viewBox="0 0 40 40"><rect x="11" y="4" width="18" height="32" rx="4" stroke="#B4454A" stroke-width="3.5" fill="none"/><circle cx="20" cy="31" r="1.8" fill="#B4454A"/><path d="M16 14l8 4-8 4z" fill="#B4454A"/></svg></div>
+          <h3>Social media</h3><p>TikTok, YouTube and Instagram spread food trends through mukbang, food reviews and cooking videos.</p>
+          <div class="likes"><svg viewBox="0 0 24 24" fill="#B4454A"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z"/></svg><span>0</span></div>
+        </div>
+      </div>
+      <p class="reveal" style="text-align:center;margin-top:30px"><span class="pill-red">International visitors are increasingly interested in experiencing Korean food firsthand.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MUKBANG ================= -->
+<section id="mukbang" style="padding-top:40px">
+  <div class="wrap muk">
+    <div class="reveal">
+      <span class="bonus">BONUS</span>
+      <h2 style="margin-top:20px">Mukbang <span class="kr" style="color:var(--red)">(먹방)</span></h2>
+      <p style="font-size:19px;font-weight:600;color:var(--navy);margin:0">Online eating broadcasts originating in South Korea, where creators eat and interact with viewers.</p>
+      <div class="combine" id="combine">
+        <div class="tile t1"><span class="kr"><span class="hl">먹</span>는</span><small>EATING</small></div>
+        <span class="op">+</span>
+        <div class="tile t2"><span class="kr"><span class="hl">방</span>송</span><small>BROADCAST</small></div>
+        <span class="op">=</span>
+        <div class="tile result"><span class="kr">먹방</span><small>MUKBANG</small></div>
+      </div>
+      <button class="btn small cream" id="combineBtn">Smoosh the words together</button>
+    </div>
+    <div class="reveal">
+      <div class="stream">
+        <div class="screen">
+          <div class="live off" id="live"><span class="red">● LIVE</span><span id="viewers">👀 0</span></div>
+          <img src="assets/mukbang.webp" alt="A cute illustrated streamer eating ramyeon, chicken and rice on camera" id="streamer">
+          <div class="chat" id="chat"></div>
+          <div class="react" id="react"></div>
+        </div>
+        <div class="ctrls">
+          <button class="btn" id="liveBtn">Go live</button>
+          <button class="btn cream" id="biteBtn" disabled style="opacity:.5">Take a bite 🍜</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONCLUSION ================= -->
+<section id="conclusion">
+  <div class="wrap">
+    <div class="reveal" style="text-align:center">
+      <span class="eyebrow"><span class="dot"></span>To wrap up</span>
+      <h2><em>Conclusion</em></h2>
+    </div>
+    <div class="concl-grid">
+      <div class="card note reveal"><span class="n">01</span><p>Korean food culture reflects a balance between tradition and modern lifestyles.</p></div>
+      <div class="card note reveal"><span class="n">02</span><p>Traditional foods and customs preserve Korea's cultural identity and heritage.</p></div>
+      <div class="card note reveal"><span class="n">03</span><p>Street food, fusion cuisine, delivery and mukbang make Korean food more accessible and globally popular.</p></div>
+      <div class="card note reveal"><span class="n">04</span><p>Food remains an important way to express affection, strengthen relationships and bring people together.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="thanks" id="thanks">
+  <img class="blossom l" src="assets/blossom.webp" alt="">
+  <img class="blossom r" src="assets/blossom.webp" alt="">
+  <img class="side l sticker" src="assets/gimbap2.webp" alt="">
+  <img class="side r sticker" src="assets/tteokbokki-bowl.webp" alt="">
+  <div class="wrap">
+    <h2 class="reveal"><span class="t">Thank</span>You</h2>
+    <div class="kr-thanks reveal">감사합니다!</div>
+    <button class="btn reveal" id="finalBtn" data-say="잘 먹었습니다">잘 먹었습니다 🙏</button>
+  </div>
+  <div class="wave-band waves"></div>
+</section>
+<footer>Korean Food Guide · T1 Group A · 수진 · 슈엣링 · 안나 · 지원</footer>
+
+<script>
+(() => {
+const $ = (s, el = document) => el.querySelector(s);
+const $$ = (s, el = document) => [...el.querySelectorAll(s)];
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------------- sound ---------------- */
+let soundOn = true, ac;
+try { soundOn = localStorage.getItem('kfg-sound') !== 'off'; } catch (e) {}
+const sndBtn = $('#snd');
+const paintSnd = () => { sndBtn.setAttribute('aria-pressed', soundOn); $('.w', sndBtn).style.opacity = soundOn ? 1 : .15; };
+paintSnd();
+sndBtn.onclick = () => { soundOn = !soundOn; try { localStorage.setItem('kfg-sound', soundOn ? 'on' : 'off'); } catch (e) {} paintSnd(); blip(700); };
+function blip(f = 520, d = .09, type = 'sine', vol = .08) {
+  if (!soundOn) return;
+  try {
+    ac = ac || new (window.AudioContext || window.webkitAudioContext)();
+    const o = ac.createOscillator(), g = ac.createGain(), t = ac.currentTime;
+    o.type = type; o.frequency.setValueAtTime(f, t); o.frequency.exponentialRampToValueAtTime(f * 1.6, t + d);
+    g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(.0001, t + d + .05);
+    o.connect(g).connect(ac.destination); o.start(t); o.stop(t + d + .06);
+  } catch (e) {}
+}
+const chord = () => [523, 659, 784, 1046].forEach((f, i) => setTimeout(() => blip(f, .12, 'triangle', .06), i * 80));
+document.addEventListener('pointerdown', e => {
+  if (e.target.closest('.btn,.chip,.opt,.say,.plate,.mitem,.sitem')) blip(420 + Math.random() * 120, .06, 'sine', .06);
+});
+
+/* ---------------- speech ---------------- */
+function speak(text, el) {
+  if (!('speechSynthesis' in window)) return;
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'ko-KR'; u.rate = .85;
+  const v = speechSynthesis.getVoices().find(v => v.lang && v.lang.startsWith('ko'));
+  if (v) u.voice = v;
+  if (el) { el.classList.add('speaking'); u.onend = u.onerror = () => el.classList.remove('speaking'); }
+  speechSynthesis.speak(u);
+}
+$$('[data-say]').forEach(b => b.addEventListener('click', e => { e.stopPropagation(); speak(b.dataset.say, b); }));
+
+/* ---------------- hero title letters ---------------- */
+const splitInto = (el, txt) => { el.innerHTML = txt.split(" ").map(w => `<span style="white-space:nowrap;display:inline-block">${[...w].map(c => `<span class="l">${c}</span>`).join("")}</span>`).join(" "); };
+splitInto($('.hero h1 .k'), 'Korean');
+splitInto($('.hero h1 .f'), 'Food Guide');
+if (!reduce) $$('.hero h1 .l').forEach((s, i) => {
+  s.animate([{ transform: 'translateY(60px) rotate(8deg)', opacity: 0 }, { transform: 'none', opacity: 1 }],
+    { duration: 800, delay: 120 + i * 45, easing: 'cubic-bezier(.34,1.56,.64,1)', fill: 'backwards' });
+});
+
+/* draggable hero plates (spring back) */
+$$('.drag').forEach(el => {
+  let sx, sy, dx = 0, dy = 0, down = false;
+  el.addEventListener('pointerdown', e => { down = true; sx = e.clientX; sy = e.clientY; el.setPointerCapture(e.pointerId); el.style.transition = 'none'; blip(300); });
+  el.addEventListener('pointermove', e => { if (!down) return; dx = e.clientX - sx; dy = e.clientY - sy; el.style.transform = `translate(${dx}px,${dy}px) rotate(${dx / 12}deg) scale(1.05)`; });
+  const up = () => { if (!down) return; down = false; el.style.transition = 'transform .8s cubic-bezier(.34,1.8,.64,1)'; el.style.transform = ''; blip(600); };
+  el.addEventListener('pointerup', up); el.addEventListener('pointercancel', up);
+});
+
+/* ---------------- reveal ---------------- */
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+}), { threshold: .12, rootMargin: '0px 0px -40px 0px' });
+$$('.reveal').forEach((el, i) => { el.style.transitionDelay = (i % 4) * 70 + 'ms'; io.observe(el); });
+const kj = $('#kimjang');
+new IntersectionObserver(es => es.forEach(e => e.isIntersecting && kj.classList.add('in')), { threshold: .5 }).observe(kj);
+
+/* ---------------- nav ---------------- */
+const nav = $('#nav'), links = $$('a', nav);
+const secs = links.map(a => $(a.getAttribute('href')));
+let lastY = scrollY;
+addEventListener('scroll', () => {
+  const y = scrollY;
+  nav.classList.toggle('hide', y > lastY + 4 && y > 400);
+  if (y < lastY - 4 || y < 400) nav.classList.remove('hide');
+  lastY = y;
+  let cur = -1;
+  secs.forEach((s, i) => { if (s.getBoundingClientRect().top < innerHeight * .4) cur = i; });
+  links.forEach((a, i) => a.classList.toggle('active', i === cur));
+}, { passive: true });
+
+/* ---------------- petals ---------------- */
+const cv = $('#petals'), cx = cv.getContext('2d');
+let W, H, DPR = Math.min(devicePixelRatio || 1, 2);
+const petals = [];
+const resize = () => { W = cv.width = innerWidth * DPR; H = cv.height = innerHeight * DPR; cv.style.width = innerWidth + 'px'; cv.style.height = innerHeight + 'px'; };
+resize(); addEventListener('resize', resize);
+const mkPetal = (x, y, burst) => ({
+  x: x ?? Math.random() * W, y: y ?? -20 * DPR, s: (6 + Math.random() * 7) * DPR,
+  vx: burst ? (Math.random() - .5) * 6 * DPR : (.3 + Math.random() * .6) * DPR,
+  vy: burst ? (-Math.random() * 5 - 1) * DPR : (.6 + Math.random() * .9) * DPR,
+  r: Math.random() * 6.28, vr: (Math.random() - .5) * .06, ph: Math.random() * 6.28,
+  c: ['#F6C6CF', '#F2B1BE', '#FADDE2', '#EFA3B2'][Math.random() * 4 | 0], burst, life: 1
+});
+if (!reduce) for (let i = 0; i < 18; i++) { const p = mkPetal(); p.y = Math.random() * H; petals.push(p); }
+function drawPetal(p) {
+  cx.save(); cx.translate(p.x, p.y); cx.rotate(p.r); cx.globalAlpha = Math.min(1, p.life) * .9;
+  cx.fillStyle = p.c; cx.beginPath();
+  cx.moveTo(0, -p.s); cx.bezierCurveTo(p.s * .9, -p.s * .6, p.s * .7, p.s * .6, 0, p.s);
+  cx.bezierCurveTo(-p.s * .7, p.s * .6, -p.s * .9, -p.s * .6, 0, -p.s); cx.fill();
+  cx.fillStyle = 'rgba(255,255,255,.5)'; cx.beginPath(); cx.moveTo(0, -p.s * .9); cx.lineTo(p.s * .12, -p.s * .55); cx.lineTo(-p.s * .12, -p.s * .55); cx.fill();
+  cx.restore();
+}
+let t0 = 0;
+(function loop(t) {
+  cx.clearRect(0, 0, W, H);
+  for (let i = petals.length - 1; i >= 0; i--) {
+    const p = petals[i];
+    p.ph += .02;
+    if (p.burst) { p.vy += .12 * DPR; p.vx *= .98; p.life -= .012; }
+    p.x += p.vx + (p.burst ? 0 : Math.sin(p.ph) * .6 * DPR); p.y += p.vy; p.r += p.vr;
+    drawPetal(p);
+    if (p.y > H + 30 || p.life <= 0 || p.x > W + 40) {
+      if (p.burst || petals.length > 22) petals.splice(i, 1); else Object.assign(p, mkPetal());
+    }
+  }
+  if (!reduce && !document.hidden) requestAnimationFrame(loop); else setTimeout(() => requestAnimationFrame(loop), 500);
+})();
+function burst(x, y, n = 14) { if (reduce) return; for (let i = 0; i < n; i++) petals.push(mkPetal(x * DPR, y * DPR, true)); }
+document.addEventListener('click', e => {
+  if (e.target.closest('.btn,.plate,.hot,.dish,.friend,.hw,.tile')) burst(e.clientX, e.clientY, 8);
+});
+
+function confetti(n = 40) {
+  if (reduce) return;
+  const cols = ['#B4454A', '#1F2B3D', '#F2B1BE', '#E3A33B', '#6F9A4E'];
+  for (let i = 0; i < n; i++) {
+    const c = document.createElement('i'); c.className = 'confetti';
+    c.style.background = cols[i % cols.length]; c.style.left = (innerWidth / 2) + 'px'; c.style.top = (innerHeight * .55) + 'px';
+    document.body.appendChild(c);
+    const a = Math.random() * Math.PI * 2, d = 160 + Math.random() * 260;
+    c.animate([{ transform: 'translate(0,0) rotate(0)', opacity: 1 },
+      { transform: `translate(${Math.cos(a) * d}px,${Math.sin(a) * d - 120}px) rotate(${Math.random() * 720}deg)`, opacity: 1, offset: .6 },
+      { transform: `translate(${Math.cos(a) * d * 1.2}px,${Math.sin(a) * d + 200}px) rotate(${Math.random() * 900}deg)`, opacity: 0 }],
+      { duration: 1600 + Math.random() * 600, easing: 'cubic-bezier(.2,.7,.4,1)' }).onfinish = () => c.remove();
+  }
+  chord();
+}
+
+/* ---------------- meal table ---------------- */
+const hots = [
+  { x: 12, y: 52, g: 'side', n: 'Kimchi', d: 'Spicy fermented napa cabbage. A banchan staple.' },
+  { x: 23, y: 31, g: 'side', n: 'Spinach namul', d: 'Lightly seasoned blanched spinach.' },
+  { x: 41, y: 21, g: 'side', n: 'Stir-fried anchovies', d: 'Sweet, salty, crunchy little fish.' },
+  { x: 60, y: 19, g: 'side', n: 'Pickled radish', d: 'Tangy and refreshing.' },
+  { x: 77, y: 31, g: 'side', n: 'Bean sprouts', d: 'Kongnamul, seasoned with sesame.' },
+  { x: 88, y: 51, g: 'side', n: 'Rolled omelette', d: 'Gyeran-mari, egg rolled with veggies.' },
+  { x: 38, y: 57, g: 'rice', n: 'Rice · 밥', d: 'The centre of every meal, on the left.' },
+  { x: 62, y: 58, g: 'soup', n: 'Soup / stew · 찌개', d: 'Served hot, on the right of the rice.' },
+  { x: 50, y: 87, g: 'cutlery', n: 'Spoon & chopsticks · 수저', d: 'Stainless steel, laid on the right.' }
+];
+const need = { rice: 1, soup: 1, side: 6, cutlery: 1 };
+let got = { rice: 0, soup: 0, side: 0, cutlery: 0 }, bub;
+const table = $('#table');
+hots.forEach((h, i) => {
+  const b = document.createElement('button');
+  b.className = 'hot'; b.style.left = h.x + '%'; b.style.top = h.y + '%';
+  b.setAttribute('aria-label', h.n); b.innerHTML = '<span>+</span>';
+  b.onclick = () => {
+    bub && bub.remove();
+    bub = document.createElement('div'); bub.className = 'bubble';
+    bub.style.left = h.x + '%'; bub.style.top = h.y + '%';
+    if (h.y < 30) { bub.style.translate = '-50% 34px'; }
+    bub.innerHTML = `<b>${h.n}</b>${h.d}`; table.appendChild(bub);
+    clearTimeout(bub._t); const me = bub; me._t = setTimeout(() => me.remove(), 3200);
+    if (b.classList.contains('got')) { blip(500); return; }
+    b.classList.add('got'); b.innerHTML = '<span>✓</span>';
+    got[h.g]++;
+    const slot = $(`[data-slot="${h.g}"]`);
+    $('.count', slot).textContent = `${got[h.g]}/${need[h.g]}`;
+    slot.classList.remove('bump'); void slot.offsetWidth; slot.classList.add('bump');
+    if (got[h.g] === need[h.g]) { slot.classList.add('done'); blip(880, .12, 'triangle'); } else blip(660);
+    if (Object.keys(need).every(k => got[k] === need[k])) {
+      $('#mealMsg').textContent = 'Table set! Now say 잘 먹겠습니다 🍚';
+      confetti(50);
+    } else $('#mealMsg').textContent = `${Object.values(got).reduce((a, b) => a + b)} / 9 found`;
+  };
+  table.appendChild(b);
+});
+$('#mealReset').onclick = () => {
+  got = { rice: 0, soup: 0, side: 0, cutlery: 0 };
+  $$('.hot', table).forEach(b => { b.classList.remove('got'); b.innerHTML = '<span>+</span>'; });
+  $$('.slot').forEach(s => { s.classList.remove('done'); $('.count', s).textContent = `0/${need[s.dataset.slot]}`; });
+  $('#mealMsg').textContent = ''; bub && bub.remove();
+};
+
+/* ---------------- flip cards ---------------- */
+$$('.flip, .tcard').forEach(f => {
+  const go = () => { f.classList.toggle('on'); blip(f.classList.contains('on') ? 700 : 500); };
+  f.addEventListener('click', go);
+  f.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } });
+});
+
+/* ---------------- chopsticks ---------------- */
+const CS = {
+  kr: { info: 'Korea: flat, thin and made of stainless steel. Light, slim and a little slippery!', fill: 'url(#steel)', len: 300, w0: 9, w1: 5, flat: true },
+  jp: { info: 'Japan: wooden, shorter, with sharply pointed tips (great for picking bones out of fish).', fill: 'url(#wood)', len: 250, w0: 12, w1: 3, flat: false },
+  cn: { info: 'China: wooden or bamboo, longest of the three, with thick blunt ends for sharing dishes.', fill: 'url(#bamboo)', len: 340, w0: 13, w1: 9, flat: false }
+};
+function drawCS(k) {
+  const c = CS[k], g = $('#csPair'), x0 = (440 - c.len) / 2;
+  const stick = (y, rot) => {
+    const p = `M${x0},${y - c.w0 / 2} L${x0 + c.len},${y - c.w1 / 2} Q${x0 + c.len + 3},${y} ${x0 + c.len},${y + c.w1 / 2} L${x0},${y + c.w0 / 2} Z`;
+    let deco = '';
+    if (k === 'kr') deco = `<rect x="${x0 + 6}" y="${y - c.w0 / 2 + 1}" width="60" height="${c.w0 - 2}" fill="none" stroke="#fff" stroke-opacity=".7" stroke-width="1"/><path d="M${x0 + 16},${y} h40" stroke="#8A949E" stroke-width="1.2" stroke-dasharray="3 3"/>`;
+    if (k === 'jp') deco = `<rect x="${x0}" y="${y - c.w0 / 2}" width="70" height="${c.w0}" fill="#B4454A" opacity=".85"/><path d="M${x0 + 10},${y - 4} h50" stroke="#F6D77B" stroke-width="1.5"/>`;
+    if (k === 'cn') deco = `<path d="M${x0 + 90},${y - 6} v12 M${x0 + 200},${y - 5} v10" stroke="#A88B42" stroke-width="2"/>`;
+    return `<g transform="rotate(${rot} 220 100)"><path d="${p}" fill="${c.fill}" stroke="#1F2B3D" stroke-width="2"/>${deco}</g>`;
+  };
+  g.style.opacity = 0; g.style.transform = 'translateX(-30px) rotate(-6deg)';
+  setTimeout(() => {
+    g.innerHTML = stick(88, -3) + stick(112, 3) +
+      `<text x="220" y="185" text-anchor="middle" font-family="Figtree" font-weight="700" font-size="13" fill="#6C6266">${c.flat ? 'flat · metal' : k === 'jp' ? 'round · wood · pointed' : 'long · bamboo/wood · blunt'}</text>`;
+    g.style.opacity = 1; g.style.transform = 'none';
+  }, reduce ? 0 : 180);
+  $('#csInfo').textContent = c.info;
+}
+$$('[data-cs]').forEach(b => b.onclick = () => {
+  $$('[data-cs]').forEach(x => { x.classList.toggle('on', x === b); x.setAttribute('aria-selected', x === b); });
+  drawCS(b.dataset.cs);
+});
+drawCS('kr');
+
+/* ---------------- etiquette steps ---------------- */
+$$('.step').forEach(s => s.addEventListener('click', () => {
+  const was = s.classList.contains('on');
+  $$('.step').forEach(x => x.classList.remove('on'));
+  if (!was) s.classList.add('on');
+}));
+
+/* quiz */
+const Q = [
+  { q: 'Grandma hasn\'t picked up her spoon yet. You\'re starving. What do you do?', o: ['Dig in, she won\'t mind', 'Wait for her to start eating', 'Eat only the side dishes'], a: 1, w: 'Wait for the elders to start eating first.' },
+  { q: 'Your soup is nearly finished. How do you get the last spoonful?', o: ['Lift the bowl and sip', 'Leave the bowl on the table and use your spoon', 'Tip it into your rice bowl'], a: 1, w: 'Keep your rice and soup bowls on the table. Don\'t lift them.' },
+  { q: 'Your boss holds out their glass. How do you pour?', o: ['With both hands', 'One hand, casually', 'Let them pour their own'], a: 0, w: 'Pour drinks for elders using both hands.' },
+  { q: 'Taking a sip in front of an elder, you should…', o: ['Make eye contact and cheers again', 'Turn your head slightly away', 'Drink very quickly'], a: 1, w: 'Turn your head slightly away when drinking in front of elders.' },
+  { q: 'The meal is over. What do you say?', o: ['잘 먹겠습니다', '잘 먹었습니다', '안녕히 계세요'], a: 1, w: '잘 먹었습니다: "Thank you, I enjoyed the meal" (past tense: you did eat well!).' }
+];
+let qi = 0, score = 0;
+const dots = $('#qDots'); dots.innerHTML = Q.map(() => '<i></i>').join('');
+function renderQ() {
+  const d = $$('i', dots);
+  d.forEach((x, i) => x.classList.toggle('on', i === qi));
+  if (qi >= Q.length) {
+    $('#qText').textContent = `You scored ${score} / ${Q.length}! ${score === Q.length ? 'Perfect manners. 최고! 👏' : score >= 3 ? 'Nicely done. Your elders approve.' : 'Have another read and try again!'}`;
+    $('#qOpts').innerHTML = ''; $('#qFb').textContent = '';
+    const r = $('#qNext'); r.style.display = 'inline-flex'; r.textContent = 'Try again ↻';
+    if (score === Q.length) confetti(60);
+    return;
+  }
+  const q = Q[qi];
+  $('#qText').textContent = q.q; $('#qFb').textContent = ''; $('#qNext').style.display = 'none';
+  $('#qOpts').innerHTML = '';
+  q.o.forEach((o, i) => {
+    const b = document.createElement('button'); b.className = 'opt'; b.textContent = o;
+    if (/[가-힣]/.test(o)) b.classList.add('kr');
+    b.onclick = () => {
+      if ($('#qOpts').dataset.done) return;
+      $('#qOpts').dataset.done = 1;
+      const ok = i === q.a;
+      b.classList.add(ok ? 'right' : 'wrong');
+      if (!ok) $$('.opt')[q.a].classList.add('right');
+      if (ok) { score++; d[qi].classList.add('ok'); blip(880, .12, 'triangle'); } else blip(200, .15, 'square', .04);
+      $('#qFb').innerHTML = (ok ? '<b style="color:var(--green)">Correct!</b> ' : '<b style="color:var(--red)">Not quite.</b> ') + q.w;
+      const n = $('#qNext'); n.style.display = 'inline-flex'; n.textContent = qi === Q.length - 1 ? 'See score →' : 'Next →';
+    };
+    $('#qOpts').appendChild(b);
+  });
+  delete $('#qOpts').dataset.done;
+}
+$('#qNext').onclick = () => {
+  if (qi >= Q.length) { qi = 0; score = 0; $$('i', dots).forEach(x => x.className = ''); } else qi++;
+  renderQ();
+};
+renderQ();
+
+/* ---------------- foods tabs ---------------- */
+$$('.plate').forEach(p => p.onclick = () => {
+  $$('.plate').forEach(x => { x.classList.toggle('on', x === p); x.setAttribute('aria-selected', x === p); });
+  $$('.panel').forEach(x => x.classList.toggle('on', x.dataset.panel === p.dataset.food));
+});
+/* photo stack: click to bring to front */
+$$('.photo-stack img').forEach(img => img.onclick = () => {
+  $$('.photo-stack img').forEach(x => x.classList.remove('front')); img.classList.add('front');
+});
+/* fermentation */
+const kd = $('#kimDays'), bubbles = $('#bubbles');
+kd.oninput = () => {
+  const d = +kd.value;
+  const s = d < 4 ? 'fresh & crunchy' : d < 12 ? 'getting tangy' : d < 22 ? 'perfectly ripe' : 'sour, great for kimchi-jjigae!';
+  $('#kimState').textContent = `Day ${d}: ${s}`;
+  const top = 40 - d * .7;
+  $('#kimFill').setAttribute('d', `M10 ${top} Q12 56 28 58 Q44 56 46 ${top} Z`);
+  $('#kimFill').setAttribute('fill', `hsl(${8 - d * .2},${70 - d * .6}%,${51 - d * .5}%)`);
+  let h = ''; const n = Math.round(d / 3);
+  for (let i = 0; i < n; i++) h += `<circle cx="${16 + (i * 37) % 24}" cy="${54 - (i * 13) % (54 - top - 4)}" r="${1.5 + (i % 3)}" opacity=".8"/>`;
+  bubbles.innerHTML = h;
+  if (d % 5 === 0) blip(300 + d * 20, .05);
+};
+/* bibimbap */
+let mixes = 0;
+$('#mixBtn').onclick = () => {
+  const b = $('#bowl'); b.classList.remove('mixing'); void b.offsetWidth; b.classList.add('mixing');
+  mixes++;
+  [0, 150, 300, 450, 600, 750].forEach((t, i) => setTimeout(() => blip(300 + (i % 2) * 120, .05, 'triangle'), t));
+  setTimeout(() => { b.classList.add('mixed'); }, 900);
+  $('#mixCount').textContent = mixes === 1 ? 'Mixed! Bibim = "mixed", bap = "rice" 😋' : `Mixed ${mixes} times. Very thorough! 👏`;
+};
+/* yakgwa */
+let soaks = 0;
+$('#honeyBtn').onclick = () => {
+  const y = $('#yak'); y.classList.remove('dripping'); void y.offsetWidth; y.classList.add('dripping');
+  setTimeout(() => y.classList.add('glossy'), 700);
+  soaks++;
+  $('#honeyMsg').textContent = ['Sticky, sweet, slightly chewy. 맛있다!', 'Extra glossy ✨', 'Okay that\'s a lot of honey 🍯🍯🍯'][Math.min(soaks - 1, 2)];
+};
+
+/* ---------------- kimjang ---------------- */
+const handNames = ['엄마', '아빠', '할머니', '이모', '삼촌', '이웃', '친구', '나'];
+const hands = $('#hands'); let helped = 0;
+handNames.forEach(n => {
+  const b = document.createElement('button'); b.className = 'hand'; b.textContent = n.length > 2 ? n.slice(0, 2) : n; b.title = n;
+  b.setAttribute('aria-label', 'Invite ' + n);
+  b.onclick = () => {
+    if (b.classList.contains('on')) return;
+    b.classList.add('on'); helped++;
+    $('#kimBar').style.width = (helped / handNames.length * 100) + '%';
+    $('#kimTxt').textContent = helped === handNames.length ? `All ${helped * 25} heads of cabbage done, together! Time to share 🥬❤️` : `${helped * 25} heads of cabbage seasoned (${helped} helper${helped > 1 ? 's' : ''})`;
+    blip(500 + helped * 60);
+    if (helped === handNames.length) confetti(40);
+  };
+  hands.appendChild(b);
+});
+/* holiday */
+$$('[data-hol]').forEach(b => b.onclick = () => {
+  $$('[data-hol]').forEach(x => { x.classList.toggle('on', x === b); x.setAttribute('aria-selected', x === b); });
+  $$('.hol').forEach(x => x.classList.toggle('on', x.dataset.holp === b.dataset.hol));
+});
+let age = 20;
+$('#ageBtn').onclick = () => { age++; $('#ageTxt').textContent = `Happy New Year! You're now a year older: ${age} 🎉`; };
+
+/* ---------------- jeong share ---------------- */
+const st = $('#shareTable');
+const friends = [{ n: '수진', a: -90 }, { n: '슈엣링', a: 0 }, { n: '안나', a: 90 }, { n: '지원', a: 180 }];
+const faceSvg = c => `<svg viewBox="0 0 46 46"><circle cx="23" cy="23" r="20" fill="#FBE3D6"/><path d="M5 20 Q8 4 23 4 Q38 4 41 20 Q34 12 23 13 Q12 12 5 20Z" fill="${c}"/><circle cx="16" cy="25" r="2.4" fill="#1F2B3D"/><circle cx="30" cy="25" r="2.4" fill="#1F2B3D"/><ellipse cx="12" cy="30" rx="3.5" ry="2" fill="#F2A7A7" opacity=".7"/><ellipse cx="34" cy="30" rx="3.5" ry="2" fill="#F2A7A7" opacity=".7"/><path class="m" d="M19 31 Q23 34 27 31" stroke="#1F2B3D" stroke-width="2" fill="none" stroke-linecap="round"/></svg>`;
+const hair = ['#2B2020', '#5A3A2A', '#1F2B3D', '#3A2A2A'];
+let jeong = 0, fi = 0;
+const fEls = friends.map((f, i) => {
+  const el = document.createElement('button'); el.className = 'friend';
+  const r = 46, rad = f.a * Math.PI / 180;
+  el.style.left = 50 + Math.cos(rad) * r + '%'; el.style.top = 50 + Math.sin(rad) * r + '%';
+  el.innerHTML = `<span class="face-c">${faceSvg(hair[i])}</span><span class="kr">${f.n}</span>`;
+  el.setAttribute('aria-label', 'Share food with ' + f.n);
+  el.onclick = () => share(i);
+  st.appendChild(el); return el;
+});
+function share(i) {
+  const el = fEls[i], dish = $('.dish', st);
+  const sr = st.getBoundingClientRect(), dr = dish.getBoundingClientRect(), fr = $('.face-c', el).getBoundingClientRect();
+  const m = document.createElement('i'); m.className = 'morsel'; st.appendChild(m);
+  const x0 = dr.left + dr.width / 2 - sr.left, y0 = dr.top + dr.height / 2 - sr.top;
+  const x1 = fr.left + fr.width / 2 - sr.left, y1 = fr.top + fr.height / 2 - sr.top;
+  m.style.left = x0 + 'px'; m.style.top = y0 + 'px';
+  const anim = m.animate([{ transform: 'translate(0,0) scale(1)' },
+    { transform: `translate(${(x1 - x0) / 2}px,${(y1 - y0) / 2 - 60}px) scale(1.3)` },
+    { transform: `translate(${x1 - x0}px,${y1 - y0}px) scale(.6)` }], { duration: reduce ? 1 : 520, easing: 'ease-in-out' });
+  blip(500, .08);
+  anim.onfinish = () => {
+    m.remove();
+    el.classList.add('fed'); setTimeout(() => el.classList.remove('fed'), 400);
+    $('.m', el).setAttribute('d', 'M17 30 Q23 37 29 30');
+    setTimeout(() => $('.m', el).setAttribute('d', 'M19 31 Q23 34 27 31'), 900);
+    const h = document.createElement('div'); h.className = 'heart';
+    h.innerHTML = '<svg viewBox="0 0 24 24" fill="#B4454A"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z"/></svg>';
+    h.style.left = x1 + 'px'; h.style.top = (y1 - 30) + 'px'; st.appendChild(h); setTimeout(() => h.remove(), 1200);
+    jeong++; $('#jeongNum').textContent = jeong; $('#jeongBar').style.width = Math.min(100, jeong * 8) + '%';
+    blip(780, .1, 'triangle');
+    if (jeong === 12) confetti(40);
+  };
+}
+const dish = $('.dish', st);
+const shareNext = () => { share(fi % 4); fi++; };
+dish.onclick = shareNext;
+dish.onkeydown = e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); shareNext(); } };
+
+/* ---------------- marquee ---------------- */
+const words = ['치킨 Chicken', '배달 Delivery', '분식 Bunsik', '혼밥 Honbap', '퓨전 Fusion', '먹방 Mukbang', '편의점 Convenience store', '한류 Hallyu'];
+$('#marq').innerHTML = [...words, ...words].map(w => `<span>${w}</span><i></i>`).join('');
+
+/* ---------------- chicken ---------------- */
+const flav = { soy: 'none', yang: 'saturate(1.5) hue-rotate(-12deg) brightness(.95)', honey: 'saturate(1.1) hue-rotate(14deg) brightness(1.15)' };
+$$('#flavours .chip').forEach(c => c.onclick = () => {
+  $$('#flavours .chip').forEach(x => x.classList.toggle('on', x === c));
+  const img = $('#chickenImg'); img.style.filter = flav[c.dataset.f] + ' drop-shadow(0 10px 14px rgba(90,40,30,.22))';
+  img.animate([{ transform: 'scale(1) rotate(0)' }, { transform: 'scale(1.08) rotate(-5deg)' }, { transform: 'scale(1)' }], { duration: 500, easing: 'cubic-bezier(.34,1.56,.64,1)' });
+});
+$('#orderBtn').onclick = () => {
+  const s = $('#scooter'), bag = $('#bag'), done = $('#doneTag');
+  $('#orderWrap').style.display = 'none';
+  s.classList.remove('go'); bag.classList.remove('drop'); done.classList.remove('show'); void s.offsetWidth;
+  s.classList.add('go');
+  let n = 0; const iv = setInterval(() => { blip(180 + (n++ % 2) * 30, .05, 'sawtooth', .025); if (n > 18) clearInterval(iv); }, 120);
+  setTimeout(() => { bag.classList.add('drop'); done.classList.add('show'); chord(); }, reduce ? 0 : 2400);
+  setTimeout(() => { $('#orderWrap').style.display = ''; $('#orderBtn').textContent = 'Order again 🛵'; }, reduce ? 0 : 3600);
+};
+
+/* ---------------- bunsik ---------------- */
+const MI = [
+  ['Tteokbokki', 'Spicy rice cakes.'],
+  ['Gimbap', 'Rice and fillings wrapped in seaweed.'],
+  ['Eomuk', 'Korean fish cake, often served on skewers in broth.'],
+  ['Sundae', 'Korean blood sausage.'],
+  ['Hotteok', 'Sweet Korean pancakes with a gooey filling.']
+];
+$$('.mitem').forEach(m => m.onclick = () => {
+  $$('.mitem').forEach(x => x.classList.toggle('on', x === m));
+  const [n, d] = MI[m.dataset.m];
+  $('#minfo').innerHTML = `<b>${n}</b> · ${d}`;
+});
+
+/* ---------------- convenience store ---------------- */
+const lunchbox = '<svg viewBox="0 0 70 62"><rect x="4" y="14" width="62" height="40" rx="6" fill="#fff" stroke="#1F2B3D" stroke-width="2.5"/><rect x="8" y="18" width="26" height="32" rx="3" fill="#F4EDE0"/><rect x="38" y="18" width="24" height="15" rx="3" fill="#D9452F"/><rect x="38" y="35" width="24" height="15" rx="3" fill="#6F9A4E"/><rect x="2" y="8" width="66" height="8" rx="3" fill="#B4454A" opacity=".85"/></svg>';
+const banana = '<svg viewBox="0 0 70 62"><path d="M20 10 h30 v6 q8 6 8 18 v18 q0 6 -6 6 h-34 q-6 0 -6 -6 v-18 q0 -12 8 -18z" fill="#F6D77B" stroke="#1F2B3D" stroke-width="2.5"/><rect x="18" y="4" width="34" height="8" rx="3" fill="#6F9A4E" stroke="#1F2B3D" stroke-width="2"/><path d="M24 34 q11 10 22 0" stroke="#B48A1C" stroke-width="3" fill="none" stroke-linecap="round"/></svg>';
+const SH = [
+  { n: 'Instant noodles', p: 1500, h: '<img src="assets/ramyeon.webp" alt="">' },
+  { n: 'Triangle gimbap', p: 1300, h: '<img src="assets/samgak.webp" alt="">' },
+  { n: 'Lunch box', p: 4900, h: lunchbox },
+  { n: 'Banana milk', p: 1700, h: banana }
+];
+const shelf = $('#shelf'), basket = $('#basket'); let total = 0, taken = 0;
+SH.forEach(it => {
+  const b = document.createElement('button'); b.className = 'sitem';
+  b.innerHTML = `<span class="pic">${it.h}</span><small>${it.n}<br>₩${it.p.toLocaleString()}</small>`;
+  b.onclick = () => {
+    if (b.classList.contains('taken')) return;
+    b.classList.add('taken'); taken++; total += it.p;
+    const s = document.createElement('span'); s.innerHTML = it.h; basket.appendChild(s);
+    $('#tot').textContent = '₩' + total.toLocaleString();
+    $('#honbapMsg').textContent = taken === SH.length ? `Dinner for one: ₩${total.toLocaleString()}. Enjoy your 혼밥! 🍜` : `${taken} in basket… keep shopping`;
+    if (taken === SH.length) { chord(); setTimeout(() => { $$('.sitem').forEach(x => x.classList.remove('taken')); }, 2600); setTimeout(() => { basket.innerHTML = ''; total = 0; taken = 0; $('#tot').textContent = '₩0'; }, 2600); }
+  };
+  shelf.appendChild(b);
+});
+
+/* ---------------- fusion ---------------- */
+const TR = ['Kimchi', 'Tteokbokki', 'Bulgogi', 'Rice-flour batter'];
+const IN = ['Cheese & fried rice', 'Cream sauce', 'Tortilla', 'Burger bun', 'Hot dog'];
+const potSvg = c => `<svg class="pot" viewBox="0 0 110 110"><ellipse cx="55" cy="96" rx="40" ry="6" fill="#000" opacity=".08"/><path d="M14 46 Q16 92 55 94 Q94 92 96 46 Z" fill="#fff" stroke="#1F2B3D" stroke-width="3"/><ellipse cx="55" cy="46" rx="41" ry="12" fill="${c}" stroke="#1F2B3D" stroke-width="3"/><circle cx="44" cy="44" r="5" fill="#fff" opacity=".6"/><circle cx="64" cy="48" r="4" fill="#fff" opacity=".5"/></svg>`;
+const corndog = '<svg class="pot" viewBox="0 0 110 110"><rect x="52" y="64" width="6" height="42" rx="3" fill="#D8B27A" stroke="#1F2B3D" stroke-width="2"/><rect x="34" y="8" width="42" height="64" rx="21" fill="#E3A33B" stroke="#1F2B3D" stroke-width="3"/><g fill="#F6D77B" stroke="#B9822A" stroke-width="1">' + Array.from({ length: 16 }, (_, i) => `<rect x="${39 + (i % 4) * 8}" y="${15 + Math.floor(i / 4) * 12}" width="6" height="6" rx="1.5"/>`).join('') + '</g><path d="M44 20 q11 -8 22 0" stroke="#B4454A" stroke-width="3" fill="none" stroke-linecap="round"/></svg>';
+const taco = '<svg class="pot" viewBox="0 0 110 110"><path d="M10 80 Q55 0 100 80 Z" fill="#F2D18B" stroke="#1F2B3D" stroke-width="3" stroke-linejoin="round"/><path d="M22 66 Q55 22 88 66" stroke="#8E3237" stroke-width="12" fill="none" stroke-linecap="round"/><path d="M26 60 Q55 30 84 60" stroke="#6F9A4E" stroke-width="5" fill="none" stroke-dasharray="6 5" stroke-linecap="round"/><path d="M10 80 Q55 92 100 80" stroke="#1F2B3D" stroke-width="3" fill="#E9BE6C"/></svg>';
+const burger = '<svg class="pot" viewBox="0 0 110 110"><path d="M16 50 Q16 14 55 14 Q94 14 94 50 Z" fill="#E3A33B" stroke="#1F2B3D" stroke-width="3"/><g fill="#fff"><ellipse cx="40" cy="30" rx="3" ry="1.6"/><ellipse cx="58" cy="24" rx="3" ry="1.6"/><ellipse cx="70" cy="34" rx="3" ry="1.6"/></g><path d="M12 56 q10 -8 20 0 q10 -8 22 0 q10 -8 22 0 q10 -8 22 0" stroke="#6F9A4E" stroke-width="6" fill="none" stroke-linecap="round"/><rect x="14" y="60" width="82" height="16" rx="8" fill="#7A3B22" stroke="#1F2B3D" stroke-width="3"/><path d="M16 82 h78 q0 16 -18 16 h-42 q-18 0 -18 -16z" fill="#E3A33B" stroke="#1F2B3D" stroke-width="3"/></svg>';
+const FUS = {
+  'Kimchi|Cheese & fried rice': { n: 'Kimchi cheese fried rice', d: 'Tangy kimchi fried rice under a blanket of melted cheese.', a: '<img src="assets/fusion-rice.webp" alt="">' },
+  'Tteokbokki|Cream sauce': { n: 'Creamy rose tteokbokki', d: 'Spicy gochujang meets cream for a pink "rose" sauce.', a: potSvg('#F08E86') },
+  'Bulgogi|Tortilla': { n: 'Korean tacos', d: 'Sweet-savoury bulgogi folded into a tortilla.', a: taco },
+  'Bulgogi|Burger bun': { n: 'Bulgogi burger', d: 'Marinated bulgogi patty in a soft bun.', a: burger },
+  'Rice-flour batter|Hot dog': { n: 'Korean-style corn dog', d: 'A sausage in chewy batter, rolled in crunchy coatings and sugar.', a: corndog }
+};
+let selT = null, selI = null; const found = new Set();
+const mkChips = (col, arr, set) => arr.forEach(t => {
+  const b = document.createElement('button'); b.className = 'chip'; b.textContent = t; b.setAttribute('aria-pressed', 'false');
+  b.onclick = () => { $$('.chip', col).forEach(x => x.setAttribute('aria-pressed', x === b)); set(t); tryFuse(); };
+  col.appendChild(b);
+});
+mkChips($('#colT'), TR, v => selT = v);
+mkChips($('#colI'), IN, v => selI = v);
+function tryFuse() {
+  if (!selT || !selI) return;
+  const out = $('#fusionOut'), f = FUS[selT + '|' + selI];
+  out.classList.remove('pop'); void out.offsetWidth; out.classList.add('pop');
+  if (f) {
+    $('#fArt').innerHTML = f.a; $('#fName').textContent = f.n; $('#fDesc').textContent = f.d;
+    const isNew = !found.has(f.n); found.add(f.n);
+    $('#fFound').textContent = `Discovered ${found.size} / 5` + (found.size === 5 ? ' · Fusion master! 🏆' : '');
+    if (isNew) chord(); if (found.size === 5 && isNew) confetti(50);
+  } else {
+    $('#fArt').innerHTML = potSvg('#DDD0BD'); $('#fName').textContent = 'Hmm… not a classic (yet)';
+    $('#fDesc').textContent = `${selT} + ${selI}? Try a different pairing.`; blip(220, .1, 'square', .03);
+  }
+}
+
+/* ---------------- hallyu likes ---------------- */
+$$('.hw').forEach(c => {
+  let n = Math.floor(Math.random() * 40) + 12; const sp = $('.likes span', c); sp.textContent = n + 'k';
+  const like = () => {
+    n++; sp.textContent = n + 'k'; c.classList.add('liked'); setTimeout(() => c.classList.remove('liked'), 250);
+    const r = c.getBoundingClientRect(); burst(r.left + 40, r.bottom - 30, 6);
+  };
+  c.onclick = like; c.onkeydown = e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); like(); } };
+});
+
+/* ---------------- mukbang ---------------- */
+$('#combineBtn').onclick = () => {
+  const c = $('#combine'); c.classList.remove('merged'); void c.offsetWidth; c.classList.add('merged');
+  setTimeout(() => c.classList.remove('merged'), 900); speak('먹방');
+};
+const chatMsgs = [['k_fan', '먹방 최고!! 🔥'], ['ana.eats', 'is that ramyeon?? 😍'], ['jiwon', 'the chicken looks so crispy'], ['user482', 'Hello from Malaysia 🇲🇾'], ['tteokluv', 'eat the rice too!'], ['minji', '맛있겠다 ㅠㅠ'], ['foodie_99', 'ASMR pls'], ['sujin', 'I\'m ordering delivery now lol'], ['mr.bbq', 'what sauce is that'], ['lingling', '♥♥♥']];
+let liveOn = false, viewers = 0, liveIv, ci = 0;
+const addChat = () => {
+  const [u, m] = chatMsgs[ci++ % chatMsgs.length];
+  const d = document.createElement('div'); d.innerHTML = `<b>${u}</b> ${m}`; $('#chat').appendChild(d);
+  while ($('#chat').children.length > 6) $('#chat').firstChild.remove();
+};
+$('#liveBtn').onclick = () => {
+  liveOn = !liveOn; const bb = $('#biteBtn');
+  $('#live').classList.toggle('off', !liveOn);
+  $('#liveBtn').textContent = liveOn ? 'End stream' : 'Go live';
+  bb.disabled = !liveOn; bb.style.opacity = liveOn ? 1 : .5;
+  if (liveOn) {
+    viewers = 120; addChat();
+    liveIv = setInterval(() => { viewers += Math.floor(Math.random() * 80); $('#viewers').textContent = '👀 ' + viewers.toLocaleString(); if (Math.random() < .55) addChat(); }, 900);
+    chord();
+  } else { clearInterval(liveIv); $('#chat').innerHTML = ''; $('#viewers').textContent = '👀 0'; }
+};
+$('#biteBtn').onclick = () => {
+  const s = $('#streamer'); s.classList.remove('chomp'); void s.offsetWidth; s.classList.add('chomp');
+  blip(240, .06, 'square', .04); setTimeout(() => blip(200, .06, 'square', .04), 120);
+  viewers += 300; $('#viewers').textContent = '👀 ' + viewers.toLocaleString(); addChat();
+  const r = $('#react');
+  for (let i = 0; i < 5; i++) {
+    const h = document.createElement('span'); h.textContent = ['❤️', '😋', '🔥', '👏', '🍜'][Math.random() * 5 | 0];
+    h.style.cssText = 'position:absolute;font-size:22px;left:' + (Math.random() * 40) + 'px;bottom:0';
+    r.appendChild(h);
+    h.animate([{ transform: 'translateY(0) scale(.5)', opacity: 0 }, { transform: 'translateY(-40px) scale(1.2)', opacity: 1, offset: .2 }, { transform: `translate(${Math.random() * 40 - 20}px,-180px)`, opacity: 0 }], { duration: 1500 + Math.random() * 500, delay: i * 90, easing: 'ease-out', fill: 'backwards' }).onfinish = () => h.remove();
+  }
+};
+
+/* ---------------- final ---------------- */
+$('#finalBtn').addEventListener('click', () => confetti(70));
+})();
+</script>
+</body>
+</html>
