@@ -551,6 +551,9 @@ ul.tri li::before{content:"";position:absolute;left:2px;top:.45em;border:7px sol
   font-variant-numeric:tabular-nums;transition:background .2s,transform .12s;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;
 }
 .like:hover{background:var(--paper)}
+.like{position:relative;overflow:hidden;isolation:isolate}
+.like::after{content:"";position:absolute;inset:0;z-index:-1;background:var(--blush);transform:scaleX(0);transform-origin:0 50%}
+.like.holding::after{transform:scaleX(1);transition:transform 2.5s linear .5s}
 .like:active{transform:scale(.94)}
 .like svg{width:20px;height:20px;transition:transform .3s var(--spring)}
 .hw.liked .like svg{transform:scale(1.35)}
@@ -2000,31 +2003,26 @@ const flush = () => {
   }).then(r => r.ok ? r.json() : null).then(d => { if (d && d.count != null && !pending[id]) { likeCounts[id] = d.count; paintLikes(); } }).catch(() => {}));
 };
 addEventListener('pagehide', flush);
-/* hidden reset: open the site once with ?admin=KEY, then press and hold a like button */
-let adminKey = null;
-try {
-  const q = new URLSearchParams(location.search).get('admin');
-  if (q) { localStorage.setItem('kfg-admin', q); history.replaceState(null, '', location.pathname + location.hash); }
-  adminKey = localStorage.getItem('kfg-admin');
-} catch (e) {}
+/* hidden reset: press and hold a like button for 3 seconds */
+const HOLD_MS = 3000;
 $$('.hw').forEach(c => {
   const id = c.dataset.like;
   const likeBtn = $('.like', c);
   let holdT, swallow = false;
-  if (adminKey) {
-    const cancel = () => clearTimeout(holdT);
-    likeBtn.addEventListener('pointerdown', () => {
-      holdT = setTimeout(() => {
-        swallow = true;
-        fetch(LIKE_API, { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-Admin-Key': adminKey }, body: JSON.stringify({ id, reset: true }) })
-          .then(r => r.ok ? r.json() : Promise.reject())
-          .then(() => { delete pending[id]; likeCounts[id] = 0; paintLikes(); likeBtn.animate([{ transform: 'rotate(0)' }, { transform: 'rotate(-6deg)' }, { transform: 'rotate(6deg)' }, { transform: 'rotate(0)' }], { duration: 400 }); blip(200, .15, 'triangle'); })
-          .catch(() => blip(120, .2, 'square', .04));
-      }, 1500);
-    });
-    ['pointerup', 'pointerleave', 'pointercancel'].forEach(ev => likeBtn.addEventListener(ev, cancel));
-    likeBtn.addEventListener('contextmenu', e => e.preventDefault());
-  }
+  const cancel = () => { clearTimeout(holdT); likeBtn.classList.remove('holding'); };
+  likeBtn.addEventListener('pointerdown', () => {
+    likeBtn.classList.add('holding');
+    holdT = setTimeout(() => {
+      swallow = true; likeBtn.classList.remove('holding');
+      delete pending[id];
+      fetch(LIKE_API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id, reset: true }) })
+        .then(r => r.ok ? r.json() : Promise.reject())
+        .then(() => { likeCounts[id] = 0; paintLikes(); likeBtn.animate([{ transform: 'rotate(0)' }, { transform: 'rotate(-6deg)' }, { transform: 'rotate(6deg)' }, { transform: 'rotate(0)' }], { duration: 400 }); blip(200, .15, 'triangle'); })
+        .catch(() => blip(120, .2, 'square', .04));
+    }, HOLD_MS);
+  });
+  ['pointerup', 'pointerleave', 'pointercancel'].forEach(ev => likeBtn.addEventListener(ev, cancel));
+  likeBtn.addEventListener('contextmenu', e => e.preventDefault());
   const like = e => {
     if (swallow) { swallow = false; return; }
     likeCounts[id] = (likeCounts[id] || 0) + 1; pending[id] = (pending[id] || 0) + 1; paintLikes();
