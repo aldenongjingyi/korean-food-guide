@@ -671,6 +671,99 @@ footer{text-align:center;padding:0 20px 110px;color:var(--muted);font-size:14px}
 /* ---------- confetti ---------- */
 .confetti{position:fixed;z-index:60;pointer-events:none;width:12px;height:12px;border-radius:50% 0 50% 0}
 
+
+/* ---------- dig deeper ---------- */
+.more-wrap{display:flex;flex-direction:column;gap:12px;margin-top:34px}
+.more{background:var(--paper);border:2px dashed var(--beige-dk);border-radius:18px;overflow:hidden}
+.more summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:12px;padding:14px 18px;font-weight:800;color:var(--navy);font-size:15px;letter-spacing:.02em}
+.more summary::-webkit-details-marker{display:none}
+.more summary:hover{background:#FFF3EC}
+.more .plus{width:26px;height:26px;border-radius:50%;background:var(--red);flex:none;position:relative;transition:transform .35s var(--spring)}
+.more .plus::before,.more .plus::after{content:"";position:absolute;left:50%;top:50%;width:12px;height:2.5px;background:#fff;translate:-50% -50%;border-radius:2px}
+.more .plus::after{rotate:90deg}
+.more[open] .plus{transform:rotate(45deg)}
+.more[open]{border-style:solid;border-color:var(--blush)}
+.more-body{padding:0 22px 16px 22px;animation:rise-in .35s ease}
+.more-body li{color:var(--navy)}
+.more .src{margin:8px 0 0;font-size:13px;font-weight:700;color:var(--muted)}
+.more .src a{color:var(--red);text-decoration:none;margin-right:4px}
+.more .src a:hover{text-decoration:underline}
+@keyframes rise-in{from{opacity:0;transform:translateY(-6px)}}
+
+/* ---------- e-portfolio sections ---------- */
+#vocab,#process,#video,#slides,#references{padding-top:90px;padding-bottom:90px}
+#vocab{background:linear-gradient(var(--cream),var(--blush))}
+.vocab-filters{margin:26px 0 18px}
+.vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px}
+.vcard{
+  text-align:left;background:var(--paper);border:2px solid #F0DED5;border-radius:18px;padding:14px 16px 12px;
+  box-shadow:0 4px 0 #EAD6CB;transition:transform .3s var(--spring),box-shadow .15s;display:flex;flex-direction:column;gap:2px;min-width:0
+}
+.vcard:hover{transform:translateY(-3px) rotate(-1deg)}
+.vcard:active{transform:translateY(2px);box-shadow:0 1px 0 #EAD6CB}
+.vcard .kr{font-size:26px;color:var(--red);line-height:1.2}
+.vcard .ro{font-weight:800;color:var(--navy);font-size:15px}
+.vcard .ro small{font-weight:600;color:var(--muted)}
+.vcard .mean{color:var(--muted);font-size:14px;line-height:1.35}
+.vcard.speaking{border-color:var(--red)}
+.vocab-note{font-size:13px;color:var(--muted);margin-top:16px}
+
+.folder{margin-top:34px;position:relative}
+.folder-tab{display:inline-block;background:#E9C987;color:var(--navy);font-weight:800;padding:10px 22px 12px;border-radius:14px 14px 0 0;font-size:15px;position:relative;top:4px}
+.folder-body{background:#F2D9A0;border-radius:0 18px 18px 18px;padding:26px;display:grid;grid-template-columns:repeat(3,1fr);gap:22px;box-shadow:0 8px 0 #D9BD7C,0 24px 40px -20px rgba(90,60,20,.4)}
+.polaroid{background:#fff;padding:10px 10px 12px;border-radius:6px;box-shadow:0 10px 20px -10px rgba(0,0,0,.35);text-align:left;transition:transform .4s var(--spring);display:flex;flex-direction:column;gap:8px;min-width:0}
+.polaroid:nth-child(odd){rotate:-1.6deg}
+.polaroid:nth-child(even){rotate:1.4deg}
+.polaroid:hover{transform:translateY(-6px) scale(1.03);rotate:0deg}
+.polaroid .ph{aspect-ratio:4/3;background:#1d1f22;border-radius:3px;overflow:hidden;display:grid;place-items:center}
+.polaroid .ph img{width:100%;height:100%;object-fit:cover;object-position:top}
+.polaroid b{font-size:15px;color:var(--navy);line-height:1.25}
+.polaroid span{font-size:12px;color:var(--muted);font-weight:600}
+.lightbox{position:fixed;inset:0;z-index:70;background:rgba(18,22,30,.86);display:flex;align-items:center;justify-content:center;gap:10px;padding:20px}
+.lightbox[hidden]{display:none}
+.lightbox figure{margin:0;max-width:min(760px,100%);display:flex;flex-direction:column;gap:12px;animation:pop .35s var(--spring)}
+.lightbox img{max-height:62vh;width:auto;max-width:100%;margin:0 auto;border-radius:10px}
+.lightbox figcaption{background:var(--paper);border-radius:14px;padding:14px 18px;color:var(--navy);font-size:15px;line-height:1.5}
+.lightbox figcaption b{display:block;color:var(--red);font-size:17px;margin-bottom:4px}
+.lb-close{position:absolute;top:16px;right:16px;width:44px;height:44px;border-radius:50%;background:var(--paper);color:var(--navy);font-size:18px;font-weight:800}
+.lb-nav{width:48px;height:48px;border-radius:50%;background:var(--paper);color:var(--navy);font-size:30px;line-height:1;flex:none}
+
+.video-wrap{max-width:980px}
+.tv-big{margin-top:34px;display:flex;flex-direction:column;align-items:center}
+.tv-screen{width:100%;aspect-ratio:16/9;border-radius:18px;overflow:hidden;background:#0d1118;border:14px solid var(--navy);box-shadow:0 30px 50px -24px rgba(20,25,40,.65);position:relative}
+.tv-screen iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.yt-facade{position:absolute;inset:0;padding:0;display:block}
+.yt-facade img{width:100%;height:100%;object-fit:cover;filter:saturate(1.05) brightness(.85);transition:transform .6s var(--spring),filter .3s}
+.yt-facade:hover img{transform:scale(1.04);filter:saturate(1.1) brightness(.95)}
+.yt-play{position:absolute;left:50%;top:50%;translate:-50% -50%;width:92px;height:92px;border-radius:50%;background:var(--red);color:#fff;display:grid;place-items:center;box-shadow:0 8px 0 var(--red-dk),0 16px 30px rgba(0,0,0,.35);transition:transform .2s var(--spring)}
+.yt-play svg{width:40px;height:40px;margin-left:6px}
+.yt-facade:hover .yt-play{transform:scale(1.08)}
+.yt-facade:active .yt-play{transform:scale(.94)}
+.yt-label{position:absolute;left:50%;bottom:18px;translate:-50% 0;background:rgba(255,249,244,.92);color:var(--navy);font-weight:800;border-radius:999px;padding:7px 16px;font-size:14px}
+.tv-stand{width:18%;height:34px;background:linear-gradient(var(--navy),var(--navy-dk));clip-path:polygon(28% 0,72% 0,100% 100%,0 100%)}
+.tv-base{width:34%;height:10px;border-radius:6px;background:var(--navy-dk)}
+.video-link{text-align:center;margin-top:16px;font-weight:700}
+.video-link a{color:var(--red)}
+
+.flip-book{margin-top:30px;background:var(--paper);border:2px solid #F0DED5;border-radius:24px;padding:18px;box-shadow:0 6px 0 #EAD6CB}
+.fb-stage{border-radius:14px;overflow:hidden;background:#eee;aspect-ratio:16/9}
+.fb-stage img{width:100%;height:100%;object-fit:contain;display:block}
+.fb-stage img.turn{animation:turn .35s ease}
+@keyframes turn{from{opacity:.2;transform:translateX(12px)}}
+.dl-row{margin:26px 0 0}
+.fb-bar{display:flex;align-items:center;justify-content:center;gap:16px;margin:14px 0 6px}
+.fb-count{font-weight:800;color:var(--navy);font-variant-numeric:tabular-nums;min-width:64px;text-align:center}
+.fb-thumbs{display:flex;gap:8px;overflow-x:auto;padding:8px 2px;scrollbar-width:thin}
+.fb-thumbs button{flex:none;width:96px;aspect-ratio:16/9;border-radius:6px;overflow:hidden;border:3px solid transparent;opacity:.65;transition:opacity .2s,border-color .2s}
+.fb-thumbs button.on{border-color:var(--red);opacity:1}
+.fb-thumbs img{width:100%;height:100%;object-fit:cover}
+
+.refs{margin:30px 0 0;padding-left:28px;display:flex;flex-direction:column;gap:10px;counter-reset:none}
+.refs li{color:var(--navy);line-height:1.5;padding-left:6px;scroll-margin-top:100px}
+.refs li:target{background:#FFF1D6;border-radius:8px}
+.refs .who{font-weight:800}
+.refs a{color:var(--red);word-break:break-word;font-size:14px}
+
 /* ---------- responsive ---------- */
 @media (max-width:900px){
   section{padding:80px 16px}
@@ -799,6 +892,18 @@ footer{text-align:center;padding:0 20px 110px;color:var(--muted);font-size:14px}
   .note{min-height:0;rotate:0deg!important}
   .thanks{padding:90px 16px 170px}
   .thanks .side{width:38vw;bottom:30px}
+  .vocab-grid{grid-template-columns:1fr 1fr;gap:10px}
+  .vcard{padding:12px}
+  .vcard .kr{font-size:22px}
+  .folder-body{grid-template-columns:1fr 1fr;padding:16px;gap:14px}
+  .polaroid b{font-size:13px}
+  .lb-nav{position:absolute;bottom:20px}
+  .lb-nav.prev{left:20px}
+  .lb-nav.next{right:20px}
+  .tv-screen{border-width:8px}
+  .yt-play{width:70px;height:70px}
+  .flip-book{padding:10px}
+  .fb-thumbs button{width:72px}
 }
 /* reduced motion: stop the ambient, looping motion only; anything the visitor clicks still animates */
 @media (prefers-reduced-motion:reduce){
@@ -821,6 +926,11 @@ footer{text-align:center;padding:0 20px 110px;color:var(--muted);font-size:14px}
   <a href="#modern">Modern</a>
   <a href="#global">Global</a>
   <a href="#mukbang">Mukbang</a>
+  <a href="#vocab">Vocab</a>
+  <a href="#process">Photos</a>
+  <a href="#video">Video</a>
+  <a href="#slides">Slides</a>
+  <a href="#references">Sources</a>
   <button class="snd" id="snd" aria-label="Toggle sound" aria-pressed="true">
     <svg viewBox="0 0 24 24" fill="none" stroke="#B4454A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="#B4454A"/><path class="w" d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg>
   </button>
@@ -877,6 +987,8 @@ footer{text-align:center;padding:0 20px 110px;color:var(--muted);font-size:14px}
       </div>
     </div>
   </div>
+<div class="wrap more-wrap"><details class="more reveal"><summary><span class="plus" aria-hidden="true"></span>Dig deeper: the Korean table</summary><div class="more-body"><ul class="tri"><li>The everyday table is called <b>bapsang (밥상)</b>. Meals are named by how many banchan come with them: 3, 5, 7, 9 or 12 <i>cheop</i>. The 12-cheop table was for royalty.</li><li>Placement: the rice sits to the left of the soup, with the spoon and chopsticks beside the soup. Banchan go in the middle for everyone to share.</li><li><b>Sujeo (수저)</b> joins <i>sutgarak</i> (spoon) and <i>jeotgarak</i> (chopsticks). Never stand chopsticks upright in rice: it looks like food offered to ancestors.</li></ul><p class="src">Sources: <a href="#ref-3">[3]</a> <a href="#ref-4">[4]</a></p></div></details></div>
+
 </section>
 
 <!-- ================= CUTLERY ================= -->
@@ -943,6 +1055,8 @@ footer{text-align:center;padding:0 20px 110px;color:var(--muted);font-size:14px}
       </div>
     </div>
   </div>
+<div class="wrap more-wrap"><details class="more reveal"><summary><span class="plus" aria-hidden="true"></span>Dig deeper: the history of metal chopsticks</summary><div class="more-body"><ul class="tri"><li>Metal chopsticks were found in the tomb of King Muryeong of Baekje, who died in 523.</li><li>Silver only reacts to some poisons, so historians doubt that poison detection was the main reason metal tableware caught on.</li><li>Flat chopsticks were easy to make by cutting sheet metal. In the Joseon period, brass became the everyday metal for most households.</li></ul><p class="src">Sources: <a href="#ref-5">[5]</a> <a href="#ref-6">[6]</a></p></div></details></div>
+
 </section>
 
 <!-- ================= ETIQUETTE ================= -->
@@ -961,7 +1075,7 @@ footer{text-align:center;padding:0 20px 110px;color:var(--muted);font-size:14px}
           <div><h4>Before eating</h4>
             <div class="body"><div>
               <p>Wait for the elders to start eating, then say:</p>
-              <button class="say" data-say="잘 먹겠습니다"><span class="play"><svg viewBox="0 0 10 10"><path d="M2 1l7 4-7 4z"/></svg></span><span><span class="kr">잘 먹겠습니다</span><small>jal meokgesseumnida · "Thank you for the meal"</small></span></button>
+              <button class="say" data-say="잘 먹겠습니다"><span class="play"><svg viewBox="0 0 10 10"><path d="M2 1l7 4-7 4z"/></svg></span><span><span class="kr">잘 먹겠습니다</span><small>jal meokgetseumnida · "Thank you for the meal"</small></span></button>
             </div></div>
           </div>
         </div>
@@ -982,7 +1096,7 @@ footer{text-align:center;padding:0 20px 110px;color:var(--muted);font-size:14px}
           <div><h4>After the meal</h4>
             <div class="body"><div>
               <p>Show your thanks:</p>
-              <button class="say" data-say="잘 먹었습니다"><span class="play"><svg viewBox="0 0 10 10"><path d="M2 1l7 4-7 4z"/></svg></span><span><span class="kr">잘 먹었습니다</span><small>jal meogeosseumnida · "Thank you, I enjoyed the meal"</small></span></button>
+              <button class="say" data-say="잘 먹었습니다"><span class="play"><svg viewBox="0 0 10 10"><path d="M2 1l7 4-7 4z"/></svg></span><span><span class="kr">잘 먹었습니다</span><small>jal meogeotseumnida · "Thank you, I enjoyed the meal"</small></span></button>
             </div></div>
           </div>
         </div>
@@ -1000,6 +1114,8 @@ footer{text-align:center;padding:0 20px 110px;color:var(--muted);font-size:14px}
       </div>
     </div>
   </div>
+<div class="wrap more-wrap"><details class="more reveal"><summary><span class="plus" aria-hidden="true"></span>Dig deeper: more table manners</summary><div class="more-body"><ul class="tri"><li>If pouring with both hands is awkward, support your pouring arm by placing your other hand under the elbow.</li><li>Receive things from elders with both hands too.</li><li>It is more polite to lean over the table than to lift your rice or soup bowl to your mouth.</li></ul><p class="src">Sources: <a href="#ref-7">[7]</a> <a href="#ref-8">[8]</a></p></div></details></div>
+
 </section>
 
 <!-- ================= FOODS ================= -->
@@ -1126,6 +1242,8 @@ footer{text-align:center;padding:0 20px 110px;color:var(--muted);font-size:14px}
       </div>
     </div>
   </div>
+<div class="wrap more-wrap"><details class="more reveal"><summary><span class="plus" aria-hidden="true"></span>Dig deeper: kimchi</summary><div class="more-body"><ul class="tri"><li>Kimchi is part of nearly every Korean meal, across classes and regions.</li><li>Each family’s kimchi methods and ingredients are treated as family heritage, traditionally passed from mother-in-law to daughter-in-law.</li></ul><p class="src">Sources: <a href="#ref-2">[2]</a></p></div></details><details class="more reveal"><summary><span class="plus" aria-hidden="true"></span>Dig deeper: tteok</summary><div class="more-body"><ul class="tri"><li>Tteok is made from regular rice (<i>mepssal</i>) or glutinous rice (<i>chapssal</i>), sometimes mixed.</li><li>Different tteok are made for holidays, weddings and ancestral rites.</li><li>Garaetteok is made from non-glutinous rice flour; injeolmi is pounded glutinous rice coated in bean powder.</li></ul><p class="src">Sources: <a href="#ref-9">[9]</a> <a href="#ref-10">[10]</a></p></div></details><details class="more reveal"><summary><span class="plus" aria-hidden="true"></span>Dig deeper: bibimbap</summary><div class="more-body"><ul class="tri"><li><i>Bibim</i> means mixing and <i>bap</i> means cooked rice.</li><li>The vegetables are usually <i>namul</i> (seasoned vegetables). Dolsot bibimbap is served sizzling in a hot stone bowl.</li></ul><p class="src">Sources: <a href="#ref-11">[11]</a></p></div></details><details class="more reveal"><summary><span class="plus" aria-hidden="true"></span>Dig deeper: yakgwa</summary><div class="more-body"><ul class="tri"><li>Koreans have made yakgwa for more than a thousand years. In the Silla period it was reserved for Buddhist ceremonies.</li><li>The dough also includes ginger juice and rice wine. It is fried at a low temperature, then soaked in honey syrup.</li></ul><p class="src">Sources: <a href="#ref-12">[12]</a> <a href="#ref-13">[13]</a></p></div></details></div>
+
 </section>
 
 <!-- ================= TRADITIONS ================= -->
@@ -1191,6 +1309,8 @@ footer{text-align:center;padding:0 20px 110px;color:var(--muted);font-size:14px}
       </div>
     </div>
   </div>
+<div class="wrap more-wrap"><details class="more reveal"><summary><span class="plus" aria-hidden="true"></span>Dig deeper: kimjang</summary><div class="more-body"><ul class="tri"><li>Late autumn is kimjang season: communities make large amounts of kimchi so every household has enough for the winter.</li><li>UNESCO added kimjang to its list in December 2013, at a committee session in Baku, Azerbaijan.</li></ul><p class="src">Sources: <a href="#ref-2">[2]</a></p></div></details><details class="more reveal"><summary><span class="plus" aria-hidden="true"></span>Dig deeper: holiday foods</summary><div class="more-body"><ul class="tri"><li>In tteokguk, the long white rice cake stands for long life and purity; sliced into coin shapes, it stands for wealth in the new year.</li><li>Songpyeon means “pine tteok”: it was steamed on pine needles, which stopped it sticking and added a fresh scent.</li></ul><p class="src">Sources: <a href="#ref-14">[14]</a> <a href="#ref-15">[15]</a></p></div></details></div>
+
 </section>
 
 <!-- ================= JEONG ================= -->
@@ -1219,6 +1339,8 @@ footer{text-align:center;padding:0 20px 110px;color:var(--muted);font-size:14px}
       <p style="text-align:center;color:var(--muted);font-size:14px;font-weight:600;margin:8px 0 0">Tap the dish (or a friend) to share a bite</p>
     </div>
   </div>
+<div class="wrap more-wrap"><details class="more reveal"><summary><span class="plus" aria-hidden="true"></span>Dig deeper: jeong</summary><div class="more-body"><ul class="tri"><li>Jeong is a warm feeling of affection, sympathy and attachment that grows between people through shared time and experiences.</li><li>Sharing food, even with strangers, is one of the clearest ways jeong shows in everyday life.</li></ul><p class="src">Sources: <a href="#ref-16">[16]</a></p></div></details></div>
+
 </section>
 
 <!-- ================= MODERN ================= -->
@@ -1277,6 +1399,7 @@ footer{text-align:center;padding:0 20px 110px;color:var(--muted);font-size:14px}
       </div>
     </div>
 
+<details class="more reveal"><summary><span class="plus" aria-hidden="true"></span>Dig deeper: fried chicken</summary><div class="more-body"><ul class="tri"><li><b>Chimaek (치맥)</b> is fried chicken with <i>maekju</i> (beer), a much-loved pairing in Korea.</li><li>Yangnyeom chicken is coated in a sweet, spicy gochujang-based glaze; soy garlic is savoury and garlicky.</li></ul><p class="src">Sources: <a href="#ref-17">[17]</a> <a href="#ref-18">[18]</a></p></div></details>
     <!-- bunsik -->
     <div class="card feature flipx reveal">
       <div class="art-first">
@@ -1305,6 +1428,7 @@ footer{text-align:center;padding:0 20px 110px;color:var(--muted);font-size:14px}
       </div>
     </div>
 
+<details class="more reveal"><summary><span class="plus" aria-hidden="true"></span>Dig deeper: bunsik</summary><div class="more-body"><ul class="tri"><li>Bunsik literally means “food made of flour”, but today it covers any quick, cheap meal served at <i>bunsikjip</i> snack restaurants.</li><li>Gimbap, tteokbokki, ramyeon, sundae and eomuk are all classic bunsik.</li></ul><p class="src">Sources: <a href="#ref-19">[19]</a> <a href="#ref-20">[20]</a></p></div></details>
     <!-- convenience store -->
     <div class="card feature reveal">
       <div>
@@ -1325,6 +1449,7 @@ footer{text-align:center;padding:0 20px 110px;color:var(--muted);font-size:14px}
       </div>
     </div>
 
+<details class="more reveal"><summary><span class="plus" aria-hidden="true"></span>Dig deeper: honbap</summary><div class="more-body"><ul class="tri"><li>Korean media link the rise of honbap to a more competitive society, growing individualism and more single-person households.</li><li>The same shift fuelled a boom in neighbourhood convenience stores and their packed meals (dosirak).</li></ul><p class="src">Sources: <a href="#ref-21">[21]</a> <a href="#ref-22">[22]</a></p></div></details>
     <!-- fusion -->
     <div class="card feature flipx reveal">
       <div class="art-first">
@@ -1345,6 +1470,8 @@ footer{text-align:center;padding:0 20px 110px;color:var(--muted);font-size:14px}
       </div>
     </div>
   </div>
+<div class="wrap more-wrap"><details class="more reveal"><summary><span class="plus" aria-hidden="true"></span>Dig deeper: fusion food</summary><div class="more-body"><ul class="tri"><li>Korean tacos were popularised in 2008 by chef Roy Choi’s Kogi BBQ food truck in Los Angeles: bulgogi on a corn tortilla with kimchi salsa.</li><li>Korean corn dogs are battered and rolled in panko or chopped fries before frying; some use rice cakes or mozzarella instead of a sausage.</li></ul><p class="src">Sources: <a href="#ref-23">[23]</a> <a href="#ref-24">[24]</a></p></div></details></div>
+
 </section>
 
 <!-- ================= GLOBAL ================= -->
@@ -1410,6 +1537,8 @@ footer{text-align:center;padding:0 20px 110px;color:var(--muted);font-size:14px}
       <p class="reveal" style="text-align:center;margin-top:30px"><span class="pill-red global-note">International visitors are increasingly interested in experiencing Korean food firsthand.</span></p>
     </div>
   </div>
+<div class="wrap more-wrap"><details class="more reveal"><summary><span class="plus" aria-hidden="true"></span>Dig deeper: the Korean Wave</summary><div class="more-body"><ul class="tri"><li>The first Hallyu wave (late 1990s to 2000s) was mostly K-dramas and films in Asia. The second was driven by K-pop on platforms like YouTube.</li><li>When idols eat dishes like tteokbokki on live streams or name them as favourites, global curiosity about those foods jumps.</li></ul><p class="src">Sources: <a href="#ref-25">[25]</a> <a href="#ref-26">[26]</a></p></div></details></div>
+
 </section>
 
 <!-- ================= MUKBANG ================= -->
@@ -1443,6 +1572,8 @@ footer{text-align:center;padding:0 20px 110px;color:var(--muted);font-size:14px}
       </div>
     </div>
   </div>
+<div class="wrap more-wrap"><details class="more reveal"><summary><span class="plus" aria-hidden="true"></span>Dig deeper: mukbang</summary><div class="more-body"><ul class="tri"><li>Mukbang grew in the early 2010s on the Korean streaming site AfreecaTV, where “broadcast jockeys” ate in front of a camera while chatting with viewers.</li><li>It spread internationally from the mid-2010s.</li></ul><p class="src">Sources: <a href="#ref-27">[27]</a></p></div></details></div>
+
 </section>
 
 <!-- ================= CONCLUSION ================= -->
@@ -1472,6 +1603,97 @@ footer{text-align:center;padding:0 20px 110px;color:var(--muted);font-size:14px}
     <button class="btn reveal" id="finalBtn" data-say="잘 먹었습니다">잘 먹었습니다 🙏</button>
   </div>
   <div class="wave-band waves"></div>
+</section>
+
+<!-- ================= VOCABULARY ================= -->
+<section id="vocab">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="eyebrow"><span class="seal" aria-hidden="true">단어</span><span class="lbl">e-Portfolio · Vocabulary</span></span>
+      <h2>Words from our <em>presentation</em></h2>
+      <p class="lede">Every Korean word we used, in one place. Tap a card to hear it.</p>
+    </div>
+    <div class="tabs vocab-filters" id="vocabFilters" role="tablist"></div>
+    <div class="vocab-grid" id="vocabGrid"></div>
+    <p class="vocab-note">Romanised the way most English speakers spell them; the official Revised Romanization is in brackets where it differs.</p>
+  </div>
+</section>
+
+<!-- ================= PROCESS FOLDER ================= -->
+<section id="process">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="eyebrow"><span class="seal" aria-hidden="true">과정</span><span class="lbl">e-Portfolio · How our project developed</span></span>
+      <h2>Our project <em>folder</em></h2>
+      <p class="lede">Most of our planning happened in our group chat. Open a photo to read why it mattered.</p>
+    </div>
+    <div class="folder reveal">
+      <div class="folder-tab">📁 Korean Food Culture · T1 Group A</div>
+      <div class="folder-body" id="folderGrid"></div>
+    </div>
+  </div>
+</section>
+<div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <button class="lb-close" id="lbClose" aria-label="Close">✕</button>
+  <button class="lb-nav prev" id="lbPrev" aria-label="Previous photo">‹</button>
+  <figure><img id="lbImg" alt=""><figcaption><b id="lbTitle"></b><span id="lbCap"></span></figcaption></figure>
+  <button class="lb-nav next" id="lbNext" aria-label="Next photo">›</button>
+</div>
+
+<!-- ================= VIDEO ================= -->
+<section id="video">
+  <div class="wrap video-wrap">
+    <div class="reveal">
+      <span class="eyebrow"><span class="seal" aria-hidden="true">영상</span><span class="lbl">e-Portfolio · Presentation video</span></span>
+      <h2>Our <em>presentation</em></h2>
+      <p class="lede">We didn’t have many rehearsals or in-person discussions, but we kept talking in our WhatsApp chat. Here’s our presentation. Enjoy!</p>
+    </div>
+    <div class="tv-big reveal">
+      <div class="tv-screen" id="ytBox">
+        <button class="yt-facade" id="ytPlay" aria-label="Play our presentation video">
+          <img src="https://i.ytimg.com/vi/HAXyG8HWQy0/hqdefault.jpg" alt="" loading="lazy">
+          <span class="yt-play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span>
+          <span class="yt-label">Play presentation</span>
+        </button>
+      </div>
+      <div class="tv-stand"></div><div class="tv-base"></div>
+    </div>
+    <p class="video-link"><a href="https://youtu.be/HAXyG8HWQy0" target="_blank" rel="noopener">Watch on YouTube ↗</a></p>
+  </div>
+</section>
+
+<!-- ================= SLIDES PDF ================= -->
+<section id="slides">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="eyebrow"><span class="seal" aria-hidden="true">발표</span><span class="lbl">e-Portfolio · Presentation slides</span></span>
+      <h2>Our <em>slides</em></h2>
+      <p class="lede">The 23 slides we presented, made in Canva. Download the PDF, or flip through them below.</p>
+    </div>
+    <p class="dl-row reveal"><a class="btn" href="assets/slides/Korean%20Food%20Culture%20T1%20Group%20A.pdf" download="Korean Food Culture T1 Group A.pdf"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 19h14" stroke="currentColor" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Download slides (PDF, 7 MB)</a></p>
+    <div class="flip-book reveal">
+      <div class="fb-stage"><img id="fbImg" src="assets/slides/slide-01.webp" alt="Slide 1 of 23" width="1440" height="810"></div>
+      <div class="fb-bar">
+        <button class="btn small navy" id="fbPrev" aria-label="Previous slide">‹ Prev</button>
+        <span class="fb-count" id="fbCount">1 / 23</span>
+        <button class="btn small navy" id="fbNext" aria-label="Next slide">Next ›</button>
+      </div>
+      <div class="fb-thumbs" id="fbThumbs"></div>
+    </div>
+    
+  </div>
+</section>
+
+<!-- ================= REFERENCES ================= -->
+<section id="references">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="eyebrow"><span class="seal" aria-hidden="true">출처</span><span class="lbl">e-Portfolio · References</span></span>
+      <h2><em>References</em></h2>
+      <p class="lede">Sources for the facts on this site. Numbers in each “Dig deeper” box point here. Websites accessed November 2026.</p>
+    </div>
+    <ol class="refs reveal"><li id="ref-1"><span class="who">T1 Group A.</span> Korean Food Guide: presentation slides (2026). Our own research and slides. <a href="#slides">See “Our slides” above</a></li><li id="ref-2"><span class="who">UNESCO.</span> Kimjang, making and sharing kimchi in the Republic of Korea. Intangible Cultural Heritage list, inscribed 2013. <a href="https://ich.unesco.org/en/RL/kimjang-making-and-sharing-kimchi-in-the-republic-of-korea-00881" target="_blank" rel="noopener">ich.unesco.org/en/RL/kimjang-making-and-sharing-kimchi-in-the-republic-of-korea-00881</a></li><li id="ref-3"><span class="who">Maangchi.</span> Korean table setting. <a href="https://www.maangchi.com/blog/korean-table-setting" target="_blank" rel="noopener">www.maangchi.com/blog/korean-table-setting</a></li><li id="ref-4"><span class="who">Wikipedia.</span> Sujeo. <a href="https://en.wikipedia.org/wiki/Sujeo" target="_blank" rel="noopener">en.wikipedia.org/wiki/Sujeo</a></li><li id="ref-5"><span class="who">Korea JoongAng Daily.</span> Flat, frustrating and now famous: The history of Korea’s metal chopsticks. <a href="https://www.koreajoongangdaily.com/kjd-special/why-flat-frustrating-and-now-famous-the-history-of-koreas-metal-chopsticks/12031557" target="_blank" rel="noopener">www.koreajoongangdaily.com/kjd-special/why-flat-frustrating-and-now-famous-the-history-of-koreas-metal-chopsticks/12031557</a></li><li id="ref-6"><span class="who">Embassy of the Republic of Korea (MOFA).</span> Why the metal chopsticks: a Korean tradition? <a href="https://overseas.mofa.go.kr/no-en/brd/m_21237/view.do?seq=23" target="_blank" rel="noopener">overseas.mofa.go.kr/no-en/brd/m_21237/view.do?seq=23</a></li><li id="ref-7"><span class="who">Embassy of the Republic of Korea (MOFA).</span> Korean etiquette and manners. <a href="https://overseas.mofa.go.kr/no-en/brd/m_21237/view.do?seq=111" target="_blank" rel="noopener">overseas.mofa.go.kr/no-en/brd/m_21237/view.do?seq=111</a></li><li id="ref-8"><span class="who">Culture Trip.</span> A guide to Korean table manners. <a href="https://theculturetrip.com/asia/south-korea/articles/a-guide-to-korean-table-manners" target="_blank" rel="noopener">theculturetrip.com/asia/south-korea/articles/a-guide-to-korean-table-manners</a></li><li id="ref-9"><span class="who">Wikipedia.</span> Tteok. <a href="https://en.wikipedia.org/wiki/Tteok" target="_blank" rel="noopener">en.wikipedia.org/wiki/Tteok</a></li><li id="ref-10"><span class="who">Asia Society.</span> Exploring different types of tteok. <a href="https://www.asiasociety.org/korea/exploring-different-types-tteok" target="_blank" rel="noopener">www.asiasociety.org/korea/exploring-different-types-tteok</a></li><li id="ref-11"><span class="who">National Geographic.</span> Bibimbap, Korea’s famous dish. <a href="https://www.nationalgeographic.com/travel/article/bibimbap-koreas-famous-dish" target="_blank" rel="noopener">www.nationalgeographic.com/travel/article/bibimbap-koreas-famous-dish</a></li><li id="ref-12"><span class="who">Wikipedia.</span> Yakgwa. <a href="https://en.wikipedia.org/wiki/Yakgwa" target="_blank" rel="noopener">en.wikipedia.org/wiki/Yakgwa</a></li><li id="ref-13"><span class="who">Maangchi.</span> Yakgwa (honey cookies) recipe. <a href="https://www.maangchi.com/recipe/yakgwa" target="_blank" rel="noopener">www.maangchi.com/recipe/yakgwa</a></li><li id="ref-14"><span class="who">Wikipedia.</span> Tteokguk. <a href="https://en.wikipedia.org/wiki/Tteokguk" target="_blank" rel="noopener">en.wikipedia.org/wiki/Tteokguk</a></li><li id="ref-15"><span class="who">Michelin Guide.</span> Article on what goes into a bowl of tteokguk. <a href="https://guide.michelin.com/kr/en/article/features/whats-bowl-tteokguk" target="_blank" rel="noopener">guide.michelin.com/kr/en/article/features/whats-bowl-tteokguk</a></li><li id="ref-16"><span class="who">Korea.net.</span> Honorary Reporters feature on jeong (정). <a href="https://www.korea.net/NewsFocus/HonoraryReporters/view?articleId=198727" target="_blank" rel="noopener">www.korea.net/NewsFocus/HonoraryReporters/view?articleId=198727</a></li><li id="ref-17"><span class="who">CNN Travel.</span> Article on chimaek, Korea’s fried chicken and beer culture. <a href="https://amp.cnn.com/cnn/travel/article/south-korea-beer-chicken" target="_blank" rel="noopener">amp.cnn.com/cnn/travel/article/south-korea-beer-chicken</a></li><li id="ref-18"><span class="who">Seoul Tourism Organization.</span> Korean fried chicken in Seoul. <a href="https://www.seoultourism.org/korean-fried-chicken-seoul/" target="_blank" rel="noopener">www.seoultourism.org/korean-fried-chicken-seoul/</a></li><li id="ref-19"><span class="who">Wikipedia.</span> Bunsik. <a href="https://en.wikipedia.org/wiki/Bunsik" target="_blank" rel="noopener">en.wikipedia.org/wiki/Bunsik</a></li><li id="ref-20"><span class="who">Lonely Planet.</span> A guide to the best street food in South Korea. <a href="https://www.lonelyplanet.com/articles/best-street-food-south-korea" target="_blank" rel="noopener">www.lonelyplanet.com/articles/best-street-food-south-korea</a></li><li id="ref-21"><span class="who">Korea Economic Institute of America (KEIA).</span> Table for one? How dining culture is changing in South Korea. <a href="https://keia.org/analysis/table-for-one-how-dining-culture-is-changing-in-south-korea/" target="_blank" rel="noopener">keia.org/analysis/table-for-one-how-dining-culture-is-changing-in-south-korea/</a></li><li id="ref-22"><span class="who">Bloomberg.</span> Convenience stores boom as Korea’s households change (2016). <a href="https://www.bloomberg.com/news/articles/2016-12-29/convenience-stores-boom-as-korea-s-households-change" target="_blank" rel="noopener">www.bloomberg.com/news/articles/2016-12-29/convenience-stores-boom-as-korea-s-households-change</a></li><li id="ref-23"><span class="who">Wikipedia.</span> Korean taco. <a href="https://en.wikipedia.org/wiki/Korean_taco" target="_blank" rel="noopener">en.wikipedia.org/wiki/Korean_taco</a></li><li id="ref-24"><span class="who">Ministry of Culture, Sports and Tourism (Korea).</span> Koreans reinterpret new ingredients to recreate dishes. <a href="https://www.mcst.go.kr/english/policy/kocis/newsView.jsp?pSeq=153" target="_blank" rel="noopener">www.mcst.go.kr/english/policy/kocis/newsView.jsp?pSeq=153</a></li><li id="ref-25"><span class="who">Wikipedia.</span> Korean Wave. <a href="https://en.wikipedia.org/wiki/Korean_Wave" target="_blank" rel="noopener">en.wikipedia.org/wiki/Korean_Wave</a></li><li id="ref-26"><span class="who">The Korea Times.</span> Korean cuisine enters global mainstream fueled by K-content fever (2024). <a href="https://www.koreatimes.co.kr/lifestyle/trends/20241129/korean-cuisine-enters-global-mainstream-fueled-by-k-content-fever" target="_blank" rel="noopener">www.koreatimes.co.kr/lifestyle/trends/20241129/korean-cuisine-enters-global-mainstream-fueled-by-k-content-fever</a></li><li id="ref-27"><span class="who">Wikipedia.</span> Mukbang. <a href="https://en.wikipedia.org/wiki/Mukbang" target="_blank" rel="noopener">en.wikipedia.org/wiki/Mukbang</a></li></ol>
+  </div>
 </section>
 <footer>Korean Food Guide · T1 Group A · 수진 · 슈엣링 · 안나 · 지원</footer>
 
@@ -1829,7 +2051,7 @@ $('#honeyBtn').onclick = () => {
 const handNames = ['엄마', '아빠', '할머니', '이모', '삼촌', '이웃', '친구', '나'];
 const hands = $('#hands'); let helped = 0;
 handNames.forEach(n => {
-  const b = document.createElement('button'); b.className = 'hand'; b.textContent = n.length > 2 ? n.slice(0, 2) : n; b.title = n;
+  const b = document.createElement('button'); b.className = 'hand'; b.textContent = n; b.title = n; if (n.length > 2) b.style.fontSize = '11px';
   b.setAttribute('aria-label', 'Invite ' + n);
   b.onclick = () => {
     if (b.classList.contains('on')) return;
@@ -2025,7 +2247,7 @@ function showFusion(i, user) {
 showFusion(0, false);
 
 /* ---------------- hallyu likes (shared, stored on the server) ---------------- */
-const LIKE_API = location.hostname.endsWith('vercel.app') ? '/api/likes' : 'https://korean-food-guide.vercel.app/api/likes';
+const LIKE_API = location.hostname.endsWith('vercel.app') ? '/api/likes' : 'https://korean-food-culture.vercel.app/api/likes';
 const likeCounts = {}, pending = {};
 const fmt = n => n.toLocaleString('en-US');
 const paintLikes = () => $$('.hw').forEach(c => { const v = likeCounts[c.dataset.like]; if (v != null) $('.like .n', c).textContent = fmt(v); });
@@ -2115,6 +2337,135 @@ $('#biteBtn').onclick = () => {
     h.animate([{ transform: 'translateY(0) scale(.5)', opacity: 0 }, { transform: 'translateY(-40px) scale(1.2)', opacity: 1, offset: .2 }, { transform: `translate(${Math.random() * 40 - 20}px,-180px)`, opacity: 0 }], { duration: 1500 + Math.random() * 500, delay: i * 90, easing: 'ease-out', fill: 'backwards' }).onfinish = () => h.remove();
   }
 };
+
+
+/* ---------------- vocabulary ---------------- */
+const VOCAB = [
+  ['table','밥','bap','cooked rice; also means “meal”'],
+  ['table','국','guk','soup'],
+  ['table','찌개','jjigae','stew'],
+  ['table','반찬','banchan','side dishes shared at the table'],
+  ['table','밥상','bapsang','the meal table and its setting'],
+  ['table','수저','sujeo','spoon and chopsticks set'],
+  ['table','잘 먹겠습니다','jal meokgetseumnida','“Thank you for the meal” (before eating)'],
+  ['table','잘 먹었습니다','jal meogeotseumnida','“I enjoyed the meal” (after eating)'],
+  ['classics','김치','kimchi (gimchi)','fermented vegetables, usually cabbage or radish'],
+  ['classics','배추김치','baechu kimchi','napa cabbage kimchi'],
+  ['classics','깍두기','kkakdugi','cubed radish kimchi'],
+  ['classics','된장','doenjang','fermented soybean paste'],
+  ['classics','고추장','gochujang','fermented red chilli paste'],
+  ['classics','떡','tteok','rice cake'],
+  ['classics','가래떡','garaetteok','long, cylinder-shaped rice cake'],
+  ['classics','인절미','injeolmi','rice cake coated in soybean powder'],
+  ['classics','비빔밥','bibimbap','“mixed rice” with vegetables, meat and egg'],
+  ['classics','약과','yakgwa','traditional honey cookie'],
+  ['traditions','김장','kimjang','making and sharing kimchi before winter'],
+  ['traditions','설날','Seollal','Lunar New Year'],
+  ['traditions','떡국','tteokguk','rice-cake soup eaten at Seollal'],
+  ['traditions','추석','Chuseok','autumn harvest festival'],
+  ['traditions','송편','songpyeon','half-moon rice cakes made for Chuseok'],
+  ['traditions','정','jeong','warm emotional connection between people'],
+  ['modern','치킨','chikin','Korean fried chicken'],
+  ['modern','양념','yangnyeom','seasoning; sweet and spicy chicken glaze'],
+  ['modern','배달','baedal','delivery'],
+  ['modern','분식','bunsik','cheap, casual snack food'],
+  ['modern','떡볶이','tteokbokki','spicy stir-fried rice cakes'],
+  ['modern','김밥','gimbap','rice and fillings rolled in seaweed'],
+  ['modern','어묵','eomuk','fish cake'],
+  ['modern','순대','sundae','Korean blood sausage'],
+  ['modern','호떡','hotteok','sweet filled pancake'],
+  ['modern','라면','ramyeon','instant noodles'],
+  ['modern','편의점','pyeonuijeom','convenience store'],
+  ['modern','혼밥','honbap','eating alone'],
+  ['modern','불고기','bulgogi','marinated grilled beef'],
+  ['modern','닭갈비','dak galbi (dakgalbi)','spicy stir-fried chicken'],
+  ['global','한류','Hallyu','the Korean Wave'],
+  ['global','먹방','mukbang (meokbang)','eating broadcast'],
+  ['global','먹는','meongneun','eating (as in 먹는 방송)'],
+  ['global','방송','bangsong','broadcast'],
+];
+const VCATS = [['all','All'],['table','At the table'],['classics','Classic foods'],['traditions','Traditions'],['modern','Modern food'],['global','Global']];
+const vGrid = $('#vocabGrid'), vFil = $('#vocabFilters');
+const drawVocab = cat => {
+  vGrid.innerHTML = '';
+  VOCAB.filter(v => cat === 'all' || v[0] === cat).forEach((v, i) => {
+    const b = document.createElement('button'); b.className = 'vcard';
+    const [ro, off] = v[2].includes('(') ? [v[2].split(' (')[0], v[2].split(' (')[1].replace(')', '')] : [v[2], ''];
+    b.innerHTML = `<span class="kr">${v[1]}</span><span class="ro">${ro}${off ? ` <small>(${off})</small>` : ''}</span><span class="mean">${v[3]}</span>`;
+    b.setAttribute('aria-label', `${v[1]}, ${ro}: ${v[3]}. Tap to hear it.`);
+    b.onclick = () => speak(v[1], b);
+    b.animate([{ opacity: 0, transform: 'translateY(10px)' }, { opacity: 1, transform: 'none' }], { duration: 300, delay: i * 18, fill: 'backwards', easing: 'ease-out' });
+    vGrid.appendChild(b);
+  });
+};
+VCATS.forEach(([k, label], i) => {
+  const c = document.createElement('button'); c.className = 'chip' + (i ? '' : ' on'); c.textContent = label;
+  c.setAttribute('role', 'tab'); c.setAttribute('aria-selected', i === 0);
+  c.onclick = () => { $$('.chip', vFil).forEach(x => { x.classList.toggle('on', x === c); x.setAttribute('aria-selected', x === c); }); drawVocab(k); };
+  vFil.appendChild(c);
+});
+drawVocab('all');
+
+/* ---------------- process folder ---------------- */
+const PHOTOS = [
+  ['chat-topic-poll', 'Choosing our topic', 'We picked our topic with a poll in our group chat. All four of us voted for Korean food culture over festivals, pop culture and daily-life etiquette, so the decision was quick and unanimous.'],
+  ['chat-parts-poll', 'Splitting the work (30 Oct 2026)', 'We divided the presentation into four parts: characteristics, traditional and popular foods, food culture and society, and modern food culture. Each of us picked one part to research and present.'],
+  ['deck-cover', 'Building our slides', 'We built our slides in Canva with one shared design: a cream background, red and navy titles and cherry blossoms. This website uses the same look.'],
+  ['deck-tteok', 'A content slide', 'One of our finished slides: tteok, with its key facts and photos of four kinds of rice cake.'],
+  ['chat-chopsticks-1', 'Collecting chopsticks to compare', 'When Shuet Ling said she had nothing to bring, we asked if she had Chinese or Malaysian chopsticks, so we could show real chopsticks from different countries alongside our “why stainless cutlery” slide.'],
+  ['chat-chopsticks-2', 'Shuet Ling brings chopsticks', 'Shuet Ling offered to bring her chopsticks so the class could see them during the presentation.'],
+  ['chat-japanese-chopsticks', 'Japanese chopsticks too', 'Anna had Japanese chopsticks, so we could show the difference between Korean metal chopsticks and Japanese wooden ones side by side.'],
+  ['chat-banchan', 'Real banchan for the class', 'Jiwon made her own Korean-style side dishes (banchan) and offered to bring them, so our classmates could see real banchan instead of only photos.'],
+  ['chat-soju-glass', 'Planning the drinking etiquette demo', 'We planned to bring a soju shot glass and demonstrate drinking etiquette live: pouring with both hands and turning away from elders. We agreed to show the chopsticks while presenting and to brief everyone just before we started.'],
+];
+const fGrid = $('#folderGrid'), lb = $('#lightbox');
+let lbi = 0;
+const openLb = i => {
+  lbi = (i + PHOTOS.length) % PHOTOS.length; const [f, t, c] = PHOTOS[lbi];
+  $('#lbImg').src = `assets/process/${f}.webp`; $('#lbImg').alt = t; $('#lbTitle').textContent = t; $('#lbCap').textContent = c;
+  lb.hidden = false; document.body.style.overflow = 'hidden'; $('#lbClose').focus();
+};
+const closeLb = () => { lb.hidden = true; document.body.style.overflow = ''; };
+PHOTOS.forEach(([f, t], i) => {
+  const b = document.createElement('button'); b.className = 'polaroid';
+  b.innerHTML = `<span class="ph"><img src="assets/process/${f}.webp" alt="" loading="lazy"></span><b>${t}</b><span>Tap to read why it mattered</span>`;
+  b.onclick = () => openLb(i); fGrid.appendChild(b);
+});
+$('#lbClose').onclick = closeLb; $('#lbPrev').onclick = () => openLb(lbi - 1); $('#lbNext').onclick = () => openLb(lbi + 1);
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+addEventListener('keydown', e => {
+  if (lb.hidden) return;
+  if (e.key === 'Escape') closeLb(); if (e.key === 'ArrowRight') openLb(lbi + 1); if (e.key === 'ArrowLeft') openLb(lbi - 1);
+});
+
+/* ---------------- video (loads YouTube only when played) ---------------- */
+$('#ytPlay').onclick = () => {
+  const f = document.createElement('iframe');
+  f.src = 'https://www.youtube-nocookie.com/embed/HAXyG8HWQy0?autoplay=1&rel=0&modestbranding=1';
+  f.title = 'T1 Group A: Korean Food Guide presentation';
+  f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+  f.allowFullscreen = true; f.referrerPolicy = 'strict-origin-when-cross-origin';
+  $('#ytBox').innerHTML = ''; $('#ytBox').appendChild(f);
+};
+
+/* ---------------- slides flip-book ---------------- */
+const NSLIDES = 23, fbImg = $('#fbImg'), fbThumbs = $('#fbThumbs');
+let fbi = 1;
+const slideSrc = n => `assets/slides/slide-${String(n).padStart(2, '0')}.webp`;
+for (let n = 1; n <= NSLIDES; n++) {
+  const b = document.createElement('button'); b.setAttribute('aria-label', 'Slide ' + n);
+  b.innerHTML = `<img src="${slideSrc(n)}" alt="" loading="lazy">`; b.onclick = () => goSlide(n); fbThumbs.appendChild(b);
+}
+function goSlide(n) {
+  fbi = Math.min(NSLIDES, Math.max(1, n));
+  fbImg.src = slideSrc(fbi); fbImg.alt = `Slide ${fbi} of ${NSLIDES}`;
+  fbImg.classList.remove('turn'); void fbImg.offsetWidth; fbImg.classList.add('turn');
+  $('#fbCount').textContent = `${fbi} / ${NSLIDES}`;
+  $$('button', fbThumbs).forEach((b, i) => b.classList.toggle('on', i + 1 === fbi));
+  const t = $$('button', fbThumbs)[fbi - 1]; fbThumbs.scrollTo({ left: t.offsetLeft - fbThumbs.clientWidth / 2 + t.clientWidth / 2, behavior: 'smooth' });
+}
+$('#fbPrev').onclick = () => goSlide(fbi - 1); $('#fbNext').onclick = () => goSlide(fbi + 1);
+$$('button', fbThumbs)[0].classList.add('on');
 
 /* ---------------- final ---------------- */
 $('#finalBtn').addEventListener('click', () => confetti(70));
