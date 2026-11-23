@@ -931,9 +931,6 @@ footer{text-align:center;padding:0 20px 110px;color:var(--muted);font-size:14px}
   <a href="#video">Video</a>
   <a href="#slides">Slides</a>
   <a href="#references">Sources</a>
-  <button class="snd" id="snd" aria-label="Toggle sound" aria-pressed="true">
-    <svg viewBox="0 0 24 24" fill="none" stroke="#B4454A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="#B4454A"/><path class="w" d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg>
-  </button>
 </nav>
 
 <!-- ================= HERO ================= -->
@@ -1703,12 +1700,8 @@ const $$ = (s, el = document) => [...el.querySelectorAll(s)];
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 /* ---------------- sound ---------------- */
-let soundOn = true, ac;
-try { soundOn = localStorage.getItem('kfg-sound') !== 'off'; } catch (e) {}
-const sndBtn = $('#snd');
-const paintSnd = () => { sndBtn.setAttribute('aria-pressed', soundOn); $('.w', sndBtn).style.opacity = soundOn ? 1 : .15; };
-paintSnd();
-sndBtn.onclick = () => { soundOn = !soundOn; try { localStorage.setItem('kfg-sound', soundOn ? 'on' : 'off'); } catch (e) {} paintSnd(); blip(700); };
+const soundOn = true; let ac;
+try { localStorage.removeItem('kfg-sound'); } catch (e) {}
 function blip(f = 520, d = .09, type = 'sine', vol = .08) {
   if (!soundOn) return;
   try {
