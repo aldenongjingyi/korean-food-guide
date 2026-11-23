@@ -2247,7 +2247,7 @@ function showFusion(i, user) {
 showFusion(0, false);
 
 /* ---------------- hallyu likes (shared, stored on the server) ---------------- */
-const LIKE_API = location.hostname.endsWith('vercel.app') ? '/api/likes' : 'https://korean-food-culture.vercel.app/api/likes';
+const LIKE_API = location.hostname.endsWith('vercel.app') ? '/api/likes' : 'https://koreanfoodculture.vercel.app/api/likes';
 const likeCounts = {}, pending = {};
 const fmt = n => n.toLocaleString('en-US');
 const paintLikes = () => $$('.hw').forEach(c => { const v = likeCounts[c.dataset.like]; if (v != null) $('.like .n', c).textContent = fmt(v); });
