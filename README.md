@@ -1,4 +1,4 @@
-# Korean Food Guide
+# Korean Food Culture · T1 Group A
 
 An interactive single-page guide to Korean food culture by T1 Group A (수진 · 슈엣링 · 안나 · 지원).
 
