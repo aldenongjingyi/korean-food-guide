@@ -691,7 +691,7 @@ footer{text-align:center;padding:0 20px 110px;color:var(--muted);font-size:14px}
 @keyframes rise-in{from{opacity:0;transform:translateY(-6px)}}
 
 /* ---------- e-portfolio sections ---------- */
-#vocab,#process,#video,#slides,#references{padding-top:90px;padding-bottom:90px}
+#vocab,#portfolio,#references{padding-top:90px;padding-bottom:90px}
 #vocab{background:linear-gradient(var(--cream),var(--blush))}
 .vocab-filters{margin:26px 0 18px}
 .vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px}
@@ -709,8 +709,29 @@ footer{text-align:center;padding:0 20px 110px;color:var(--muted);font-size:14px}
 .vocab-note{font-size:13px;color:var(--muted);margin-top:16px}
 
 .folder{margin-top:34px;position:relative}
-.folder-tab{display:inline-block;background:#E9C987;color:var(--navy);font-weight:800;padding:10px 22px 12px;border-radius:14px 14px 0 0;font-size:15px;position:relative;top:4px}
-.folder-body{background:#F2D9A0;border-radius:0 18px 18px 18px;padding:26px;display:grid;grid-template-columns:repeat(3,1fr);gap:22px;box-shadow:0 8px 0 #D9BD7C,0 24px 40px -20px rgba(90,60,20,.4)}
+.folder-tabs{display:flex;gap:6px;align-items:flex-end;overflow-x:auto;scrollbar-width:none;padding:6px 4px 0;position:relative;z-index:1}
+.folder-tabs::-webkit-scrollbar{display:none}
+.folder-tab{flex:none;background:#E3C27F;color:#6B5532;font-weight:800;padding:9px 20px 13px;border-radius:14px 14px 0 0;font-size:15px;position:relative;top:4px;transition:background .2s,color .2s,transform .3s var(--spring);box-shadow:inset 0 -6px 8px -6px rgba(90,60,20,.35)}
+.folder-tab:hover{transform:translateY(-3px)}
+.folder-tab.on{background:#F2D9A0;color:var(--navy);padding-top:12px;box-shadow:none;transform:none}
+.folder-tab:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+.folder-body{background:#F2D9A0;border-radius:0 18px 18px 18px;padding:26px;box-shadow:0 8px 0 #D9BD7C,0 24px 40px -20px rgba(90,60,20,.4);position:relative}
+.fpanel{animation:fpIn .4s var(--spring)}
+.fpanel[hidden]{display:none}
+@keyframes fpIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.fp-note{color:#6B5532;font-weight:700;font-size:15px;margin:0 0 18px}
+.folder-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.folder-body .tv-big{margin-top:6px}
+.folder-body .dl-row{margin:0}
+.folder-body .flip-book{margin-top:18px}
+.letter{background:var(--paper) repeating-linear-gradient(transparent 0 31px,#F0DED5 31px 32px);border-radius:10px;padding:34px 40px 30px;max-width:760px;margin:4px auto;box-shadow:0 12px 26px -14px rgba(90,60,20,.45);rotate:-.6deg;position:relative;line-height:32px;color:var(--navy)}
+.letter::before{content:"";position:absolute;top:-12px;left:50%;width:110px;height:26px;translate:-50% 0;rotate:2deg;background:rgba(243,220,212,.85);border-radius:3px}
+.letter-kr{font-family:"Gowun Batang",serif;color:var(--red);font-size:18px;margin:0}
+.letter h3{font-family:"DM Serif Display",serif;font-weight:400;font-size:34px;margin:0;line-height:1.2;color:var(--navy)}
+.letter-by{font-size:13px;font-weight:700;color:var(--muted);margin:2px 0 14px}
+.letter p{margin:0 0 32px;font-size:16px}
+.letter p.letter-by,.letter p.letter-kr{line-height:1.6}
+.letter-sign{font-family:"Gaegu",cursive;font-size:24px!important;color:var(--red);text-align:right;margin:0!important}
 .polaroid{background:#fff;padding:10px 10px 12px;border-radius:6px;box-shadow:0 10px 20px -10px rgba(0,0,0,.35);text-align:left;transition:transform .4s var(--spring);display:flex;flex-direction:column;gap:8px;min-width:0}
 .polaroid:nth-child(odd){rotate:-1.6deg}
 .polaroid:nth-child(even){rotate:1.4deg}
@@ -895,7 +916,12 @@ footer{text-align:center;padding:0 20px 110px;color:var(--muted);font-size:14px}
   .vocab-grid{grid-template-columns:1fr 1fr;gap:10px}
   .vcard{padding:12px}
   .vcard .kr{font-size:22px}
-  .folder-body{grid-template-columns:1fr 1fr;padding:16px;gap:14px}
+  .folder-body{padding:14px;border-radius:0 14px 14px 14px}
+  .folder-grid{grid-template-columns:1fr 1fr;gap:14px}
+  .folder-tab{padding:8px 13px 12px;font-size:13px}
+  .folder-tab.on{padding-top:10px}
+  .letter{padding:26px 20px 22px;rotate:0deg}
+  .letter h3{font-size:28px}
   .polaroid b{font-size:13px}
   .lb-nav{position:absolute;bottom:20px}
   .lb-nav.prev{left:20px}
@@ -927,9 +953,7 @@ footer{text-align:center;padding:0 20px 110px;color:var(--muted);font-size:14px}
   <a href="#global">Global</a>
   <a href="#mukbang">Mukbang</a>
   <a href="#vocab">Vocab</a>
-  <a href="#process">Photos</a>
-  <a href="#video">Video</a>
-  <a href="#slides">Slides</a>
+  <a href="#portfolio">Folder</a>
   <a href="#references">Sources</a>
 </nav>
 
@@ -1630,17 +1654,66 @@ footer{text-align:center;padding:0 20px 110px;color:var(--muted);font-size:14px}
   </div>
 </section>
 
-<!-- ================= PROCESS FOLDER ================= -->
-<section id="process">
+<!-- ================= PORTFOLIO FOLDER (photos · video · slides · reflection) ================= -->
+<section id="portfolio">
   <div class="wrap">
     <div class="reveal">
-      <span class="eyebrow"><span class="seal" aria-hidden="true">과정</span><span class="lbl">e-Portfolio · How our project developed</span></span>
+      <span class="eyebrow"><span class="seal" aria-hidden="true">과정</span><span class="lbl">e-Portfolio · Our project folder</span></span>
       <h2>Our project <em>folder</em></h2>
-      <p class="lede">Most of our planning happened in our group chat. Open a photo to read why it mattered.</p>
+      <p class="lede">Everything behind the presentation in one place: our group chat photos, the presentation video, our slides and our group reflection. Tap a tab to open it.</p>
     </div>
     <div class="folder reveal">
-      <div class="folder-tab">📁 Korean Food Culture · T1 Group A</div>
-      <div class="folder-body" id="folderGrid"></div>
+      <div class="folder-tabs" role="tablist" aria-label="Project folder">
+        <button class="folder-tab on" role="tab" id="tab-process" aria-controls="process" aria-selected="true">📷 Photos</button>
+        <button class="folder-tab" role="tab" id="tab-video" aria-controls="video" aria-selected="false" tabindex="-1">🎬 Video</button>
+        <button class="folder-tab" role="tab" id="tab-slides" aria-controls="slides" aria-selected="false" tabindex="-1">📑 Slides</button>
+        <button class="folder-tab" role="tab" id="tab-reflection" aria-controls="reflection" aria-selected="false" tabindex="-1">✍️ Reflection</button>
+      </div>
+      <div class="folder-body">
+        <div class="fpanel" id="process" role="tabpanel" aria-labelledby="tab-process">
+          <p class="fp-note">Most of our planning happened in our WhatsApp group chat. Open a photo to read why it mattered.</p>
+          <div class="folder-grid" id="folderGrid"></div>
+        </div>
+        <div class="fpanel" id="video" role="tabpanel" aria-labelledby="tab-video" hidden>
+          <p class="fp-note">We didn’t have many rehearsals or in-person discussions, but we kept talking in our WhatsApp chat. Here’s our presentation. Enjoy!</p>
+          <div class="tv-big">
+            <div class="tv-screen" id="ytBox">
+              <button class="yt-facade" id="ytPlay" aria-label="Play our presentation video">
+                <img src="https://i.ytimg.com/vi/HAXyG8HWQy0/hqdefault.jpg" alt="" loading="lazy">
+                <span class="yt-play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span>
+                <span class="yt-label">Play presentation</span>
+              </button>
+            </div>
+            <div class="tv-stand"></div><div class="tv-base"></div>
+          </div>
+          <p class="video-link"><a href="https://youtu.be/HAXyG8HWQy0" target="_blank" rel="noopener">Watch on YouTube ↗</a></p>
+        </div>
+        <div class="fpanel" id="slides" role="tabpanel" aria-labelledby="tab-slides" hidden>
+          <p class="fp-note">The 23 slides we presented, made in Canva. Download the PDF, or flip through them below.</p>
+          <p class="dl-row"><a class="btn" href="assets/slides/Korean%20Food%20Culture%20T1%20Group%20A.pdf" download="Korean Food Culture T1 Group A.pdf"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 19h14" stroke="currentColor" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Download slides (PDF, 7 MB)</a></p>
+          <div class="flip-book">
+            <div class="fb-stage"><img id="fbImg" src="assets/slides/slide-01.webp" alt="Slide 1 of 23" width="1440" height="810"></div>
+            <div class="fb-bar">
+              <button class="btn small navy" id="fbPrev" aria-label="Previous slide">‹ Prev</button>
+              <span class="fb-count" id="fbCount">1 / 23</span>
+              <button class="btn small navy" id="fbNext" aria-label="Next slide">Next ›</button>
+            </div>
+            <div class="fb-thumbs" id="fbThumbs"></div>
+          </div>
+        </div>
+        <div class="fpanel" id="reflection" role="tabpanel" aria-labelledby="tab-reflection" hidden>
+          <article class="letter">
+            <p class="letter-kr" aria-hidden="true">우리의 이야기</p>
+            <h3>Group reflection</h3>
+            <p class="letter-by">Fayola Tanaka · Anna Nozaki · Lee Jiwon · Tan Shuet Ling</p>
+            <p>During the preparation of the presentation, we learned to distribute parts of the assignments. We learned to cooperate, communicate, and support one another as a group. We gained better understanding about each other and also the Korean culture, especially when our team consist of 4 people with 4 different country and culture background. We learned a lot from Jiwon when it comes to daily practices as she is Korean herself.</p>
+            <p>Distributing our parts does not mean that we work individually. We made sure that each point can connect with the others and complement each other. From explaining the basic structure to discussing the social significance of food and influences, we made sure everyone understood each other’s parts. We also gained better understanding of how food isn’t just something you consume to survive but also something that represents traditions, values, and identity.</p>
+            <p>Throughout the presentation, we managed to work together to ensure that each section was explained clearly and demonstrated accordingly. Although each member had their own part to present, we assist one another by adding information and support the fact that is being presented. For example, when Anna was explaining about the drinking etiquette, we demonstrated to the class how it looks in real life. Same goes for the other facts like how Korean chopsticks are different compared to Japanese or Chinese chopsticks. This made the information more engaging and easier for our classmates to understand. We also had the opportunity to try out the side dishes that Jiwon brought to present to the class.</p>
+            <p>Overall, this presentation connects the 4 of us to get to know each other through Korean food and work together while also gaining a deeper appreciation towards Korean food culture and food in general.</p>
+            <p class="letter-sign">— T1 Group A <span aria-hidden="true">🍚</span></p>
+          </article>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -1651,49 +1724,6 @@ footer{text-align:center;padding:0 20px 110px;color:var(--muted);font-size:14px}
   <button class="lb-nav next" id="lbNext" aria-label="Next photo">›</button>
 </div>
 
-<!-- ================= VIDEO ================= -->
-<section id="video">
-  <div class="wrap video-wrap">
-    <div class="reveal">
-      <span class="eyebrow"><span class="seal" aria-hidden="true">영상</span><span class="lbl">e-Portfolio · Presentation video</span></span>
-      <h2>Our <em>presentation</em></h2>
-      <p class="lede">We didn’t have many rehearsals or in-person discussions, but we kept talking in our WhatsApp chat. Here’s our presentation. Enjoy!</p>
-    </div>
-    <div class="tv-big reveal">
-      <div class="tv-screen" id="ytBox">
-        <button class="yt-facade" id="ytPlay" aria-label="Play our presentation video">
-          <img src="https://i.ytimg.com/vi/HAXyG8HWQy0/hqdefault.jpg" alt="" loading="lazy">
-          <span class="yt-play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span>
-          <span class="yt-label">Play presentation</span>
-        </button>
-      </div>
-      <div class="tv-stand"></div><div class="tv-base"></div>
-    </div>
-    <p class="video-link"><a href="https://youtu.be/HAXyG8HWQy0" target="_blank" rel="noopener">Watch on YouTube ↗</a></p>
-  </div>
-</section>
-
-<!-- ================= SLIDES PDF ================= -->
-<section id="slides">
-  <div class="wrap">
-    <div class="reveal">
-      <span class="eyebrow"><span class="seal" aria-hidden="true">발표</span><span class="lbl">e-Portfolio · Presentation slides</span></span>
-      <h2>Our <em>slides</em></h2>
-      <p class="lede">The 23 slides we presented, made in Canva. Download the PDF, or flip through them below.</p>
-    </div>
-    <p class="dl-row reveal"><a class="btn" href="assets/slides/Korean%20Food%20Culture%20T1%20Group%20A.pdf" download="Korean Food Culture T1 Group A.pdf"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 19h14" stroke="currentColor" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Download slides (PDF, 7 MB)</a></p>
-    <div class="flip-book reveal">
-      <div class="fb-stage"><img id="fbImg" src="assets/slides/slide-01.webp" alt="Slide 1 of 23" width="1440" height="810"></div>
-      <div class="fb-bar">
-        <button class="btn small navy" id="fbPrev" aria-label="Previous slide">‹ Prev</button>
-        <span class="fb-count" id="fbCount">1 / 23</span>
-        <button class="btn small navy" id="fbNext" aria-label="Next slide">Next ›</button>
-      </div>
-      <div class="fb-thumbs" id="fbThumbs"></div>
-    </div>
-    
-  </div>
-</section>
 
 <!-- ================= REFERENCES ================= -->
 <section id="references">
@@ -1703,7 +1733,7 @@ footer{text-align:center;padding:0 20px 110px;color:var(--muted);font-size:14px}
       <h2><em>References</em></h2>
       <p class="lede">Sources for the facts on this site. Numbers in the “Dig deeper” boxes point here. Websites accessed November 2026.</p>
     </div>
-    <ol class="refs reveal"><li id="ref-1"><span class="who">BIBIBOP.</span> What is bibimbap? Korea’s mixed rice bowl. <a href="https://www.bibibop.com/2026/09/12/what-is-bibimbap/" target="_blank" rel="noopener">www.bibibop.com/2026/09/12/what-is-bibimbap/</a></li><li id="ref-2"><span class="who">Daebak.</span> 5 Korean fusion cuisines to try, from tacos to carbonara. <a href="https://daebak.co/blogs/magazine/5-korean-fusion-cuisines-to-try" target="_blank" rel="noopener">daebak.co/blogs/magazine/5-korean-fusion-cuisines-to-try</a></li><li id="ref-3"><span class="who">Embassy of the Republic of Korea (MOFA).</span> Korean etiquette and manners. <a href="https://overseas.mofa.go.kr/no-en/brd/m_21237/view.do?seq=111" target="_blank" rel="noopener">overseas.mofa.go.kr/no-en/brd/m_21237/view.do?seq=111</a></li><li id="ref-4"><span class="who">Korea Economic Institute of America (KEIA).</span> Table for one? How dining culture is changing in South Korea. <a href="https://keia.org/analysis/table-for-one-how-dining-culture-is-changing-in-south-korea/" target="_blank" rel="noopener">keia.org/analysis/table-for-one-how-dining-culture-is-changing-in-south-korea/</a></li><li id="ref-5"><span class="who">Korea JoongAng Daily.</span> Flat, frustrating and now famous: The history of Korea’s metal chopsticks. <a href="https://www.koreajoongangdaily.com/kjd-special/why-flat-frustrating-and-now-famous-the-history-of-koreas-metal-chopsticks/12031557" target="_blank" rel="noopener">www.koreajoongangdaily.com/kjd-special/why-flat-frustrating-and-now-famous-the-history-of-koreas-metal-chopsticks/12031557</a></li><li id="ref-6"><span class="who">Lonely Planet.</span> A guide to the best street food in South Korea. <a href="https://www.lonelyplanet.com/articles/best-street-food-south-korea" target="_blank" rel="noopener">www.lonelyplanet.com/articles/best-street-food-south-korea</a></li><li id="ref-7"><span class="who">Maangchi.</span> Korean table setting. <a href="https://www.maangchi.com/blog/korean-table-setting" target="_blank" rel="noopener">www.maangchi.com/blog/korean-table-setting</a></li><li id="ref-8"><span class="who">Michelin Guide.</span> Article on what goes into a bowl of tteokguk. <a href="https://guide.michelin.com/kr/en/article/features/whats-bowl-tteokguk" target="_blank" rel="noopener">guide.michelin.com/kr/en/article/features/whats-bowl-tteokguk</a></li><li id="ref-9"><span class="who">T1 Group A.</span> Korean Food Culture: presentation slides (2026). Our own research and slides. <a href="#slides">See “Our slides” above</a></li><li id="ref-10"><span class="who">Taste Korean Food.</span> Korean rice cakes (tteok) explained: A complete guide to types, ingredients and cultural meaning. <a href="https://www.tastekoreanfood.com/ktrend/korean-rice-cakes-tteok-complete-guide-to-types-ingredients-cultural-meaning" target="_blank" rel="noopener">www.tastekoreanfood.com/ktrend/korean-rice-cakes-tteok-complete-guide-to-types-ingredients-cultural-meaning</a></li><li id="ref-11"><span class="who">Tasting Table.</span> The sweet and chewy Korean cookies made for special celebrations. <a href="https://tastingtable.com/1193375/the-sweet-and-chewy-korean-cookies-made-for-special-celebrations" target="_blank" rel="noopener">tastingtable.com/1193375/the-sweet-and-chewy-korean-cookies-made-for-special-celebrations</a></li><li id="ref-12"><span class="who">UNESCO.</span> Kimjang, making and sharing kimchi in the Republic of Korea. Intangible Cultural Heritage list, inscribed 2013. <a href="https://ich.unesco.org/en/RL/kimjang-making-and-sharing-kimchi-in-the-republic-of-korea-00881" target="_blank" rel="noopener">ich.unesco.org/en/RL/kimjang-making-and-sharing-kimchi-in-the-republic-of-korea-00881</a></li></ol>
+    <ol class="refs reveal"><li id="ref-1"><span class="who">BIBIBOP.</span> What is bibimbap? Korea’s mixed rice bowl. <a href="https://www.bibibop.com/2026/09/12/what-is-bibimbap/" target="_blank" rel="noopener">www.bibibop.com/2026/09/12/what-is-bibimbap/</a></li><li id="ref-2"><span class="who">Daebak.</span> 5 Korean fusion cuisines to try, from tacos to carbonara. <a href="https://daebak.co/blogs/magazine/5-korean-fusion-cuisines-to-try" target="_blank" rel="noopener">daebak.co/blogs/magazine/5-korean-fusion-cuisines-to-try</a></li><li id="ref-3"><span class="who">Embassy of the Republic of Korea (MOFA).</span> Korean etiquette and manners. <a href="https://overseas.mofa.go.kr/no-en/brd/m_21237/view.do?seq=111" target="_blank" rel="noopener">overseas.mofa.go.kr/no-en/brd/m_21237/view.do?seq=111</a></li><li id="ref-4"><span class="who">Korea Economic Institute of America (KEIA).</span> Table for one? How dining culture is changing in South Korea. <a href="https://keia.org/analysis/table-for-one-how-dining-culture-is-changing-in-south-korea/" target="_blank" rel="noopener">keia.org/analysis/table-for-one-how-dining-culture-is-changing-in-south-korea/</a></li><li id="ref-5"><span class="who">Korea JoongAng Daily.</span> Flat, frustrating and now famous: The history of Korea’s metal chopsticks. <a href="https://www.koreajoongangdaily.com/kjd-special/why-flat-frustrating-and-now-famous-the-history-of-koreas-metal-chopsticks/12031557" target="_blank" rel="noopener">www.koreajoongangdaily.com/kjd-special/why-flat-frustrating-and-now-famous-the-history-of-koreas-metal-chopsticks/12031557</a></li><li id="ref-6"><span class="who">Lonely Planet.</span> A guide to the best street food in South Korea. <a href="https://www.lonelyplanet.com/articles/best-street-food-south-korea" target="_blank" rel="noopener">www.lonelyplanet.com/articles/best-street-food-south-korea</a></li><li id="ref-7"><span class="who">Maangchi.</span> Korean table setting. <a href="https://www.maangchi.com/blog/korean-table-setting" target="_blank" rel="noopener">www.maangchi.com/blog/korean-table-setting</a></li><li id="ref-8"><span class="who">Michelin Guide.</span> Article on what goes into a bowl of tteokguk. <a href="https://guide.michelin.com/kr/en/article/features/whats-bowl-tteokguk" target="_blank" rel="noopener">guide.michelin.com/kr/en/article/features/whats-bowl-tteokguk</a></li><li id="ref-9"><span class="who">T1 Group A.</span> Korean Food Culture: presentation slides (2026). Our own research and slides. <a href="#slides">See the Slides tab in our project folder above</a></li><li id="ref-10"><span class="who">Taste Korean Food.</span> Korean rice cakes (tteok) explained: A complete guide to types, ingredients and cultural meaning. <a href="https://www.tastekoreanfood.com/ktrend/korean-rice-cakes-tteok-complete-guide-to-types-ingredients-cultural-meaning" target="_blank" rel="noopener">www.tastekoreanfood.com/ktrend/korean-rice-cakes-tteok-complete-guide-to-types-ingredients-cultural-meaning</a></li><li id="ref-11"><span class="who">Tasting Table.</span> The sweet and chewy Korean cookies made for special celebrations. <a href="https://tastingtable.com/1193375/the-sweet-and-chewy-korean-cookies-made-for-special-celebrations" target="_blank" rel="noopener">tastingtable.com/1193375/the-sweet-and-chewy-korean-cookies-made-for-special-celebrations</a></li><li id="ref-12"><span class="who">UNESCO.</span> Kimjang, making and sharing kimchi in the Republic of Korea. Intangible Cultural Heritage list, inscribed 2013. <a href="https://ich.unesco.org/en/RL/kimjang-making-and-sharing-kimchi-in-the-republic-of-korea-00881" target="_blank" rel="noopener">ich.unesco.org/en/RL/kimjang-making-and-sharing-kimchi-in-the-republic-of-korea-00881</a></li></ol>
   </div>
 </section>
 <footer>Korean Food Culture · T1 Group A · 수진 · 슈엣링 · 안나 · 지원</footer>
@@ -2443,6 +2473,35 @@ lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
 addEventListener('keydown', e => {
   if (lb.hidden) return;
   if (e.key === 'Escape') closeLb(); if (e.key === 'ArrowRight') openLb(lbi + 1); if (e.key === 'ArrowLeft') openLb(lbi - 1);
+});
+
+/* ---------------- project folder tabs ---------------- */
+const fTabs = $$('.folder-tab');
+const openTab = (id, focus) => {
+  fTabs.forEach(t => {
+    const on = t.getAttribute('aria-controls') === id;
+    t.classList.toggle('on', on); t.setAttribute('aria-selected', on); t.tabIndex = on ? 0 : -1;
+    $('#' + t.getAttribute('aria-controls')).hidden = !on;
+    if (on && focus) t.focus();
+  });
+};
+fTabs.forEach((t, i) => {
+  t.onclick = () => { openTab(t.getAttribute('aria-controls')); blip(); };
+  t.onkeydown = e => {
+    const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0; if (!d) return;
+    e.preventDefault(); openTab(fTabs[(i + d + fTabs.length) % fTabs.length].getAttribute('aria-controls'), true);
+  };
+});
+// links like #slides open that tab and scroll to the folder
+const tabFromHash = () => {
+  const id = location.hash.slice(1);
+  if (fTabs.some(t => t.getAttribute('aria-controls') === id)) { openTab(id); $('#portfolio').scrollIntoView({ behavior: 'smooth' }); }
+};
+addEventListener('hashchange', tabFromHash); tabFromHash();
+document.addEventListener('click', e => {
+  const a = e.target.closest('a[href^="#"]'); if (!a) return;
+  const id = a.getAttribute('href').slice(1);
+  if (fTabs.some(t => t.getAttribute('aria-controls') === id)) { e.preventDefault(); openTab(id); $('#portfolio').scrollIntoView({ behavior: 'smooth' }); }
 });
 
 /* ---------------- video (loads YouTube only when played) ---------------- */
